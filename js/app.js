@@ -133,7 +133,7 @@ class MapApp {
                 this.map.createPane(paneName);
                 this.map.getPane(paneName).style.zIndex = 1000;
                 this.map.getPane('pane5').style.zIndex = 1001;
-                this.userMarkerSm=L.marker(e.latlng, {icon: this.personIcon, pane: paneName}).addTo(this.map);
+                this.userMarker=L.marker(e.latlng, {icon: this.personIcon, pane: paneName}).addTo(this.map);
                 this.userMarkerCircleSm=L.circle(e.latlng, {radius: 12, pane: paneName}).addTo(this.map).setStyle({ 
                     fillColor: "#2f8cdd", 
                     color: "transparent", 
