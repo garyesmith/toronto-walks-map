@@ -18,9 +18,13 @@ class MapApp {
         ];
 
         this.personIcon = L.icon({
-            iconUrl: './icons/person.png',
+            iconUrl: './assets/person.png',
             iconSize: [24, 24], // size here is in pixels
         });
+
+        this.userMarker;
+        this.userMarkerCircleSm;
+        this.userMarkerCircleLg;
     }
 
     init() {
@@ -123,26 +127,36 @@ class MapApp {
 
         // draw circle to highlight current user location when/if determined
         this.map.on('locationfound', (e) => {
-            const radius = 12;
-            L.circle(e.latlng, radius).addTo(this.map).setStyle({ 
-                fillColor: "#2f8cdd", 
-                color: "transparent", 
-                weight: 2 
-            });
-            console.log(e.latlng);
-            L.marker(e.latlng, {icon: this.personIcon}).addTo(this.map);
-            L.circle(e.latlng, 1000).addTo(this.map).setStyle({ 
-                fillColor: "transparent", 
-                color: "#2f8cdd", 
-                dashArray: '5, 5',
-                weight: 2 
-            });
+
+            if (!this.userMarker) {
+                const paneName = 'pane'+this.layerConfigs.length;
+                this.map.createPane(paneName);
+                this.map.getPane(paneName).style.zIndex = 1000;
+                this.map.getPane('pane5').style.zIndex = 1001;
+                this.userMarkerSm=L.marker(e.latlng, {icon: this.personIcon, pane: paneName}).addTo(this.map);
+                this.userMarkerCircleSm=L.circle(e.latlng, {radius: 12, pane: paneName}).addTo(this.map).setStyle({ 
+                    fillColor: "#2f8cdd", 
+                    color: "transparent", 
+                    weight: 2 
+                });
+                this.userMarkerCircleLg=L.circle(e.latlng, {radius: 1000, pane: paneName }).addTo(this.map).setStyle({ 
+                    fillColor: "transparent", 
+                    color: "#2f8cdd", 
+                    dashArray: '5, 5',
+                    weight: 2
+                });
+            } else {
+                this.userMarker.setLatLng(e.latlng);
+                this.userMarkerCircleSm.setLatLng(e.latlng);
+                this.userMarkerCircleLg.setLatLng(e.latlng);
+            }
+
         });
     }
 
     // trigger a request to determine user's current location
     locateUser() {
-        this.map.locate();
+        this.map.locate({watch: true, maximumAge: 0, enableHighAccuracy: true});
     }
 }
 
