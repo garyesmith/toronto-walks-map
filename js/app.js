@@ -5,30 +5,29 @@ class MapApp {
         // local properties (state)
         this.map = null;
         this.infoDiv = document.getElementById('info');
-        this.layers = [];
+        this.mapLayers = [];
+        this.walkLayer = null;
         
         // config (json file, color, weight)
         this.layerConfigs = [
-            ["./green_spaces.json", "#adc57b", 1, 1],
-            ["./sidewalks.json", "#999999", 1, 2],
-            ["./water.json", "#91cbef", 1, 3],
-            ["./buildings.json", "#d0b38f", 1, 4],
-            ["./walk1.geojson", "#2a93ee", 5, 5]
+            ["./green_spaces.json", "#adc57b", 1],
+            ["./sidewalks.json", "#999999", 1],
+            ["./water.json", "#91cbef", 1],
+            ["./buildings.json", "#d0b38f", 1]
         ];
 
         this.sightMarkersUrl = "./points.geojson";
 
-        this.personIcon = L.icon({
-            iconUrl: './assets/person.png',
-            iconSize: [24, 24], // size here is in pixels
-        });
-
+        this.currWalkNumber = 1
+        
     }
 
     init() {
         this.setupMap();
+        this.loadMapLayers();
         this.addTileLayer();
-        this.loadBaseLayers();
+        this.loadWalkLayer(this.currWalkNumber);
+        this.loadMaskLayer();
         this.loadSightMarkers();
         this.bindGlobalEvents();
         this.locateUser();
@@ -36,10 +35,15 @@ class MapApp {
 
     // init map
     setupMap() {
+        var bounds = L.latLngBounds([[43.5886087, -79.4506467], [43.6905451, -79.2889900]]);
         this.map = L.map('map', {
             preferCanvas: true,
             center: [43.6425099, -79.3745239],
-            zoom: 14
+            zoom: 14,
+            maxBounds: bounds,
+            maxBoundsViscosity: 1.0,
+            minZoom: 13,
+            maxZoom: 16
         });
         this.locationControl = L.control.locate({
             position: "topleft",
@@ -54,56 +58,100 @@ class MapApp {
             },
             setView: false
         }).addTo(this.map);
+
     }
 
     // add base tile layer
     addTileLayer() {
-        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+        this.map.createPane('basemap_pane');
+        this.map.getPane('basemap_pane').style.zIndex = 250;
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}{r}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
             subdomains: 'abcd',
-            maxZoom: 20
+            maxZoom: 16,
+            updateWhenZooming: false,
+            pane: 'basemap_pane'
         }).addTo(this.map);
     }
 
     // create and add GeoJSON layers based on config values
-    loadBaseLayers() {
+    loadMapLayers() {
+        this.map.createPane('layers_pane');
+        this.map.getPane('layers_pane').style.zIndex = 200;
         this.layerConfigs.forEach((config, i) => {
-            const [url, color, weight, zIndex] = config;
-
-            // add each layer to a new map pane, to control z-index ordering
-            const paneName = `pane${i}`;
-            this.map.createPane(paneName);
-            var z = 200 + parseInt(zIndex,10);
-            this.map.getPane(paneName).style.zIndex = z;
-
-            var dashArray = '0, 0';
-            if (url.indexOf('./walk')===0) {
-                dashArray = '5, 10';
-            }
+            const [url, color, weight] = config;
 
             // load GeoJSON layer with AJAX, style, and store reference to it in an array
-            this.layers[i] = new L.GeoJSON.AJAX(url, {
+            this.mapLayers[i] = new L.GeoJSON.AJAX(url, {
                 style: () => ({
                     color: color,
                     weight: weight,
                     fillOpacity: 0.5,
-                    opacity: 0.7,
-                    dashArray: dashArray
+                    opacity: 0.7
                 }),
-                pane: paneName
+                pane: 'layers_pane'
             });
 
-            this.layers[i].addTo(this.map);
+            this.mapLayers[i].addTo(this.map);
 
         });
 
     }
 
+    // create and add GeoJSON walk path layers
+    loadWalkLayer(walkNumber) {
+
+        const url="./walk" + walkNumber + ".geojson";
+
+        // add each layer to a new map pane, to control z-index ordering
+        this.map.createPane('walk_pane');
+        this.map.getPane('walk_pane').style.zIndex = 400;
+
+        // load GeoJSON layer with AJAX, style, and store reference to it in an array
+        this.walkLayer = new L.GeoJSON.AJAX(url, {
+            style: () => ({
+                color: "#2a93ee",
+                weight: 5,
+                fillOpacity: 0.5,
+                opacity: 0.7,
+                dashArray: '5, 10'
+            }),
+            pane: 'walk_pane'
+        });
+
+        this.walkLayer.addTo(this.map);
+
+    }
+
+     // create and add GeoJSON walk mask layer to obscure areas outside city centre
+    loadMaskLayer() {
+
+        const url="./mask.geojson";
+
+        // add each layer to a new map pane, to control z-index ordering
+        this.map.createPane('mask_pane');
+        this.map.getPane('mask_pane').style.zIndex = 400;
+
+        // load GeoJSON layer with AJAX, style, and store reference to it in an array
+        this.walkLayer = new L.GeoJSON.AJAX(url, {
+            style: () => ({
+                color: "white",
+                weight: 1,
+                fillOpacity: 1.0,
+                opacity: 1.0
+            }),
+            pane: 'mask_pane'
+        });
+
+        this.walkLayer.addTo(this.map);
+
+    }   
+
     // create and add GeoJSON sight markers
     loadSightMarkers() {
 
         const url = this.sightMarkersUrl;
-        const nextLayerIndex = this.layers.length;
+        const nextLayerIndex = this.mapLayers.length;
 
         // create pane for user location marker first, to ensure it appears below sight markers
         var paneName = 'location_pane';
@@ -116,7 +164,7 @@ class MapApp {
         this.map.getPane(paneName).style.zIndex = 400;
 
         // load GeoJSON layer with AJAX, style, and store reference to it in an array
-        this.layers[nextLayerIndex] = new L.GeoJSON.AJAX(url, {
+        this.mapLayers[nextLayerIndex] = new L.GeoJSON.AJAX(url, {
             pointToLayer: function (feature, latlng) {
                 return L.marker(latlng);
             }, 
@@ -128,7 +176,7 @@ class MapApp {
             },
         });
 
-        this.layers[nextLayerIndex].addTo(this.map);
+        this.mapLayers[nextLayerIndex].addTo(this.map);
 
     }
 
@@ -152,7 +200,7 @@ class MapApp {
 
         if (props['SightUrl'] && props['SightUrl'].length) {
             infoHtml += `
-                <p><a href="${props['SightUrl']}" target="_blank">${props['SightUrl']}</a></p>
+                <p><a href="${props['SightUrl']}" target="_blank">Open Website &nearr;</a></p>
             `;
         }
 
@@ -170,11 +218,27 @@ class MapApp {
             if (this.map) this.map.invalidateSize();
         });
 
+        this.map.addEventListener('zoomstart, movestart', (e) => {
+            this.map.getPane('basemap_pane').style.display='none';
+        });
+
+        this.map.addEventListener('zoomend, moveend', (e) =>     {
+            this.map.getPane('basemap_pane').style.display='block';
+        });
     }
 
     // trigger a request to determine user's current location
     locateUser() {
         this.locationControl.start();
+    }
+
+    handleZoomAndPanEvents() {
+        this.map.on('zoomstart', function(event) {
+            if (this.map) {
+                console.log('Zoom is about to change');
+                console.log('Current zoom level:', this.map.getZoom());
+            }        
+        });
     }
 }
 
