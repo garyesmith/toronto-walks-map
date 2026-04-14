@@ -27,13 +27,6 @@ header {
     z-index: 10;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
-header img {
-    height: 40%;
-    width: auto;
-    margin: 0 5px 0 0;
-    display: block;
-    float: left;
-}
 
 .container {
     display: flex;
@@ -54,6 +47,17 @@ header img {
     clear: both;
     margin: 10px 0;
     border: 1px solid black;
+}
+
+#info p a {
+    background-color: #e1e1e1;
+    color: #2a93ee;
+    padding: 3px 12px;
+    border-radius: 6px;
+    text-decoration: none;
+    text-transform: none;
+    font-size: 0.7rem;
+    margin-top: 8px;
 }
 
 #map {

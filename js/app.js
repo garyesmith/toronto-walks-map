@@ -13,7 +13,7 @@ class MapApp {
             ["./sidewalks.json", "#999999", 1, 2],
             ["./water.json", "#91cbef", 1, 3],
             ["./buildings.json", "#d0b38f", 1, 4],
-            ["./walk1.geojson", "#FFEA00", 5, 5]
+            ["./walk1.geojson", "orange", 5, 5]
         ];
 
         this.sightMarkersUrl = "./points.geojson";
@@ -23,9 +23,6 @@ class MapApp {
             iconSize: [24, 24], // size here is in pixels
         });
 
-        this.userMarker;
-        this.userMarkerCircleSm;
-        this.userMarkerCircleLg;
     }
 
     init() {
@@ -44,8 +41,21 @@ class MapApp {
             center: [43.6425099, -79.3745239],
             zoom: 14
         });
+        this.locationControl = L.control.locate({
+            position: "topleft",
+            strings: {
+                title: "Locate me"
+            },
+            keepCurrentZoomLevel: [13, 18],
+            clickBehavior: {
+                inView: 'setView', 
+                outOfView: 'setView', 
+                inViewNotFollowing: 'setView'
+            },
+            setView: false
+        }).addTo(this.map);
     }
-
+    
     // add base tile layer
     addTileLayer() {
         L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
@@ -126,12 +136,21 @@ class MapApp {
         const props = feature.properties;
 
         // populate the info bar
-        this.infoDiv.innerHTML = `
+        var infoHtml = `
             <h2>${props['SightName']}</h2>
             <p>
                 <img src="./images/${props['SightImage']}" alt="${props['SightName']}" />
-            ${props['SightDesc']}</p>
+                ${props['SightDesc']}
+            </p>
         `;
+
+        if (props['SightUrl'] && props['SightUrl'].length) {
+            infoHtml += `
+                <p><a href="${props['SightUrl']}" target="_blank">${props['SightUrl']}</a></p>
+            `;
+        }
+
+        this.infoDiv.innerHTML=infoHtml;
 
         this.clickZoom(e);
 
@@ -145,37 +164,11 @@ class MapApp {
             if (this.map) this.map.invalidateSize();
         });
 
-        // draw circle to highlight current user location when/if determined
-        this.map.on('locationfound', (e) => {
-
-            if (!this.userMarker) {
-
-                this.userMarker=L.marker(e.latlng, {icon: this.personIcon, pane: 'location_pane'}).addTo(this.map);
-                this.userMarkerCircleSm=L.circle(e.latlng, {radius: 12, pane: 'location_pane'}).addTo(this.map).setStyle({ 
-                    fillColor: "#2f8cdd", 
-                    color: "transparent", 
-                    weight: 2,
-                    interactive: true
-                });
-                this.userMarkerCircleLg=L.circle(e.latlng, {radius: 1000, pane: 'location_pane'}).addTo(this.map).setStyle({ 
-                    fillColor: "transparent", 
-                    color: "#2f8cdd", 
-                    dashArray: '5, 5',
-                    weight: 2,
-                    interactive: true
-                });
-            } else {
-                this.userMarker.setLatLng(e.latlng);
-                this.userMarkerCircleSm.setLatLng(e.latlng);
-                this.userMarkerCircleLg.setLatLng(e.latlng);
-            }
-
-        });
     }
 
     // trigger a request to determine user's current location
     locateUser() {
-        this.map.locate({watch: true, maximumAge: 0, enableHighAccuracy: true});
+        this.locationControl.start();
     }
 }
 
