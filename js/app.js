@@ -13,7 +13,7 @@ class MapApp {
             ["./sidewalks.json", "#999999", 1, 2],
             ["./water.json", "#91cbef", 1, 3],
             ["./buildings.json", "#d0b38f", 1, 4],
-            ["./walk1.geojson", "orange", 5, 5]
+            ["./walk1.geojson", "#2a93ee", 5, 5]
         ];
 
         this.sightMarkersUrl = "./points.geojson";
@@ -55,7 +55,7 @@ class MapApp {
             setView: false
         }).addTo(this.map);
     }
-    
+
     // add base tile layer
     addTileLayer() {
         L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
@@ -76,13 +76,19 @@ class MapApp {
             var z = 200 + parseInt(zIndex,10);
             this.map.getPane(paneName).style.zIndex = z;
 
+            var dashArray = '0, 0';
+            if (url.indexOf('./walk')===0) {
+                dashArray = '5, 10';
+            }
+
             // load GeoJSON layer with AJAX, style, and store reference to it in an array
             this.layers[i] = new L.GeoJSON.AJAX(url, {
                 style: () => ({
                     color: color,
                     weight: weight,
                     fillOpacity: 0.5,
-                    opacity: 0.7
+                    opacity: 0.7,
+                    dashArray: dashArray
                 }),
                 pane: paneName
             });
