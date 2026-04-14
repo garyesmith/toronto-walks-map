@@ -7,15 +7,16 @@ class MapApp {
         this.infoDiv = document.getElementById('info');
         this.layers = [];
         
-        // config
+        // config (json file, color, weight)
         this.layerConfigs = [
-            ["./green_spaces.json", "#adc57b", 1, 1, false],
-            ["./sidewalks.json", "#999999", 1, 2, false],
-            ["./water.json", "#91cbef", 1, 3, false],
-            ["./buildings.json", "#d0b38f", 1, 4, false],
-            ["./subway.geojson", "#444444", 4, 5, false],
-            ["./sights.geojson", "#FFEA00", 1, 6, true] // index 5
+            ["./green_spaces.json", "#adc57b", 1, 1],
+            ["./sidewalks.json", "#999999", 1, 2],
+            ["./water.json", "#91cbef", 1, 3],
+            ["./buildings.json", "#d0b38f", 1, 4],
+            ["./walk1.geojson", "#FFEA00", 5, 5]
         ];
+
+        this.sightMarkersUrl = "./points.geojson";
 
         this.personIcon = L.icon({
             iconUrl: './assets/person.png',
@@ -30,7 +31,8 @@ class MapApp {
     init() {
         this.setupMap();
         this.addTileLayer();
-        this.loadGeoJsonLayers();
+        this.loadBaseLayers();
+        this.loadSightMarkers();
         this.bindGlobalEvents();
         this.locateUser();
     }
@@ -40,7 +42,7 @@ class MapApp {
         this.map = L.map('map', {
             preferCanvas: true,
             center: [43.6425099, -79.3745239],
-            zoom: 13
+            zoom: 14
         });
     }
 
@@ -54,28 +56,25 @@ class MapApp {
     }
 
     // create and add GeoJSON layers based on config values
-    loadGeoJsonLayers() {
+    loadBaseLayers() {
         this.layerConfigs.forEach((config, i) => {
             const [url, color, weight, zIndex] = config;
 
             // add each layer to a new map pane, to control z-index ordering
             const paneName = `pane${i}`;
             this.map.createPane(paneName);
-            this.map.getPane(paneName).style.zIndex = 500 + zIndex;
+            var z = 200 + parseInt(zIndex,10);
+            this.map.getPane(paneName).style.zIndex = z;
 
             // load GeoJSON layer with AJAX, style, and store reference to it in an array
             this.layers[i] = new L.GeoJSON.AJAX(url, {
                 style: () => ({
                     color: color,
                     weight: weight,
-                    fillOpacity: 0.5
+                    fillOpacity: 0.5,
+                    opacity: 0.7
                 }),
-                pane: paneName,
-                onEachFeature: (feature, layer) => {
-                    layer.on('click', (e) => {
-                        this.handleSightClick(feature, layer);
-                    });
-                }
+                pane: paneName
             });
 
             this.layers[i].addTo(this.map);
@@ -84,37 +83,58 @@ class MapApp {
 
     }
 
+    // create and add GeoJSON sight markers
+    loadSightMarkers() {
+
+        const url = this.sightMarkersUrl;
+        const nextLayerIndex = this.layers.length;
+
+        // create pane for user location marker first, to ensure it appears below sight markers
+        var paneName = 'location_pane';
+        this.map.createPane(paneName);
+        this.map.getPane(paneName).style.zIndex = 300;
+
+        // add each layer to a new map pane, to control z-index ordering
+        paneName = `pane${nextLayerIndex}`;
+        this.map.createPane(paneName);
+        this.map.getPane(paneName).style.zIndex = 400;
+
+        // load GeoJSON layer with AJAX, style, and store reference to it in an array
+        this.layers[nextLayerIndex] = new L.GeoJSON.AJAX(url, {
+            pointToLayer: function (feature, latlng) {
+                return L.marker(latlng);
+            }, 
+            pane: paneName,
+            onEachFeature: (feature, layer) => {
+                layer.on('click', (e) => {
+                    this.handleSightClick(feature, e);
+                });
+            },
+        });
+
+        this.layers[nextLayerIndex].addTo(this.map);
+
+    }
+
+    clickZoom(e) {
+        this.map.setView(e.target.getLatLng(), 16);
+    }
+
     // display clicked sight details in info bar, highlight it, and zoom to it
-    handleSightClick(feature, layer) {
+    handleSightClick(feature, e) {
 
         const props = feature.properties;
 
         // populate the info bar
         this.infoDiv.innerHTML = `
             <h2>${props['SightName']}</h2>
-            <img src="./images/${props['SightImage']}" alt="${props['SightName']}" />
-            <p>${props['SightDesc']}</p>
+            <p>
+                <img src="./images/${props['SightImage']}" alt="${props['SightName']}" />
+            ${props['SightDesc']}</p>
         `;
 
-        // reset styles for all sights in the layer
-        this.layers[5].setStyle({ 
-            fillColor: "#FFEA00", 
-            color: "#FFEA00", 
-            weight: 1 
-        });
+        this.clickZoom(e);
 
-        // 3. Highlight only the clicked layer (the visual object)
-        layer.setStyle({ 
-            fillColor: "#FFA500", 
-            color: "#FFA500", 
-            weight: 3 
-        });
-
-        // center and zoom to the clicked sight
-        this.map.fitBounds(layer.getBounds(), { 
-            maxZoom: 16, 
-            animate: true 
-        });
     }
 
     // handle global window events
@@ -129,21 +149,20 @@ class MapApp {
         this.map.on('locationfound', (e) => {
 
             if (!this.userMarker) {
-                const paneName = 'pane'+this.layerConfigs.length;
-                this.map.createPane(paneName);
-                this.map.getPane(paneName).style.zIndex = 1000;
-                this.map.getPane('pane5').style.zIndex = 1001;
-                this.userMarker=L.marker(e.latlng, {icon: this.personIcon, pane: paneName}).addTo(this.map);
-                this.userMarkerCircleSm=L.circle(e.latlng, {radius: 12, pane: paneName}).addTo(this.map).setStyle({ 
+
+                this.userMarker=L.marker(e.latlng, {icon: this.personIcon, pane: 'location_pane'}).addTo(this.map);
+                this.userMarkerCircleSm=L.circle(e.latlng, {radius: 12, pane: 'location_pane'}).addTo(this.map).setStyle({ 
                     fillColor: "#2f8cdd", 
                     color: "transparent", 
-                    weight: 2 
+                    weight: 2,
+                    interactive: true
                 });
-                this.userMarkerCircleLg=L.circle(e.latlng, {radius: 1000, pane: paneName }).addTo(this.map).setStyle({ 
+                this.userMarkerCircleLg=L.circle(e.latlng, {radius: 1000, pane: 'location_pane'}).addTo(this.map).setStyle({ 
                     fillColor: "transparent", 
                     color: "#2f8cdd", 
                     dashArray: '5, 5',
-                    weight: 2
+                    weight: 2,
+                    interactive: true
                 });
             } else {
                 this.userMarker.setLatLng(e.latlng);

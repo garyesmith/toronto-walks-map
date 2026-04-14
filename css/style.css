@@ -75,13 +75,13 @@ p {
 }
 
 /* desktop (default) */
-@media (min-width: 769px) {
+@media (min-width: 1025px) {
     .container {
         flex-direction: row;
     }
 
     #info {
-        width: 25%;
+        width: 33%;
         height: 100%;
     }
 
@@ -93,13 +93,13 @@ p {
     }
 
     #map {
-        width: 75%;
+        width: 66%;
         height: 100%;
     }
 }
 
 /* mobile */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
     .container {
         /* column-reverse puts content on top and info on bottom */
         flex-direction: column-reverse;
@@ -113,8 +113,9 @@ p {
     }
 
     #info img {
-        width: 25%;
-        clear: both;
+        width: 33%;
+        display: block;
+        float: left;
         margin: 0 10px;
         border: 1px solid black;
     }
