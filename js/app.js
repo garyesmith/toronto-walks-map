@@ -16,9 +16,25 @@ class MapApp {
             ["./buildings.json", "#d0b38f", 1]
         ];
 
+        this.mapMarker = L.ExtraMarkers.icon({
+            markerColor: 'cyan',
+            shape: 'circle',
+            prefix: 'fa'
+        });
+
+        this.selectedMapMarker = L.ExtraMarkers.icon({
+            markerColor: 'orange',
+            shape: 'circle',
+            prefix: 'fa'
+        });
+
+        this.markers = [];
+
         this.sightMarkersUrl = "./points.geojson";
 
         this.currWalkNumber = 1
+
+        this.infoDiv.style.height = window.innerHeight - 100 + 'px';
         
     }
 
@@ -152,6 +168,7 @@ class MapApp {
 
         const url = this.sightMarkersUrl;
         const nextLayerIndex = this.mapLayers.length;
+        this.markersIndex = nextLayerIndex;
 
         // create pane for user location marker first, to ensure it appears below sight markers
         var paneName = 'location_pane';
@@ -165,19 +182,44 @@ class MapApp {
 
         // load GeoJSON layer with AJAX, style, and store reference to it in an array
         this.mapLayers[nextLayerIndex] = new L.GeoJSON.AJAX(url, {
-            pointToLayer: function (feature, latlng) {
-                return L.marker(latlng);
+            pointToLayer: (feature, latlng) => { 
+                var newMarker=L.marker(latlng, {
+                    icon: this.mapMarker,
+                    pane: paneName
+                });
+                this.markers.push(newMarker);
+                return newMarker;
             }, 
-            pane: paneName,
             onEachFeature: (feature, layer) => {
                 layer.on('click', (e) => {
                     this.handleSightClick(feature, e);
                 });
+                this.addSightToInfoBar(feature);
             },
         });
 
         this.mapLayers[nextLayerIndex].addTo(this.map);
 
+    }
+
+    addSightToInfoBar(feature) {
+        const props = feature.properties;
+        var infoHtml = this.infoDiv.innerHTML;
+        infoHtml += `
+            <div class="marker-box" id="sight-${props['OBJECTID']}">
+                <div class="marker-line">
+                    <div class="marker-${props['OBJECTID']} leaflet-marker-icon extra-marker extra-marker-circle-cyan"></div>
+                </div>
+                <div class="marker-meta">
+                    <h2>${props['SightName']}</h2>
+                    <p>
+                        <img src="./images/${props['SightImage']}" alt="${props['SightName']}" />
+                        ${props['SightDesc']}
+                    </p>
+                </div>
+            </div>
+        `;
+        this.infoDiv.innerHTML = infoHtml;
     }
 
     clickZoom(e) {
@@ -187,25 +229,29 @@ class MapApp {
     // display clicked sight details in info bar, highlight it, and zoom to it
     handleSightClick(feature, e) {
 
-        const props = feature.properties;
+        // update styles of markers in info pane, to make sure only highlighted one is orange
+        const infoMarkers = document.querySelectorAll('.leaflet-marker-icon');
+        infoMarkers.forEach(el => {
+            if (el.classList.contains('marker-'+feature.properties['OBJECTID'])) {
+                el.classList.remove('extra-marker-circle-cyan');
+                el.classList.add('extra-marker-circle-orange');
+            } else {
+                el.classList.remove('extra-marker-circle-orange');
+                el.classList.add('extra-marker-circle-cyan');
+            }
+        });
 
-        // populate the info bar
-        var infoHtml = `
-            <h2>${props['SightName']}</h2>
-            <p>
-                <img src="./images/${props['SightImage']}" alt="${props['SightName']}" />
-                ${props['SightDesc']}
-            </p>
-        `;
+        // scroll to the marker in the info pane
+        const sightId = 'sight-'+feature.properties['OBJECTID'];
+        document.getElementById(sightId).scrollIntoView({ behavior: 'smooth' });
 
-        if (props['SightUrl'] && props['SightUrl'].length) {
-            infoHtml += `
-                <p><a href="${props['SightUrl']}" target="_blank">Open Website &nearr;</a></p>
-            `;
-        }
+        // set all map markers to original style
+        this.markers.forEach(marker => {
+            marker.setIcon(this.mapMarker);
+        });
 
-        this.infoDiv.innerHTML=infoHtml;
-
+        // set only clicked map marker to highlighted style, and zoom to it
+        e.target.setIcon(this.selectedMapMarker);
         this.clickZoom(e);
 
     }
@@ -232,14 +278,6 @@ class MapApp {
         this.locationControl.start();
     }
 
-    handleZoomAndPanEvents() {
-        this.map.on('zoomstart', function(event) {
-            if (this.map) {
-                console.log('Zoom is about to change');
-                console.log('Current zoom level:', this.map.getZoom());
-            }        
-        });
-    }
 }
 
 // init the app
