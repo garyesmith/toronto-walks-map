@@ -241,7 +241,7 @@ class MapApp {
             const parent = document.querySelector('#info');
             child.classList.add('active');
             parent.scrollTo({
-                top: child.offsetTop - parent.offsetTop
+                top: child.offsetTop
             });
         }
 
