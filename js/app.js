@@ -34,7 +34,7 @@ class MapApp {
 
         this.currWalkNumber = 1
 
-        this.infoDiv.style.height = window.innerHeight - 100 + 'px';
+        this.infoDiv.style.height = window.innerHeight + 'px';
         
     }
 
@@ -168,24 +168,20 @@ class MapApp {
 
         const url = this.sightMarkersUrl;
         const nextLayerIndex = this.mapLayers.length;
-        this.markersIndex = nextLayerIndex;
 
         // create pane for user location marker first, to ensure it appears below sight markers
         var paneName = 'location_pane';
-        this.map.createPane(paneName);
-        this.map.getPane(paneName).style.zIndex = 300;
-
-        // add each layer to a new map pane, to control z-index ordering
-        paneName = `pane${nextLayerIndex}`;
         this.map.createPane(paneName);
         this.map.getPane(paneName).style.zIndex = 400;
 
         // load GeoJSON layer with AJAX, style, and store reference to it in an array
         this.mapLayers[nextLayerIndex] = new L.GeoJSON.AJAX(url, {
             pointToLayer: (feature, latlng) => { 
+                //console.log(this.mapMarker);
+                this.mapMarker.options.className = 'sight-'+feature.properties['OBJECTID'];
                 var newMarker=L.marker(latlng, {
                     icon: this.mapMarker,
-                    pane: paneName
+                    pane: paneName,
                 });
                 this.markers.push(newMarker);
                 return newMarker;
@@ -195,7 +191,7 @@ class MapApp {
                     this.handleSightClick(feature, e);
                 });
                 this.addSightToInfoBar(feature);
-            },
+            }
         });
 
         this.mapLayers[nextLayerIndex].addTo(this.map);
@@ -222,10 +218,6 @@ class MapApp {
         this.infoDiv.innerHTML = infoHtml;
     }
 
-    clickZoom(e) {
-        this.map.setView(e.target.getLatLng(), 16);
-    }
-
     // display clicked sight details in info bar, highlight it, and zoom to it
     handleSightClick(feature, e) {
 
@@ -243,16 +235,23 @@ class MapApp {
 
         // scroll to the marker in the info pane
         const sightId = 'sight-'+feature.properties['OBJECTID'];
-        document.getElementById(sightId).scrollIntoView({ behavior: 'smooth' });
+        //document.getElementById(sightId).scrollIntoView({ behavior: 'smooth' });
+        const parent = document.getElementById('info');
+        const child = document.getElementById(sightId);
+        parent.scrollTo({
+            top: child.offsetTop - parent.offsetTop,
+            behavior: 'smooth'
+        });
 
         // set all map markers to original style
         this.markers.forEach(marker => {
             marker.setIcon(this.mapMarker);
         });
 
-        // set only clicked map marker to highlighted style, and zoom to it
+        // highlighted only the clicked marker, and zoom to it
         e.target.setIcon(this.selectedMapMarker);
-        this.clickZoom(e);
+        console.log(e.target);
+        this.map.setView(e.target.getLatLng(), 16);
 
     }
 
@@ -261,16 +260,26 @@ class MapApp {
 
         // reset map size on window resize
         window.addEventListener('resize', () => {
+            this.infoDiv.style.height = window.innerHeight + 'px';
             if (this.map) this.map.invalidateSize();
         });
 
-        this.map.addEventListener('zoomstart, movestart', (e) => {
+        this.map.addEventListener('dragstart', (e) => {
             this.map.getPane('basemap_pane').style.display='none';
         });
 
-        this.map.addEventListener('zoomend, moveend', (e) =>     {
+        this.map.addEventListener('dragend', (e) => {
             this.map.getPane('basemap_pane').style.display='block';
         });
+
+        this.map.addEventListener('zoomstart', (e) =>     {
+            this.map.getPane('basemap_pane').style.display='none';
+        });
+
+         this.map.addEventListener('zoomend', (e) =>     {
+            this.map.getPane('basemap_pane').style.display='block';
+        });
+        
     }
 
     // trigger a request to determine user's current location

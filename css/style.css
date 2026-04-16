@@ -17,6 +17,7 @@ path.leaflet-interactive:focus {
 }
 
 header {
+    width: 100%;
     height: 50px;
     min-height: 50px;
     background-color: #1a1a1a;
@@ -36,7 +37,7 @@ header {
 
 #info {
     background-color: #f4f4f9;
-    padding: 1.75% 2% 1.75% 1.25%;
+    padding: 1.75% 2% 25% 1.25%;
     transition: all 0.3s ease-in-out;
     overflow-y: scroll;
     border-right: 1px solid #ddd;
@@ -64,7 +65,7 @@ header {
     background-color: #ffffff;
     padding: 20px;
     transition: all 0.5s ease-in-out;
-    overflow-y: auto;
+    overflow-y: hidden;
 }
 
 h2 {
@@ -103,8 +104,11 @@ p {
     background-image: url(../assets/dotline.png);
     background-repeat: repeat-y;
     background-position: center;
-    background-size: 7% auto;
+    background-size: 8% auto;
     padding: 0;
+}
+.marker-box:last-child .marker-line {
+    background-image: none;
 }
 .marker-box .marker-meta {
     flex: 8;
@@ -158,5 +162,14 @@ p {
     #map {
         width: 100%;
         height: 50%;
+    }
+
+    .marker-box {
+        padding-right: 5%;
+    }
+    #info img {
+        width: 90%;
+        margin-top: 0;
+        display: block;
     }
 }
