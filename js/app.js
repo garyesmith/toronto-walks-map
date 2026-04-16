@@ -307,16 +307,14 @@ class MapApp {
         const parent = document.querySelector('#info');
         parent.addEventListener('scroll', () => {
             children.forEach(child => {
-                if (!child.classList.contains('active') 
-                    && child.offsetTop - parent.scrollTop < 140
-                    && child.offsetTop - parent.scrollTop > 0 ) {
+                var diff=child.offsetTop-parent.scrollTop;
+                if (!child.classList.contains('active') && diff<110 && diff>-50 ) {
                         child.classList.add('active');
                         var markerToclick = document.querySelector('.leaflet-location_pane-pane .'+child.id);
                         if (markerToclick) {
                             markerToclick.click();
                         }   
-                } else if (child.offsetTop - parent.scrollTop > 140
-                            || child.offsetTop - parent.scrollTop < 0 ) {
+                } else if (diff>=120 || diff<=-50) {
                         child.classList.remove('active');
                 }
             });

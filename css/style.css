@@ -41,6 +41,7 @@ header {
     transition: all 0.3s ease-in-out;
     overflow-y: scroll;
     border-right: 1px solid #ddd;
+    position: relative
 }
 
 #info img {
@@ -66,6 +67,7 @@ header {
     padding: 20px;
     transition: all 0.5s ease-in-out;
     overflow-y: hidden;
+    position: relative
 }
 
 h2 {
