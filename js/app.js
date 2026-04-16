@@ -233,20 +233,20 @@ class MapApp {
                 el.classList.add('extra-marker-circle-cyan');
             }
         });
-
-        // scroll to the marker in the info pane
-        const sightId = 'sight-'+feature.properties['OBJECTID'];
         
         // if not already at the top, scroll to the associated marker box in info pane
-        const child = document.getElementById(sightId);
+        const child = document.querySelector('#info > .marker-box#sight-'+feature.properties['OBJECTID']);
         if (!child.classList.contains('active')) {
-            document.querySelectorAll('.marker-box').forEach(el => el.classList.remove('active'));
-            const parent = document.getElementById('info');
+            document.querySelectorAll('#info > .marker-box').forEach(el => el.classList.remove('active'));
+            const parent = document.querySelector('#info');
             child.classList.add('active');
             parent.scrollTo({
                 top: child.offsetTop - parent.offsetTop
             });
         }
+
+        // zoom and scroll map to the clicked marker in the map pane
+        this.map.setView(e.target.getLatLng(), 16);
 
         // set all map markers to original style
         this.markers.forEach(marker => {
@@ -257,7 +257,6 @@ class MapApp {
         // highlighted only the clicked marker, and zoom to it
         this.selectedMapMarker.options.className = 'sight-'+feature.properties['OBJECTID'];
         e.target.setIcon(this.selectedMapMarker);
-        this.map.setView(e.target.getLatLng(), 16);
 
     }
 
@@ -296,7 +295,7 @@ class MapApp {
     initSightScrollListener() {
 
         // poll until dynamically loaded sight makers are present in the DOM
-        const children = document.querySelectorAll('.marker-box');
+        const children = document.querySelectorAll('#info .marker-box .marker-meta h2');
         if (!children.length) {
             setTimeout(() => {
                 this.initSightScrollListener();
@@ -305,20 +304,31 @@ class MapApp {
         }
 
         const parent = document.querySelector('#info');
-        parent.addEventListener('scroll', () => {
-            children.forEach(child => {
-                var diff=child.offsetTop-parent.scrollTop;
-                if (!child.classList.contains('active') && diff<110 && diff>-50 ) {
-                        child.classList.add('active');
-                        var markerToclick = document.querySelector('.leaflet-location_pane-pane .'+child.id);
-                        if (markerToclick) {
-                            markerToclick.click();
-                        }   
-                } else if (diff>=120 || diff<=-50) {
-                        child.classList.remove('active');
+
+        const observerOptions = {
+            root: parent,
+            rootMargin: '2% 0px -80% 0px',
+            threshold: 0
+        };
+
+        const observerCallback = (entries) => {
+            entries.forEach(entry => {
+                const child = entry.target;
+                const childId = child.parentElement.parentElement.id;
+                const markerToClick = document.querySelector('.leaflet-location_pane-pane .' + childId);
+                if (entry.isIntersecting && !child.parentElement.parentElement.classList.contains('active') && markerToClick) {
+                    child.parentElement.parentElement.classList.add('active');
+                    markerToClick.click();
+                } else if (!entry.isIntersecting) {
+                    child.parentElement.parentElement.classList.remove('active');
                 }
             });
-        });
+        };
+
+        const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+        // Start observing each child
+        children.forEach(child => observer.observe(child));
 
     }
 
