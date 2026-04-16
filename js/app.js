@@ -7,6 +7,7 @@ class MapApp {
         this.infoDiv = document.getElementById('info');
         this.mapLayers = [];
         this.walkLayer = null;
+        this.scrollObserver;
         
         // config (json file, color, weight)
         this.layerConfigs = [
@@ -47,6 +48,7 @@ class MapApp {
         this.loadSightMarkers();
         this.bindGlobalEvents();
         this.locateUser();
+        this.initSightScrollListener();
     }
 
     // init map
@@ -177,7 +179,6 @@ class MapApp {
         // load GeoJSON layer with AJAX, style, and store reference to it in an array
         this.mapLayers[nextLayerIndex] = new L.GeoJSON.AJAX(url, {
             pointToLayer: (feature, latlng) => { 
-                //console.log(this.mapMarker);
                 this.mapMarker.options.className = 'sight-'+feature.properties['OBJECTID'];
                 var newMarker=L.marker(latlng, {
                     icon: this.mapMarker,
@@ -193,7 +194,6 @@ class MapApp {
                 this.addSightToInfoBar(feature);
             }
         });
-
         this.mapLayers[nextLayerIndex].addTo(this.map);
 
     }
@@ -202,9 +202,9 @@ class MapApp {
         const props = feature.properties;
         var infoHtml = this.infoDiv.innerHTML;
         infoHtml += `
-            <div class="marker-box" id="sight-${props['OBJECTID']}">
+            <div class="marker-box" id="sight-${feature.properties['OBJECTID']}">
                 <div class="marker-line">
-                    <div class="marker-${props['OBJECTID']} leaflet-marker-icon extra-marker extra-marker-circle-cyan"></div>
+                    <div class="marker-${feature.properties['OBJECTID']} leaflet-marker-icon extra-marker extra-marker-circle-cyan"></div>
                 </div>
                 <div class="marker-meta">
                     <h2>${props['SightName']}</h2>
@@ -216,6 +216,7 @@ class MapApp {
             </div>
         `;
         this.infoDiv.innerHTML = infoHtml;
+
     }
 
     // display clicked sight details in info bar, highlight it, and zoom to it
@@ -235,22 +236,27 @@ class MapApp {
 
         // scroll to the marker in the info pane
         const sightId = 'sight-'+feature.properties['OBJECTID'];
-        //document.getElementById(sightId).scrollIntoView({ behavior: 'smooth' });
-        const parent = document.getElementById('info');
+        
+        // if not already at the top, scroll to the associated marker box in info pane
         const child = document.getElementById(sightId);
-        parent.scrollTo({
-            top: child.offsetTop - parent.offsetTop,
-            behavior: 'smooth'
-        });
+        if (!child.classList.contains('active')) {
+            document.querySelectorAll('.marker-box').forEach(el => el.classList.remove('active'));
+            const parent = document.getElementById('info');
+            child.classList.add('active');
+            parent.scrollTo({
+                top: child.offsetTop - parent.offsetTop
+            });
+        }
 
         // set all map markers to original style
         this.markers.forEach(marker => {
+            this.mapMarker.options.className = 'sight-'+marker.feature.properties['OBJECTID'];
             marker.setIcon(this.mapMarker);
         });
 
         // highlighted only the clicked marker, and zoom to it
+        this.selectedMapMarker.options.className = 'sight-'+feature.properties['OBJECTID'];
         e.target.setIcon(this.selectedMapMarker);
-        console.log(e.target);
         this.map.setView(e.target.getLatLng(), 16);
 
     }
@@ -285,6 +291,37 @@ class MapApp {
     // trigger a request to determine user's current location
     locateUser() {
         this.locationControl.start();
+    }
+
+    initSightScrollListener() {
+
+        // poll until dynamically loaded sight makers are present in the DOM
+        const children = document.querySelectorAll('.marker-box');
+        if (!children.length) {
+            setTimeout(() => {
+                this.initSightScrollListener();
+            }, 100);
+            return;
+        }
+
+        const parent = document.querySelector('#info');
+        parent.addEventListener('scroll', () => {
+            children.forEach(child => {
+                if (!child.classList.contains('active') 
+                    && child.offsetTop - parent.scrollTop < 140
+                    && child.offsetTop - parent.scrollTop > 0 ) {
+                        child.classList.add('active');
+                        var markerToclick = document.querySelector('.leaflet-location_pane-pane .'+child.id);
+                        if (markerToclick) {
+                            markerToclick.click();
+                        }   
+                } else if (child.offsetTop - parent.scrollTop > 140
+                            || child.offsetTop - parent.scrollTop < 0 ) {
+                        child.classList.remove('active');
+                }
+            });
+        });
+
     }
 
 }
