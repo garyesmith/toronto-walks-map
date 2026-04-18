@@ -29,9 +29,11 @@ class MapApp {
             prefix: 'fa'
         });
 
-        this.markers = [];
-
         this.sightMarkersUrl = "./points.geojson";
+
+        this.markers = [];
+        this.infoElements = [];
+        this.mapElements = [];
 
         this.currWalkNumber = 1
 
@@ -200,22 +202,23 @@ class MapApp {
 
     addSightToInfoBar(feature) {
         const props = feature.properties;
-        var infoHtml = this.infoDiv.innerHTML;
-        infoHtml += `
-            <div class="marker-box" id="sight-${feature.properties['OBJECTID']}">
+        var infoHtml = `
                 <div class="marker-line">
                     <div class="marker-${feature.properties['OBJECTID']} leaflet-marker-icon extra-marker extra-marker-circle-cyan"></div>
                 </div>
                 <div class="marker-meta">
-                    <h2>${props['SightName']}</h2>
+                    <h2 id="sight-${feature.properties['OBJECTID']}">${props['SightName']}</h2>
                     <p>
                         <img src="./images/${props['SightImage']}" alt="${props['SightName']}" />
                         ${props['SightDesc']}
                     </p>
                 </div>
-            </div>
         `;
-        this.infoDiv.innerHTML = infoHtml;
+        var markerDiv = document.createElement('div');
+        //markerDiv.id="sight-"+feature.properties['OBJECTID'];
+        markerDiv.className='marker-box';
+        markerDiv.innerHTML= infoHtml;
+        document.getElementById("info").appendChild(markerDiv);
 
     }
 
@@ -223,8 +226,7 @@ class MapApp {
     handleSightClick(feature, e) {
 
         // update styles of markers in info pane, to make sure only highlighted one is orange
-        const infoMarkers = document.querySelectorAll('.leaflet-marker-icon');
-        infoMarkers.forEach(el => {
+        this.mapElements.forEach(el => {
             if (el.classList.contains('marker-'+feature.properties['OBJECTID'])) {
                 el.classList.remove('extra-marker-circle-cyan');
                 el.classList.add('extra-marker-circle-orange');
@@ -235,12 +237,11 @@ class MapApp {
         });
         
         // if not already at the top, scroll to the associated marker box in info pane
-        const child = document.querySelector('#info > .marker-box#sight-'+feature.properties['OBJECTID']);
+        const child = document.querySelector('#info > .marker-box .marker-meta h2#sight-'+feature.properties['OBJECTID']);
         if (!child.classList.contains('active')) {
-            document.querySelectorAll('#info > .marker-box').forEach(el => el.classList.remove('active'));
-            const parent = document.querySelector('#info');
+            this.infoElements.forEach(el => el.classList.remove('active'));
             child.classList.add('active');
-            parent.scrollTo({
+            this.infoDiv.scrollTo({
                 top: child.offsetTop
             });
         }
@@ -294,16 +295,29 @@ class MapApp {
 
     initSightScrollListener() {
 
-        // poll until dynamically loaded sight makers are present in the DOM
-        const children = document.querySelectorAll('#info .marker-box .marker-meta h2');
-        if (!children.length) {
-            setTimeout(() => {
-                this.initSightScrollListener();
-            }, 100);
-            return;
+        // once available, cache information box elements for future efficient references
+        if (!this.infoElements.length) {
+            this.infoElements = document.querySelectorAll('#info .marker-box .marker-meta h2');
+            if (!this.infoElements.length) {
+                setTimeout(() => {
+                    this.initSightScrollListener();
+                }, 100);
+                return;
+            }
         }
 
-        const parent = document.querySelector('#info');
+        // once available, cache map marker elements for future efficient references
+        if (!this.mapElements.length) {
+            this.mapElements = document.querySelectorAll('.leaflet-marker-icon');
+            if (!this.mapElements.length) {
+                setTimeout(() => {
+                    this.initSightScrollListener();
+                }, 100);
+                return;
+            }
+        }
+
+        const parent = this.infoDiv;
 
         const observerOptions = {
             root: parent,
@@ -312,15 +326,22 @@ class MapApp {
         };
 
         const observerCallback = (entries) => {
-            entries.forEach(entry => {
+            if (!this.mapElements.length) return;
+            entries.forEach((entry) => {
                 const child = entry.target;
-                const childId = child.parentElement.parentElement.id;
-                const markerToClick = document.querySelector('.leaflet-location_pane-pane .' + childId);
-                if (entry.isIntersecting && !child.parentElement.parentElement.classList.contains('active') && markerToClick) {
-                    child.parentElement.parentElement.classList.add('active');
-                    markerToClick.click();
+                const childId = child.id;
+                for (var i=0; i<this.mapElements.length; i++) {
+                    if (this.mapElements[i].classList.contains(childId)) break;
+                }
+                for (var j=0; j<this.markers; j++) {
+                    if (this.markers[j].id=child.id) break;
+                }
+                if (entry.isIntersecting && !child.classList.contains('active')) {
+                    child.classList.add('active');
+                    const markerToClick = document.querySelector('.leaflet-location_pane-pane .' + childId);
+                    if (markerToClick) markerToClick.click();
                 } else if (!entry.isIntersecting) {
-                    child.parentElement.parentElement.classList.remove('active');
+                    child.classList.remove('active');
                 }
             });
         };
@@ -328,7 +349,7 @@ class MapApp {
         const observer = new IntersectionObserver(observerCallback, observerOptions);
 
         // Start observing each child
-        children.forEach(child => observer.observe(child));
+        this.infoElements.forEach(child => observer.observe(child));
 
     }
 
