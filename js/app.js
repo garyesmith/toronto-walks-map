@@ -8,13 +8,14 @@ class MapApp {
         this.mapLayers = [];
         this.walkLayer = null;
         this.scrollObserver;
+        this.canvasRenderer = L.canvas({ padding: 0.5});
         
         // config (json file, color, weight)
         this.layerConfigs = [
-            ["./green_spaces.json", "#adc57b", 1],
-            ["./sidewalks.json", "#999999", 1],
-            ["./water.json", "#91cbef", 1],
-            ["./buildings.json", "#d0b38f", 1]
+            ["./json/dissolved/green_spaces_dissolved.json", "#adc57b", 1],
+            ["./json/dissolved/sidewalks_dissolved.json", "#999999", 1],
+            ["./json/dissolved/water_dissolved.json", "#91cbef", 1],
+            ["./json/dissolved/buildings_dissolved.json", "#d0b38f", 1]
         ];
 
         this.mapMarker = L.ExtraMarkers.icon({
@@ -29,7 +30,7 @@ class MapApp {
             prefix: 'fa'
         });
 
-        this.sightMarkersUrl = "./points.geojson";
+        this.sightMarkersUrl = "./json/points.json";
 
         this.markers = [];
         this.markerLookup = new Map();
@@ -90,7 +91,8 @@ class MapApp {
             const data = await response.json();
             return L.geoJSON(data, {
                 style: { color, weight, fillOpacity: 0.5, opacity: 0.7 },
-                pane: 'layers_pane'
+                pane: 'layers_pane',
+                renderer: this.canvasRenderer
             }).addTo(this.map);
         });
 
@@ -114,7 +116,7 @@ class MapApp {
     // create and add GeoJSON walk path layers
     loadWalkLayer(walkNumber) {
 
-        const url="./walk" + walkNumber + ".geojson";
+        const url="./json/walks/walk" + walkNumber + ".json";
 
         // add each layer to a new map pane, to control z-index ordering
         this.map.createPane('walk_pane');
