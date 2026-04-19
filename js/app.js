@@ -32,6 +32,7 @@ class MapApp {
         this.sightMarkersUrl = "./points.geojson";
 
         this.markers = [];
+        this.markerLookup = new Map();
         this.infoElements = [];
         this.mapElements = [];
 
@@ -46,31 +47,30 @@ class MapApp {
         this.loadMapLayers();
         this.addTileLayer();
         this.loadWalkLayer(this.currWalkNumber);
-        this.loadMaskLayer();
         this.loadSightMarkers();
         this.bindGlobalEvents();
         this.locateUser();
-        this.initSightScrollListener();
+        this.storeDomQueryReferences();
     }
 
     // init map
     setupMap() {
-        var bounds = L.latLngBounds([[43.5886087, -79.4506467], [43.6905451, -79.2889900]]);
+        var bounds = L.latLngBounds([[43.6246868, -79.3998917], [43.6634737, -79.3446790 ]]);
         this.map = L.map('map', {
             preferCanvas: true,
             center: [43.6425099, -79.3745239],
-            zoom: 14,
             maxBounds: bounds,
             maxBoundsViscosity: 1.0,
-            minZoom: 13,
-            maxZoom: 16
+            zoom: 15,
+            minZoom: 15,
+            maxZoom: 17
         });
         this.locationControl = L.control.locate({
             position: "topleft",
             strings: {
                 title: "Locate me"
             },
-            keepCurrentZoomLevel: [13, 18],
+            keepCurrentZoomLevel: [15, 17],
             clickBehavior: {
                 inView: 'setView', 
                 outOfView: 'setView', 
@@ -81,6 +81,22 @@ class MapApp {
 
     }
 
+    // load and add geoJson map layers
+    async loadMapLayers() {
+        this.map.createPane('layers_pane');
+        this.map.getPane('layers_pane').style.zIndex = 200;
+        const layerPromises = this.layerConfigs.map(async ([url, color, weight]) => {
+            const response = await fetch(url);
+            const data = await response.json();
+            return L.geoJSON(data, {
+                style: { color, weight, fillOpacity: 0.5, opacity: 0.7 },
+                pane: 'layers_pane'
+            }).addTo(this.map);
+        });
+
+        this.mapLayers = await Promise.all(layerPromises);
+    }    
+
     // add base tile layer
     addTileLayer() {
         this.map.createPane('basemap_pane');
@@ -90,32 +106,9 @@ class MapApp {
             subdomains: 'abcd',
             maxZoom: 16,
             updateWhenZooming: false,
-            pane: 'basemap_pane'
+            pane: 'basemap_pane',
+            edgeBufferTiles: 2
         }).addTo(this.map);
-    }
-
-    // create and add GeoJSON layers based on config values
-    loadMapLayers() {
-        this.map.createPane('layers_pane');
-        this.map.getPane('layers_pane').style.zIndex = 200;
-        this.layerConfigs.forEach((config, i) => {
-            const [url, color, weight] = config;
-
-            // load GeoJSON layer with AJAX, style, and store reference to it in an array
-            this.mapLayers[i] = new L.GeoJSON.AJAX(url, {
-                style: () => ({
-                    color: color,
-                    weight: weight,
-                    fillOpacity: 0.5,
-                    opacity: 0.7
-                }),
-                pane: 'layers_pane'
-            });
-
-            this.mapLayers[i].addTo(this.map);
-
-        });
-
     }
 
     // create and add GeoJSON walk path layers
@@ -143,30 +136,6 @@ class MapApp {
 
     }
 
-     // create and add GeoJSON walk mask layer to obscure areas outside city centre
-    loadMaskLayer() {
-
-        const url="./mask.geojson";
-
-        // add each layer to a new map pane, to control z-index ordering
-        this.map.createPane('mask_pane');
-        this.map.getPane('mask_pane').style.zIndex = 400;
-
-        // load GeoJSON layer with AJAX, style, and store reference to it in an array
-        this.walkLayer = new L.GeoJSON.AJAX(url, {
-            style: () => ({
-                color: "white",
-                weight: 1,
-                fillOpacity: 1.0,
-                opacity: 1.0
-            }),
-            pane: 'mask_pane'
-        });
-
-        this.walkLayer.addTo(this.map);
-
-    }   
-
     // create and add GeoJSON sight markers
     loadSightMarkers() {
 
@@ -179,6 +148,7 @@ class MapApp {
         this.map.getPane(paneName).style.zIndex = 400;
 
         // load GeoJSON layer with AJAX, style, and store reference to it in an array
+        // use className option to assign a unique class to markers so they can be referenced individually later
         this.mapLayers[nextLayerIndex] = new L.GeoJSON.AJAX(url, {
             pointToLayer: (feature, latlng) => { 
                 this.mapMarker.options.className = 'sight-'+feature.properties['OBJECTID'];
@@ -191,7 +161,7 @@ class MapApp {
             }, 
             onEachFeature: (feature, layer) => {
                 layer.on('click', (e) => {
-                    this.handleSightClick(feature, e);
+                    this.handleMapMarkerClick(feature, e);
                 });
                 this.addSightToInfoBar(feature);
             }
@@ -223,7 +193,7 @@ class MapApp {
     }
 
     // display clicked sight details in info bar, highlight it, and zoom to it
-    handleSightClick(feature, e) {
+    handleMapMarkerClick(feature, e) {
 
         // update styles of markers in info pane, to make sure only highlighted one is orange
         this.mapElements.forEach(el => {
@@ -237,27 +207,28 @@ class MapApp {
         });
         
         // if not already at the top, scroll to the associated marker box in info pane
-        const child = document.querySelector('#info > .marker-box .marker-meta h2#sight-'+feature.properties['OBJECTID']);
+        const child = document.getElementById('sight-'+feature.properties['OBJECTID']);
         if (!child.classList.contains('active')) {
             this.infoElements.forEach(el => el.classList.remove('active'));
             child.classList.add('active');
             this.infoDiv.scrollTo({
-                top: child.offsetTop
+                top: child.offsetTop-32
             });
         }
 
-        // zoom and scroll map to the clicked marker in the map pane
-        this.map.setView(e.target.getLatLng(), 16);
-
-        // set all map markers to original style
-        this.markers.forEach(marker => {
-            this.mapMarker.options.className = 'sight-'+marker.feature.properties['OBJECTID'];
-            marker.setIcon(this.mapMarker);
-        });
-
-        // highlighted only the clicked marker, and zoom to it
-        this.selectedMapMarker.options.className = 'sight-'+feature.properties['OBJECTID'];
-        e.target.setIcon(this.selectedMapMarker);
+        // once the info bar scrolling ends, highlight the marker on the map and zoom/scroll to it
+        this.infoDiv.addEventListener('scrollend', () => {
+            this.selectedMapMarker.options.className = feature.properties['OBJECTID'];
+            this.markers.forEach(marker => {
+                this.mapMarker.options.className = 'sight-'+marker.feature.properties['OBJECTID'];
+                if (marker.feature.properties['OBJECTID']==feature.properties['OBJECTID']) {
+                    marker.setIcon(this.selectedMapMarker);
+                } else {
+                    marker.setIcon(this.mapMarker);
+                }
+            });
+            this.map.setView(e.target.getLatLng(), 16);
+        }, { once: true });
 
     }
 
@@ -269,23 +240,6 @@ class MapApp {
             this.infoDiv.style.height = window.innerHeight + 'px';
             if (this.map) this.map.invalidateSize();
         });
-
-        this.map.addEventListener('dragstart', (e) => {
-            this.map.getPane('basemap_pane').style.display='none';
-        });
-
-        this.map.addEventListener('dragend', (e) => {
-            this.map.getPane('basemap_pane').style.display='block';
-        });
-
-        this.map.addEventListener('zoomstart', (e) =>     {
-            this.map.getPane('basemap_pane').style.display='none';
-        });
-
-         this.map.addEventListener('zoomend', (e) =>     {
-            this.map.getPane('basemap_pane').style.display='block';
-        });
-        
     }
 
     // trigger a request to determine user's current location
@@ -293,29 +247,40 @@ class MapApp {
         this.locationControl.start();
     }
 
-    initSightScrollListener() {
-
-        // once available, cache information box elements for future efficient references
+    // run DOM queries only once and store references
+    storeDomQueryReferences() {
+        
+        // pre-query information box elements for future references
         if (!this.infoElements.length) {
             this.infoElements = document.querySelectorAll('#info .marker-box .marker-meta h2');
             if (!this.infoElements.length) {
                 setTimeout(() => {
-                    this.initSightScrollListener();
+                    this.storeDomQueryReferences();
                 }, 100);
                 return;
             }
         }
 
-        // once available, cache map marker elements for future efficient references
+        // pre-query map marker elements for future references
         if (!this.mapElements.length) {
             this.mapElements = document.querySelectorAll('.leaflet-marker-icon');
             if (!this.mapElements.length) {
                 setTimeout(() => {
-                    this.initSightScrollListener();
+                    this.storeDomQueryReferences();
                 }, 100);
                 return;
             }
         }
+
+        // only initialize info panel scroll interection observer once all required
+        // elements are rendered into the DOM and pre-queried
+        this.initSightscrollObserver();
+
+    }
+
+    // when a sight info box scrolls to the area near the top, highlight the relevant marker
+    // on the map and zoom/scroll to it
+    initSightscrollObserver() {
 
         const parent = this.infoDiv;
 

@@ -28,6 +28,9 @@ header {
     z-index: 10;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
+header #hamburger {
+    margin-left: auto;
+}
 
 .container {
     display: flex;
