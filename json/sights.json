@@ -1,0 +1,26 @@
+[
+    {
+        "slug": "distillery-district",
+        "name": "Distillery District",
+        "details": "The brick-lined streets of the Gooderham & Worts Distillery are now a pleasant car-free pedestrian district crammed with art galleries, restaurants, brewpubs, coffee shops, and other independent businesses.",
+        "url": "https://www.thedistillerydistrict.com/"
+    },
+    {
+        "slug": "st-lawrence-market-south",
+        "name": "St. Lawrence Market South",
+        "details": "The St. Lawrence Market south building has stood on this corner since 1842, when it served as City Hall. Today it features 120 food vendors on two floors. Open every day of the week except Mondays.",
+        "url": "https://www.stlawrencemarket.com/"
+    },
+    {
+        "slug": "gooderham-flatiron-building",
+        "name": "Gooderham Flatiron Building",
+        "details": "Often described as the most-photographed building in Toronto (the CN Tower being, of course, a tower and not a building) this triangular brick building has stood in the heart of Old Toronto since 1892. It originally served as the headquarters for the Gooderham & Worts Distillery a few blocks east. Today, it's mostly offices, but the ground floor is home to the cozy Flatiron & Firkin pub, which spills out into a nice patio in summers.",
+        "url": ""
+    },
+    {
+        "slug": "berczy-park",
+        "name": "Berczy Park",
+        "details": "Berczy Park became a city landmark when it was redesigned in 2017 around a photogenic Claude Cormier-designed fountain decorated with 27 cast iron dogs, and one cat. Don't miss the distinctive trompe-l'oeil mural on the rear wall of the Gooderham Flatiron Building to the east, created by Derek Michael Besant in 1980.",
+        "url": ""
+    }
+]

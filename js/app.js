@@ -11,20 +11,20 @@ class MapApp {
         this.mapMarkerObjects = []; 
         this.infoElements = []; 
         this.mapElements = []; 
-        //this.mapDragged=false;
+        this.sightContent;
 
         // initial map configs
         this.canvasRenderer = L.canvas({ padding: 0.5}); // buffers 0.5 of the map outside view
-        this.mapInitialCenter=[43.6425099, -79.3745239];
+        this.mapInitialCenter=[43.6465378, -79.3726904];
         this.mapInitialZoom=15;
-        this.mapBounds = L.latLngBounds([[43.6246868, -79.3998917], [43.6634737, -79.3446790 ]]);
+        this.mapBounds = L.latLngBounds([[43.6087473, -79.4043939], [43.6677615, -79.3401475]]);
 
         // map layer configs
         this.layerConfigs = [
-            ["json/dissolved/green_spaces_dissolved.json", "#adc57b", 1],
-            ["json/dissolved/sidewalks_dissolved.json", "#999999", 1],
-            ["json/dissolved/water_dissolved.json", "#91cbef", 1],
-            ["json/dissolved/buildings_dissolved.json", "#d0b38f", 1]
+            ["json/dissolved/green_spaces.geojson", "#adc57b", 1],
+            ["json/dissolved/sidewalks.geojson", "#999999", 1],
+            ["json/dissolved/water.geojson", "#91cbef", 1],
+            ["json/dissolved/buildings.geojson", "#d0b38f", 1]
         ];
 
         // default map marker style
@@ -49,6 +49,7 @@ class MapApp {
         };
 
         this.sightMarkersUrl = "json/points.json";
+        this.sightContentUrl = "json/sights.json";
         this.currWalkNumber = 1
 
         this.infoDiv.style.height = window.innerHeight + 'px';
@@ -59,8 +60,8 @@ class MapApp {
         this.setupMap();
         this.loadMapLayers();
         this.loadWalkLayer(this.currWalkNumber);
-        this.addBasemapLayer();        
-        this.loadSightMarkers();
+        this.addBasemapLayer();      
+        this.loadSightContent();  
         this.bindGlobalEvents();
         this.locateUser();
         this.storeDomQueryReferences();
@@ -172,7 +173,7 @@ class MapApp {
         // use className option to assign a unique class to markers so they can be referenced individually later
         this.mapLayers[nextLayerIndex] = new L.GeoJSON.AJAX(url, {
             pointToLayer: (feature, latlng) => { 
-                this.mapMarker.options.className = 'sight-'+feature.properties['OBJECTID'];
+                this.mapMarker.options.className = 'sight-'+feature.properties['slug'];
                 var newMarker=L.marker(latlng, {
                     icon: this.mapMarker,
                     pane: paneName,
@@ -191,24 +192,40 @@ class MapApp {
 
     }
 
+    async loadSightContent() {
+        try {
+            const response = await fetch(this.sightContentUrl);
+            if (!response.ok) throw new Error('File not found');
+            const sightArray = await response.json(); 
+            this.sightContent = new Map(sightArray.map(sight => [sight.slug, sight]));
+            this.loadSightMarkers();
+        } catch (error) {
+            console.error('Error loading JSON:', error);
+        }
+    }
+
     addSightToInfoBar(feature) {
-        const props = feature.properties;
-        var infoHtml = `
-                <div class="marker-line">
-                    <div class="info-marker marker-${feature.properties['OBJECTID']} leaflet-marker-icon extra-marker extra-marker-circle-cyan"></div>
-                </div>
-                <div class="marker-meta">
-                    <h2 class="info-header" id="sight-${feature.properties['OBJECTID']}">${props['SightName']}</h2>
-                    <p>
-                        <img src="./images/${props['SightImage']}" alt="${props['SightName']}" />
-                        ${props['SightDesc']}
-                    </p>
-                </div>
-        `;
-        var markerDiv = document.createElement('div');
-        markerDiv.className='marker-box';
-        markerDiv.innerHTML= infoHtml;
-        document.getElementById("info").appendChild(markerDiv);
+        if (typeof feature.properties.slug != "undefined" && feature.properties.slug.length) {
+            const sight = this.sightContent.get(feature.properties.slug);
+            var infoHtml = `
+                    <div class="marker-line">
+                        <div class="info-marker marker-${sight.slug} leaflet-marker-icon extra-marker extra-marker-circle-cyan"></div>
+                    </div>
+                    <div class="marker-meta">
+                        <h2 class="info-header" id="sight-${sight.slug}">${sight.name}</h2>
+                        <p>
+                            <img src="./images/${sight.slug}.jpg" alt="${sight.name}" />
+                            ${sight.details}
+                        </p>
+                    </div>
+            `;
+            var markerDiv = document.createElement('div');
+            markerDiv.className='marker-box';
+            markerDiv.innerHTML= infoHtml;
+            document.getElementById("info").appendChild(markerDiv);
+        } else {
+            console.error('Unknown slug for sight point:', error);
+        }
 
     }
 
@@ -217,7 +234,7 @@ class MapApp {
 
         // update styles of markers in info pane, to make sure only highlighted one is orange
         this.mapElements.forEach(el => {
-            if (el.classList.contains('marker-'+feature.properties['OBJECTID'])) {
+            if (el.classList.contains('marker-'+feature.properties['slug'])) {
                 el.classList.remove('extra-marker-circle-cyan');
                 el.classList.add('extra-marker-circle-orange');
             } else {
@@ -227,7 +244,7 @@ class MapApp {
         });
         
         // if not already at the top, scroll to the associated marker box in info pane
-        const child = document.getElementById('sight-'+feature.properties['OBJECTID']);
+        const child = document.getElementById('sight-'+feature.properties['slug']);
         if (!child.classList.contains('active')) {
             this.infoElements.forEach(el => el.classList.remove('active'));
             child.classList.add('active');
@@ -240,10 +257,10 @@ class MapApp {
 
         // once the info bar scrolling ends, highlight the marker on the map and zoom/scroll to it
         //this.infoDiv.addEventListener('scrollend', () => {
-            this.selectedMapMarker.options.className = 'sight-'+feature.properties['OBJECTID'];
+            this.selectedMapMarker.options.className = 'sight-'+feature.properties['slug'];
             this.mapMarkerObjects.forEach(marker => {
-                this.mapMarker.options.className = 'sight-'+marker.feature.properties['OBJECTID'];
-                if (marker.feature.properties['OBJECTID']==feature.properties['OBJECTID']) {
+                this.mapMarker.options.className = 'sight-'+marker.feature.properties['slug'];
+                if (marker.feature.properties['slug']==feature.properties['slug']) {
                     marker.setIcon(this.selectedMapMarker);
                 } else {
                     marker.setIcon(this.mapMarker);
