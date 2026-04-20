@@ -2,15 +2,23 @@ class MapApp {
 
     constructor() {
 
-        // local properties (state)
-        this.map = null;
+        // global references
         this.infoDiv = document.getElementById('info');
+        this.map = null;
         this.mapLayers = [];
         this.walkLayer = null;
-        this.scrollObserver;
-        this.canvasRenderer = L.canvas({ padding: 0.5});
-        
-        // config (json file, color, weight)
+        this.scrollObserver;  
+        this.mapMarkerObjects = []; 
+        this.infoElements = []; 
+        this.mapElements = []; 
+
+        // initial map configs
+        this.canvasRenderer = L.canvas({ padding: 0.5}); // buffers 0.5 of the map outside view
+        this.mapInitialCenter=[43.6425099, -79.3745239];
+        this.mapInitialZoom=15;
+        this.mapBounds = L.latLngBounds([[43.6246868, -79.3998917], [43.6634737, -79.3446790 ]]);
+
+        // map layer configs
         this.layerConfigs = [
             ["json/dissolved/green_spaces_dissolved.json", "#adc57b", 1],
             ["json/dissolved/sidewalks_dissolved.json", "#999999", 1],
@@ -18,12 +26,14 @@ class MapApp {
             ["json/dissolved/buildings_dissolved.json", "#d0b38f", 1]
         ];
 
+        // default map marker style
         this.mapMarker = L.ExtraMarkers.icon({
             markerColor: 'cyan',
             shape: 'circle',
             prefix: 'fa'
         });
 
+        // selected map marker style
         this.selectedMapMarker = L.ExtraMarkers.icon({
             markerColor: 'orange',
             shape: 'circle',
@@ -32,10 +42,7 @@ class MapApp {
 
         this.sightMarkersUrl = "json/points.json";
 
-        this.markers = [];
-        this.markerLookup = new Map();
-        this.infoElements = [];
-        this.mapElements = [];
+
 
         this.currWalkNumber = 1
 
@@ -56,13 +63,12 @@ class MapApp {
 
     // init map
     setupMap() {
-        var bounds = L.latLngBounds([[43.6246868, -79.3998917], [43.6634737, -79.3446790 ]]);
         this.map = L.map('map', {
             preferCanvas: true,
-            center: [43.6425099, -79.3745239],
-            maxBounds: bounds,
+            center: this.mapInitialCenter,
+            maxBounds: this.mapBounds,
             maxBoundsViscosity: 1.0,
-            zoom: 15,
+            zoom: this.mapInitialZoom,
             minZoom: 15,
             maxZoom: 17
         });
@@ -126,7 +132,7 @@ class MapApp {
         this.walkLayer = new L.GeoJSON.AJAX(url, {
             style: () => ({
                 color: "#2a93ee",
-                weight: 5,
+                weight: 7,
                 fillOpacity: 0.5,
                 opacity: 0.7,
                 dashArray: '5, 10'
@@ -158,7 +164,7 @@ class MapApp {
                     icon: this.mapMarker,
                     pane: paneName,
                 });
-                this.markers.push(newMarker);
+                this.mapMarkerObjects.push(newMarker);
                 return newMarker;
             }, 
             onEachFeature: (feature, layer) => {
@@ -213,6 +219,8 @@ class MapApp {
         if (!child.classList.contains('active')) {
             this.infoElements.forEach(el => el.classList.remove('active'));
             child.classList.add('active');
+            child.classList.remove('extra-marker-circle-cyan');
+            child.classList.add('extra-marker-circle-orange');
             this.infoDiv.scrollTo({
                 top: child.offsetTop-32
             });
@@ -221,7 +229,7 @@ class MapApp {
         // once the info bar scrolling ends, highlight the marker on the map and zoom/scroll to it
         this.infoDiv.addEventListener('scrollend', () => {
             this.selectedMapMarker.options.className = feature.properties['OBJECTID'];
-            this.markers.forEach(marker => {
+            this.mapMarkerObjects.forEach(marker => {
                 this.mapMarker.options.className = 'sight-'+marker.feature.properties['OBJECTID'];
                 if (marker.feature.properties['OBJECTID']==feature.properties['OBJECTID']) {
                     marker.setIcon(this.selectedMapMarker);
@@ -239,8 +247,11 @@ class MapApp {
 
         // reset map size on window resize
         window.addEventListener('resize', () => {
-            this.infoDiv.style.height = window.innerHeight + 'px';
-            if (this.map) this.map.invalidateSize();
+            setTimeout(() => {
+                this.infoDiv.style.height = window.innerHeight + 'px';
+                if (this.map) this.map.invalidateSize();
+                map.setView(this.mapInitialCenter, this.mapInitialZoom);
+            }, 300);
         });
     }
 
@@ -297,18 +308,12 @@ class MapApp {
             entries.forEach((entry) => {
                 const child = entry.target;
                 const childId = child.id;
-                for (var i=0; i<this.mapElements.length; i++) {
-                    if (this.mapElements[i].classList.contains(childId)) break;
-                }
-                for (var j=0; j<this.markers; j++) {
-                    if (this.markers[j].id=child.id) break;
-                }
                 if (entry.isIntersecting && !child.classList.contains('active')) {
                     child.classList.add('active');
                     const markerToClick = document.querySelector('.leaflet-location_pane-pane .' + childId);
                     if (markerToClick) markerToClick.click();
                 } else if (!entry.isIntersecting) {
-                    child.classList.remove('active');
+                    child.classList.remove('active');  
                 }
             });
         };
