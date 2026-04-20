@@ -4,13 +4,14 @@ class MapApp {
 
         // global references
         this.infoDiv = document.getElementById('info');
+        this.infoScrollObserver;
         this.map = null;
         this.mapLayers = [];
         this.walkLayer = null;
-        this.scrollObserver;  
         this.mapMarkerObjects = []; 
         this.infoElements = []; 
         this.mapElements = []; 
+        //this.mapDragged=false;
 
         // initial map configs
         this.canvasRenderer = L.canvas({ padding: 0.5}); // buffers 0.5 of the map outside view
@@ -40,10 +41,14 @@ class MapApp {
             prefix: 'fa'
         });
 
+        // config options for the info bar scroll observer
+        this.infoScrollObserverOptions = {
+            root: this.infoDiv,
+            rootMargin: '2% 0px -80% 0px',
+            threshold: 0
+        };
+
         this.sightMarkersUrl = "json/points.json";
-
-
-
         this.currWalkNumber = 1
 
         this.infoDiv.style.height = window.innerHeight + 'px';
@@ -53,8 +58,8 @@ class MapApp {
     init() {
         this.setupMap();
         this.loadMapLayers();
-        this.addTileLayer();
         this.loadWalkLayer(this.currWalkNumber);
+        this.addBasemapLayer();        
         this.loadSightMarkers();
         this.bindGlobalEvents();
         this.locateUser();
@@ -86,6 +91,14 @@ class MapApp {
             setView: false
         }).addTo(this.map);
 
+        // workaround leaflet bug to prevent click handler problems after map drag
+        this.map.on('dragend', () => {
+            this.map.dragging.disable();
+            setTimeout(() => {
+                this.map.dragging.enable();
+            }, 250);
+        });
+
     }
 
     // load and add geoJson map layers
@@ -106,9 +119,9 @@ class MapApp {
     }    
 
     // add base tile layer
-    addTileLayer() {
+    addBasemapLayer() {
         this.map.createPane('basemap_pane');
-        this.map.getPane('basemap_pane').style.zIndex = 250;
+        this.map.getPane('basemap_pane').style.zIndex = 400;
         L.tileLayer('https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}{r}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
             subdomains: 'abcd',
@@ -182,10 +195,10 @@ class MapApp {
         const props = feature.properties;
         var infoHtml = `
                 <div class="marker-line">
-                    <div class="marker-${feature.properties['OBJECTID']} leaflet-marker-icon extra-marker extra-marker-circle-cyan"></div>
+                    <div class="info-marker marker-${feature.properties['OBJECTID']} leaflet-marker-icon extra-marker extra-marker-circle-cyan"></div>
                 </div>
                 <div class="marker-meta">
-                    <h2 id="sight-${feature.properties['OBJECTID']}">${props['SightName']}</h2>
+                    <h2 class="info-header" id="sight-${feature.properties['OBJECTID']}">${props['SightName']}</h2>
                     <p>
                         <img src="./images/${props['SightImage']}" alt="${props['SightName']}" />
                         ${props['SightDesc']}
@@ -193,7 +206,6 @@ class MapApp {
                 </div>
         `;
         var markerDiv = document.createElement('div');
-        //markerDiv.id="sight-"+feature.properties['OBJECTID'];
         markerDiv.className='marker-box';
         markerDiv.innerHTML= infoHtml;
         document.getElementById("info").appendChild(markerDiv);
@@ -227,8 +239,8 @@ class MapApp {
         }
 
         // once the info bar scrolling ends, highlight the marker on the map and zoom/scroll to it
-        this.infoDiv.addEventListener('scrollend', () => {
-            this.selectedMapMarker.options.className = feature.properties['OBJECTID'];
+        //this.infoDiv.addEventListener('scrollend', () => {
+            this.selectedMapMarker.options.className = 'sight-'+feature.properties['OBJECTID'];
             this.mapMarkerObjects.forEach(marker => {
                 this.mapMarker.options.className = 'sight-'+marker.feature.properties['OBJECTID'];
                 if (marker.feature.properties['OBJECTID']==feature.properties['OBJECTID']) {
@@ -238,7 +250,7 @@ class MapApp {
                 }
             });
             this.map.setView(e.target.getLatLng(), 16);
-        }, { once: true });
+        //}, { once: true });
 
     }
 
@@ -250,9 +262,10 @@ class MapApp {
             setTimeout(() => {
                 this.infoDiv.style.height = window.innerHeight + 'px';
                 if (this.map) this.map.invalidateSize();
-                map.setView(this.mapInitialCenter, this.mapInitialZoom);
+                this.map.setView(this.mapInitialCenter, this.mapInitialZoom);
             }, 300);
         });
+
     }
 
     // trigger a request to determine user's current location
@@ -287,41 +300,35 @@ class MapApp {
 
         // only initialize info panel scroll interection observer once all required
         // elements are rendered into the DOM and pre-queried
-        this.initSightscrollObserver();
+        this.startInfoScrollObserver();
 
     }
 
+     infoScrollObserverCallback = (entries) => {
+        if (!this.mapElements.length) return;
+        entries.forEach((entry) => {
+            const child = entry.target;
+            const childId = child.id;
+            if (entry.isIntersecting && !child.classList.contains('active')) {
+                child.classList.add('active');
+                const markerToClick = document.querySelector('.leaflet-location_pane-pane .' + childId);
+                if (markerToClick)  { 
+                    markerToClick.click();
+                } else {
+                }
+            } else if (!entry.isIntersecting) {
+                child.classList.remove('active');  
+            }
+        });
+    };
+
     // when a sight info box scrolls to the area near the top, highlight the relevant marker
     // on the map and zoom/scroll to it
-    initSightscrollObserver() {
+    startInfoScrollObserver() {
 
-        const parent = this.infoDiv;
+        this.infoScrollObserver = new IntersectionObserver(this.infoScrollObserverCallback, this.infoScrollObserverOptions);
 
-        const observerOptions = {
-            root: parent,
-            rootMargin: '2% 0px -80% 0px',
-            threshold: 0
-        };
-
-        const observerCallback = (entries) => {
-            if (!this.mapElements.length) return;
-            entries.forEach((entry) => {
-                const child = entry.target;
-                const childId = child.id;
-                if (entry.isIntersecting && !child.classList.contains('active')) {
-                    child.classList.add('active');
-                    const markerToClick = document.querySelector('.leaflet-location_pane-pane .' + childId);
-                    if (markerToClick) markerToClick.click();
-                } else if (!entry.isIntersecting) {
-                    child.classList.remove('active');  
-                }
-            });
-        };
-
-        const observer = new IntersectionObserver(observerCallback, observerOptions);
-
-        // Start observing each child
-        this.infoElements.forEach(child => observer.observe(child));
+        this.infoElements.forEach(child =>  this.infoScrollObserver.observe(child));
 
     }
 
