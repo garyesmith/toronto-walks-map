@@ -2,13 +2,13 @@
     {
         "slug": "distillery-district",
         "name": "Distillery District",
-        "details": "The brick-lined streets of the Gooderham & Worts Distillery are now a pleasant car-free pedestrian district crammed with art galleries, restaurants, brewpubs, coffee shops, and other independent businesses.",
+        "details": "The Victorian brick-lined streets of the Gooderham & Worts Distillery are now a pleasant car-free pedestrian district crammed with art galleries, restaurants, brewpubs, coffee shops, and other independent businesses.",
         "url": "https://www.thedistillerydistrict.com/"
     },
     {
         "slug": "st-lawrence-market-south",
         "name": "St. Lawrence Market South",
-        "details": "The St. Lawrence Market south building has stood on this corner since 1842, when the central portion served as City Hall. 120 food vendors across two floors include butchers, fishmongers, organic vegetable stalls, take-out restaurants, and speciality shops. The south market is open every day of the week except Mondays.",
+        "details": "The St. Lawrence Market south building has stood on this corner since 1842, when the central section served as City Hall. The 120 vendors across two floors include butchers, fishmongers, organic vegetable stalls, take-out restaurants, and speciality shops. The south market is open every day of the week except Mondays.",
         "url": "https://www.stlawrencemarket.com/"
     },
     {
@@ -20,38 +20,38 @@
     {
         "slug": "berczy-park",
         "name": "Berczy Park",
-        "details": "Berczy Park became a photogenic favourite when it was refurbished in 2017 and given a Claude Cormier-designed fountain decorated with 27 cast iron dogs, and one cat. Don't miss the distinctive trompe-l'oeil mural on the rear wall of the Gooderham Flatiron Building to the east, created by Derek Michael Besant in 1980.",
+        "details": "Berczy Park became a social media favourite when it was refurbished in 2017 and given a photogenic Claude Cormier-designed fountain featuring 27 cast iron dogs, and one cat. Don't miss the distinctive trompe-l'oeil mural on the rear wall of the Gooderham Flatiron Building to the east, created by Derek Michael Besant in 1980.",
         "url": ""
     },
     {
         "slug": "hockey-hall-of-fame",
         "name": "Hockey Hall of Fame",
-        "details": "Canada's national hockey museum features carefully curated exhibits and memorabilia related to Canada's game. Olympians, NHLers, PWHLers and junior players are all honoured here. And if you'd like a photo with the Stanley Cup, that's here, too.",
+        "details": "Canada's national hockey museum features carefully curated exhibits and memorabilia related to Canada's game. Olympians, NHLers, PWHLers and junior players are all honoured. And if you'd like a photo with the Stanley Cup, it's here, too.",
         "url": "https://www.hhof.com/"
     },
     {
         "slug": "union-station",
         "name": "Union Station",
-        "details": "Toronto's transit hub since 1927. VIA Rail national trains, GO Transit commuter lines, UP Express airport trains, and the TTC subway all converge here. The Great Hall on the main level just off Front Street has been freshly renovated, with a soaring ceiling and Beaux-Arts finishes. Tucked away on the lower levels is a delicious mix of speciality shops, international food courts, and restaurants.",
+        "details": "Toronto's transit hub since 1927. VIA Rail national trains, GO Transit commuter lines, UP Express airport trains, and TTC subways all converge here. The Great Hall on the main level just off Front Street has been freshly renovated to show off its soaring ceiling and Beaux-Arts finishes. The lower levels are a maze of speciality shops, international food courts, and restaurants.",
         "url": "https://torontounion.ca/"  
     },
     {
         "slug": "maple-leaf-square",
         "name": "Maple Leaf Square",
-        "details": "This normally bland space where Union Station meets Scotiabank Arena becomes the official outdoor gathering spot for hardy fans of the Toronto Maple Leafs and Toronto Raptors during playoffs runs. When the Raptors are playing, the square is rebranded as Jurrasic Park.",
+        "details": "This normally bland rideshare stand where Union Station meets Scotiabank Arena becomes the official outdoor gathering spot for hardy fans of the Toronto Maple Leafs and Toronto Raptors during playoff runs. When the Raptors are playing, the square is rebranded as Jurrasic Park.",
         "url": ""
 
     },
     {
         "slug": "scotiabank-arena",
         "name": "Scotiabank Arena",
-        "details": "This is the shared home of the Toronto Maple Leafs NHL team and the Toronto Raptors NBA team, as well as a popular venue for major concerts and events.",
+        "details": "Scotiabank Arena is the shared home of the Toronto Maple Leafs hockey team and the Toronto Raptors basketball team, as well as a popular venue for major concerts.",
         "url": "https://www.scotiabankarena.com"  
     },
     {
         "slug": "roundhouse-park",
         "name": "Roundhouse Park",
-        "details": "The John Street Roundhouse was built in 1929 by the Canadian Pacific Railway. Converted into a park in 1997, its massive turntable still functions. The adjoining buildings, originally used for locomotive repair, now house the Toronto Railway Museum, a brewpub, and a restaurant arcade.",
+        "details": "The John Street Roundhouse was built in 1929 by the Canadian Pacific Railway Company. Closed in the 1980s and converted into a park in 1997, its massive locomotive turntable still works. The adjoining train repair sheds now house the Toronto Railway Museum, a brewpub, and a restaurant arcade.",
         "url": "https://torontorailwaymuseum.com"  
     },
     {
@@ -63,13 +63,13 @@
     {
         "slug": "rogers-centre",
         "name": "Rogers Centre",
-        "details": "Home of the Toronto Blue Jays, Canada's only major league baseball team. When the building opened in 1989 as SkyDome, its retractable roof was revolutionary, keeping fans and players comfortable from April to October.",
+        "details": "Home of the Toronto Blue Jays, Canada's only Majojr League Baseball team. When the building opened in 1989 as SkyDome, its retractable roof was revolutionary, and it still keeps fans and players comfortable from April to October.",
         "url": ""  
     },
     {
         "slug": "cn-tower",
         "name": "CN Tower",
-        "details": "Toronto's most recognizable symbol, the CN Tower was the world's tallest free-standing structure from completion in 1976 through to 1997. On a clear day, it's possible to glimpse Niagara Falls and New York State from the observation deck.",
+        "details": "Toronto's most recognizable symbol, the CN Tower was the world's tallest free-standing structure from 1975 to 1997. On a clear day, it's possible to glimpse Niagara Falls and New York State from the observation deck.",
         "url": ""  
     }
 ]
