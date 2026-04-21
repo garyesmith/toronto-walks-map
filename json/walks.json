@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "name": "Walk #1: CN Tower to Distillery District",
+        "details": "An east-west overview of many of Toronto's most well-known attractions and historical sights.",
+        "km": "3",
+        "hours": "2",
+        "sights": [
+            "cn-tower",
+            "rogers-centre",
+            "roundhouse-park",
+            "ripleys-aquarium",
+            "maple-leaf-square",
+            "scotiabank-arena",
+            "union-station",
+            "hockey-hall-of-fame",
+            "berczy-park",
+            "gooderham-flatiron-building",
+            "st-lawrence-market-south",
+            "the-esplanade",
+            "first-parliament-site",
+            "distillery-district"
+        ]
+    }
+
+]

@@ -2,19 +2,19 @@
     {
         "slug": "distillery-district",
         "name": "Distillery District",
-        "details": "The Victorian brick-lined streets of the Gooderham & Worts Distillery are now a pleasant car-free pedestrian district crammed with art galleries, restaurants, brewpubs, coffee shops, and other independent businesses.",
+        "details": "The brick-lined Victorian streets of the Gooderham & Worts Distillery are now a pleasant car-free district filled with art galleries, restaurants, brewpubs, coffee shops, and other independent businesses. On summer weekends, the district hosts themed festivals and live music. The Distillery Winter Village holiday market now attracts over a million visitors annually.",
         "url": "https://www.thedistillerydistrict.com/"
     },
     {
         "slug": "first-parliament-site",
         "name": "First Parliament Site",
-        "details": "Nothing visible remains, but the first parliament buildings for Upper Canada (now the province of Ontario) stood on this site from 1798 to 1832. Occupying American troops set fire to the buildings during the War of 1812, and the British responded a year later by burning what is now the White House in Washington, DC. The site later housed the Home District Gaol before being purchased by the Consumers' Gas Company around 1879 as the area industrialized.",
+        "details": "Nothing visible remains, but the first parliament buildings for Upper Canada (now the province of Ontario) stood on this site between 1798 and 1832. Occupying American troops set fire to the buildings during the War of 1812, and the British responded a year later by torching what is now the White House in Washington, DC.",
         "url": ""
     },
     {
         "slug": "the-esplanade",
         "name": "The Esplanade",
-        "details": "Decades after infill pushed the shoreline of Lake Ontario south from Front Street, the Esplanade was an industrial area. By the early 1900s it was dominated by oil and gas companies. David Crombie Park, which runs for six blocks along the Esplanade, sits atop former railway tracks. Crombie, the mayor of Toronto from 1972 through 1978, was instrumental in the revitalization of the St. Lawrence Market area. Parking lots and vacant warehouses gave way to a vibrant walkable community of co-ops, condominiums, schools, and businesses.",
+        "details": "In the early 1900s, after infill had pushed the shoreline of Lake Ontario south from Front Street, the Esplanade became an industrial area. David Crombie Park, which runs for six blocks along the Esplanade, sits atop former railway tracks. Crombie, mayor of Toronto in the 1970s, oversaw a major redevelopment of the St. Lawrence Market area. Parking lots and vacant warehouses gave way to a vibrant walkable community of co-ops, condos, schools, and businesses.",
         "url": "https://www.thedistillerydistrict.com/"
     },        
     {
@@ -32,7 +32,7 @@
     {
         "slug": "berczy-park",
         "name": "Berczy Park",
-        "details": "Berczy Park became a social media favourite when it was refurbished in 2017 and given a photogenic Claude Cormier-designed fountain featuring 27 cast iron dogs, and one cat. Don't miss the distinctive trompe-l'oeil mural on the rear wall of the Gooderham Flatiron Building to the east, created by Derek Michael Besant in 1980.",
+        "details": "Berczy Park became a social media favourite when it was refurbished in 2017 with a photogenic Claude Cormier-designed fountain featuring 27 cast iron dogs, and one cat. Don't miss the distinctive trompe-l'oeil mural on the rear wall of the Gooderham Flatiron Building to the east, created by Derek Michael Besant in 1980.",
         "url": ""
     },
     {
@@ -50,7 +50,7 @@
     {
         "slug": "maple-leaf-square",
         "name": "Maple Leaf Square",
-        "details": "This normally bland area where Union Station meets Scotiabank Arena becomes the official outdoor gathering spot for hardy fans of the Toronto Maple Leafs and Toronto Raptors during playoff runs. When the Raptors are playing, the square is rebranded as Jurrasic Park.",
+        "details": "This normally bland area where Union Station meets Scotiabank Arena becomes the official outdoor gathering spot for hardy fans of the Toronto Maple Leafs and Toronto Raptors during playoff runs. When the Raptors are playing, the square is known as Jurrasic Park.",
         "url": ""
 
     },
@@ -63,7 +63,7 @@
     {
         "slug": "roundhouse-park",
         "name": "Roundhouse Park",
-        "details": "The John Street Roundhouse was built in 1929 by the Canadian Pacific Railway Company. Closed in the 1980s and converted into a park in 1997, its massive locomotive turntable still works. The adjoining train repair sheds now house the Toronto Railway Museum, a brewpub, and a restaurant arcade.",
+        "details": "The John Street Roundhouse was built in 1929 by the Canadian Pacific Railway Company. Closed in the 1980s and converted into a park in 1997, its massive locomotive turntable still functions. The adjoining train repair sheds now house the Toronto Railway Museum, a brewpub, and a restaurant arcade.",
         "url": "https://torontorailwaymuseum.com"  
     },
     {
@@ -75,7 +75,7 @@
     {
         "slug": "rogers-centre",
         "name": "Rogers Centre",
-        "details": "Home of the Toronto Blue Jays, Canada's only Major League Baseball team. When the building opened in 1989 as SkyDome, its retractable roof was revolutionary, and it still keeps fans and players comfortable from April to October.",
+        "details": "Home of Canada's only Major League Baseball team, the Toronto Blue Jays. When the building opened in 1989 as SkyDome, its retractable roof was revolutionary. It still keeps fans and players comfortable from April to October.",
         "url": ""  
     },
     {

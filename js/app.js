@@ -50,6 +50,7 @@ class MapApp {
 
         this.sightMarkersUrl = "json/points.geojson";
         this.sightContentUrl = "json/sights.json";
+        this.walksContentUrl = "json/walks.json";
         this.currWalkNumber = 1
 
         this.infoDiv.style.height = window.innerHeight + 'px';
@@ -60,8 +61,8 @@ class MapApp {
         this.setupMap();
         this.loadMapLayers();
         this.loadWalkLayer(this.currWalkNumber);
-        this.addBasemapLayer();      
-        this.loadSightContent();  
+        this.addBasemapLayer();
+        this.loadWalkContent();   
         this.bindGlobalEvents();
         this.locateUser();
         this.storeDomQueryReferences();
@@ -158,14 +159,23 @@ class MapApp {
 
     }
 
-    // create and add GeoJSON sight markers
-    loadSightMarkers() {
+    // add GeoJSON sight markers for the current walk to the map
+    renderSightMarkers() {
 
         const url = this.sightMarkersUrl;
         const nextLayerIndex = this.mapLayers.length;
 
-        // create pane for user location marker first, to ensure it appears below sight markers
+        // define a new pane for this layer
         var paneName = 'location_pane';
+
+        // if the pane already exists from a previous walk, delete it first
+        if (this.map.getPane(paneName)) {
+            L.DomUtil.remove(paneName);
+            delete map._panes[paneName];
+            delete map._paneRenderers[paneName];
+        }
+
+        // create a new pane for the walk
         this.map.createPane(paneName);
         this.map.getPane(paneName).style.zIndex = 400;
 
@@ -173,40 +183,59 @@ class MapApp {
         // use className option to assign a unique class to markers so they can be referenced individually later
         this.mapLayers[nextLayerIndex] = new L.GeoJSON.AJAX(url, {
             pointToLayer: (feature, latlng) => { 
-                this.mapMarker.options.className = 'sight-'+feature.properties['slug'];
-                var newMarker=L.marker(latlng, {
-                    icon: this.mapMarker,
-                    pane: paneName,
-                });
-                this.mapMarkerObjects.push(newMarker);
-                return newMarker;
+                if (this.walksContent.get(this.currWalkNumber).sights.includes(feature.properties['slug'])) {
+                    this.mapMarker.options.className = 'sight-'+feature.properties['slug'];
+                    var newMarker=L.marker(latlng, {
+                        icon: this.mapMarker,
+                        pane: paneName,
+                    });
+                    this.mapMarkerObjects.push(newMarker);
+                    return newMarker;
+                }
             }, 
             onEachFeature: (feature, layer) => {
-                layer.on('click', (e) => {
-                    this.handleMapMarkerClick(feature, e);
-                });
-                this.addSightToInfoBar(feature);
+                if (this.walksContent.get(this.currWalkNumber).sights.includes(feature.properties['slug'])) {
+                    layer.on('click', (e) => {
+                        this.handleMapMarkerClick(feature, e);
+                    });
+                    this.addSightToInfoBar(feature);
+                }
             }
         });
         this.mapLayers[nextLayerIndex].addTo(this.map);
-
     }
 
+    // load content that defines walk routes from walks.json
+    async loadWalkContent() {
+        try {
+            const response = await fetch(this.walksContentUrl);
+            if (!response.ok) throw new Error('File not found');
+            const walksArray = await response.json(); 
+            this.walksContent = new Map(walksArray.map(walk => [walk.id, walk]));
+            this.loadSightContent(); 
+        } catch (error) {
+            console.error('Error loading JSON:', error);
+        }
+    }
+
+    // load content that describes sight points from sights.json
     async loadSightContent() {
         try {
             const response = await fetch(this.sightContentUrl);
             if (!response.ok) throw new Error('File not found');
             const sightArray = await response.json(); 
             this.sightContent = new Map(sightArray.map(sight => [sight.slug, sight]));
-            this.loadSightMarkers();
+            this.renderSightMarkers();
         } catch (error) {
             console.error('Error loading JSON:', error);
         }
     }
 
     addSightToInfoBar(feature) {
+        console.log("add feature");
         if (typeof feature.properties.slug != "undefined" && feature.properties.slug.length) {
             const sight = this.sightContent.get(feature.properties.slug);
+            const sightIndex = this.walksContent.get(this.currWalkNumber).sights.indexOf(feature.properties.slug);
             var infoHtml = `
                     <div class="marker-line">
                         <div class="info-marker marker-${sight.slug} leaflet-marker-icon extra-marker extra-marker-circle-cyan"></div>
@@ -221,12 +250,26 @@ class MapApp {
             `;
             var markerDiv = document.createElement('div');
             markerDiv.className='marker-box';
+            markerDiv.setAttribute('data-index', sightIndex);
             markerDiv.innerHTML= infoHtml;
             document.getElementById("info").appendChild(markerDiv);
+            if (sightIndex==this.walksContent.get(this.currWalkNumber).sights.length-2) {
+                this.sortSightsInInfoBar();
+            }
         } else {
             console.error('Unknown slug for sight point:', error);
         }
 
+    }
+
+    sortSightsInInfoBar() {
+        console.log("sort");
+        var sights = Array.from(this.infoDiv.children); 
+        sights.sort((a, b) => {
+            return Number(a.getAttribute('data-index')) - Number(b.getAttribute('data-index'));
+        });
+        this.infoDiv.innerHTML="";
+        sights.forEach(sight => this.infoDiv.appendChild(sight));
     }
 
     // display clicked sight details in info bar, highlight it, and zoom to it
