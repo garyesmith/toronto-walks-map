@@ -48,7 +48,7 @@ class MapApp {
             threshold: 0
         };
 
-        this.sightMarkersUrl = "json/points.json";
+        this.sightMarkersUrl = "json/points.geojson";
         this.sightContentUrl = "json/sights.json";
         this.currWalkNumber = 1
 
