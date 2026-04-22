@@ -13,6 +13,7 @@ class MapApp {
         this.infoElements = []; 
         this.mapElements = []; 
         this.sightContent;
+        this.walkListMaxHeight=1200;
 
         // initial map configs
         this.canvasRenderer = L.canvas({ padding: 0.5}); // buffers 0.5 of the map outside view
@@ -216,6 +217,7 @@ class MapApp {
             this.walksContent = new Map(walksArray.map(walk => [walk.id, walk]));
             this.populateWalkSelect();
             this.loadSightContent(); 
+            
         } catch (error) {
             console.error('Error loading JSON:', error);
         }
@@ -223,13 +225,47 @@ class MapApp {
 
     // populate the select at the top of the sidebar with loaded walk names and IDs
     populateWalkSelect() {
-        document.getElementById('this-walk').innerHTML = this.walksContent.get(this.currWalkNumber).name + " &#9662;";
+        document.getElementById('this-walk').innerHTML = 'Walk: ' + this.walksContent.get(this.currWalkNumber).name + " &#9662;";
         this.walksContent.forEach(walk => {
             var option = document.createElement('li');
             option.setAttribute('value', walk.id);
-            option.innerText= walk.name;
+            var walkMetaHtml = `
+                <img src="images/${walk.thumb}" alt="${walk.name}" />
+                <h3>${walk.name}</h3>
+                <p>${walk.km} km &bull; Approx`;
+            if (walk.hours!="0") {
+                walkMetaHtml+=' '+walk.hours + ' hour';
+                if (parseInt(walk.hours,10)>1) {
+                    walkMetaHtml+='s';
+                }
+            }
+            if (walk.mins!="0") {
+                walkMetaHtml+=' '+walk.mins + ' mins';
+            }
+            option.innerHTML=walkMetaHtml;
             document.getElementById('walk-list').appendChild(option);
         });
+        var option = document.createElement('li');
+        //option.innerHTML='<p>blank</p>';
+        document.getElementById('walk-list').appendChild(option);
+        this.bindWalkSelectClickHandler();
+    }
+
+    // open or close walk list when walk name is clicked
+    bindWalkSelectClickHandler() {
+        document.getElementById('this-walk').addEventListener('click', (e) => {
+                var walkList=document.getElementById('walk-list');
+                if (walkList.style.maxHeight != "0px") {
+                    walkList.style.maxHeight="0px";
+                    walkList.style.overflowY="hidden";
+                } else {
+                    walkList.style.maxHeight=this.walkListMaxHeight+"px";
+                    setTimeout(() => {
+                        walkList.style.overflowY="scroll";
+                    }, 750);
+                }
+        });
+        document.getElementById('walk-list').style.maxHeight="0px"; // set default state
     }
 
     // load content that describes sight points from sights.json
@@ -330,12 +366,15 @@ class MapApp {
         // reset map size on window resize
         window.addEventListener('resize', () => {
             setTimeout(() => {
-                this.sightsList.style.height = window.innerHeight + 'px';
-                this.mapDiv.style.height = window.innerHeight + 'px';
+                var infoHeight=document.getElementById('info').getBoundingClientRect().height;
+                this.sightsList.style.height = infoHeight + 'px';
+                this.walkListMaxHeight=infoHeight-70;
                 if (this.map) this.map.invalidateSize();
                 this.map.setView(this.mapInitialCenter, this.mapInitialZoom);
             }, 300);
         });
+
+        window.dispatchEvent(new Event('resize'));
 
     }
 

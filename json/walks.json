@@ -1,10 +1,12 @@
 [
     {
         "id": 1,
-        "name": "Walk: CN Tower to Distillery District",
+        "name": "CN Tower to Distillery District",
         "details": "An east-west overview of many of Toronto's most well-known attractions and historical sights.",
         "km": "3",
         "hours": "2",
+        "mins": "0",
+        "thumb": "cn-tower.jpg",
         "sights": [
             "cn-tower",
             "rogers-centre",
@@ -24,20 +26,72 @@
     },
     {
         "id": 2,
-        "name": "Walk: Another walk",
+        "name": "Another walk",
         "details": "An east-west overview of many of Toronto's most well-known attractions and historical sights.",
         "km": "3",
-        "hours": "2",
+        "hours": "1",
+        "mins": "15",
+        "thumb": "rogers-centre.jpg",
         "sights": [
             "cn-tower"
         ]
     },
     {
         "id": 3,
-        "name": "Walk: A third walk",
+        "name": "A third walk",
         "details": "An east-west overview of many of Toronto's most well-known attractions and historical sights.",
-        "km": "3",
-        "hours": "2",
+        "km": "1",
+        "hours": "0",
+        "mins": "45",
+        "thumb": "the-esplanade.jpg",
+        "sights": [
+            "cn-tower"
+        ]
+    },
+    {
+        "id": 4,
+        "name": "A Fourth Walking Route",
+        "details": "An east-west overview of many of Toronto's most well-known attractions and historical sights.",
+        "km": "1",
+        "hours": "0",
+        "mins": "45",
+        "thumb": "the-esplanade.jpg",
+        "sights": [
+            "cn-tower"
+        ]
+    },
+    {
+        "id": 5,
+        "name": "Yet Another Walk for You",
+        "details": "An east-west overview of many of Toronto's most well-known attractions and historical sights.",
+        "km": "1",
+        "hours": "0",
+        "mins": "45",
+        "thumb": "the-esplanade.jpg",
+        "sights": [
+            "cn-tower"
+        ]
+    },
+    {
+        "id": 6,
+        "name": "Wow So Many Walks",
+        "details": "An east-west overview of many of Toronto's most well-known attractions and historical sights.",
+        "km": "1",
+        "hours": "0",
+        "mins": "45",
+        "thumb": "the-esplanade.jpg",
+        "sights": [
+            "cn-tower"
+        ]
+    },
+    {
+        "id": 7,
+        "name": "Too Many Walks",
+        "details": "An east-west overview of many of Toronto's most well-known attractions and historical sights.",
+        "km": "1",
+        "hours": "0",
+        "mins": "45",
+        "thumb": "the-esplanade.jpg",
         "sights": [
             "cn-tower"
         ]
