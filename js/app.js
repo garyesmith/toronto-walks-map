@@ -3,7 +3,8 @@ class MapApp {
     constructor() {
 
         // global references
-        this.infoDiv = document.getElementById('info');
+        this.sightsList = document.getElementById('sights');
+        this.mapDiv = document.getElementById('map');
         this.infoScrollObserver;
         this.map = null;
         this.mapLayers = [];
@@ -15,7 +16,7 @@ class MapApp {
 
         // initial map configs
         this.canvasRenderer = L.canvas({ padding: 0.5}); // buffers 0.5 of the map outside view
-        this.mapInitialCenter=[43.6465378, -79.3726904];
+        this.mapInitialCenter=[43.6542251, -79.3723956];
         this.mapInitialZoom=15;
         this.mapBounds = L.latLngBounds([[43.6087473, -79.4043939], [43.6677615, -79.3401475]]);
 
@@ -43,7 +44,7 @@ class MapApp {
 
         // config options for the info bar scroll observer
         this.infoScrollObserverOptions = {
-            root: this.infoDiv,
+            root: this.sightsList,
             rootMargin: '2% 0px -80% 0px',
             threshold: 0
         };
@@ -53,8 +54,9 @@ class MapApp {
         this.walksContentUrl = "json/walks.json";
         this.currWalkNumber = 1
 
-        this.infoDiv.style.height = window.innerHeight + 'px';
-        
+        this.sightsList.style.height = window.innerHeight + 'px';
+        this.mapDiv.style.height = window.innerHeight + 'px';
+
     }
 
     init() {
@@ -212,10 +214,22 @@ class MapApp {
             if (!response.ok) throw new Error('File not found');
             const walksArray = await response.json(); 
             this.walksContent = new Map(walksArray.map(walk => [walk.id, walk]));
+            this.populateWalkSelect();
             this.loadSightContent(); 
         } catch (error) {
             console.error('Error loading JSON:', error);
         }
+    }
+
+    // populate the select at the top of the sidebar with loaded walk names and IDs
+    populateWalkSelect() {
+        document.getElementById('this-walk').innerHTML = this.walksContent.get(this.currWalkNumber).name + " &#9662;";
+        this.walksContent.forEach(walk => {
+            var option = document.createElement('li');
+            option.setAttribute('value', walk.id);
+            option.innerText= walk.name;
+            document.getElementById('walk-list').appendChild(option);
+        });
     }
 
     // load content that describes sight points from sights.json
@@ -232,7 +246,6 @@ class MapApp {
     }
 
     addSightToInfoBar(feature) {
-        console.log("add feature");
         if (typeof feature.properties.slug != "undefined" && feature.properties.slug.length) {
             const sight = this.sightContent.get(feature.properties.slug);
             const sightIndex = this.walksContent.get(this.currWalkNumber).sights.indexOf(feature.properties.slug);
@@ -252,7 +265,7 @@ class MapApp {
             markerDiv.className='marker-box';
             markerDiv.setAttribute('data-index', sightIndex);
             markerDiv.innerHTML= infoHtml;
-            document.getElementById("info").appendChild(markerDiv);
+            this.sightsList.appendChild(markerDiv);
             if (sightIndex==this.walksContent.get(this.currWalkNumber).sights.length-2) {
                 this.sortSightsInInfoBar();
             }
@@ -263,13 +276,12 @@ class MapApp {
     }
 
     sortSightsInInfoBar() {
-        console.log("sort");
-        var sights = Array.from(this.infoDiv.children); 
+        var sights = Array.from(this.sightsList.children); 
         sights.sort((a, b) => {
             return Number(a.getAttribute('data-index')) - Number(b.getAttribute('data-index'));
         });
-        this.infoDiv.innerHTML="";
-        sights.forEach(sight => this.infoDiv.appendChild(sight));
+        this.sightsList.innerHTML="";
+        sights.forEach(sight => this.sightsList.appendChild(sight));
     }
 
     // display clicked sight details in info bar, highlight it, and zoom to it
@@ -290,27 +302,25 @@ class MapApp {
         const child = document.getElementById('sight-'+feature.properties['slug']);
         if (!child.classList.contains('active')) {
             this.infoElements.forEach(el => el.classList.remove('active'));
-            child.classList.add('active');
             child.classList.remove('extra-marker-circle-cyan');
             child.classList.add('extra-marker-circle-orange');
-            this.infoDiv.scrollTo({
-                top: child.offsetTop-32
+            this.sightsList.scrollTo({
+                top: child.offsetTop-80
             });
         }
 
         // once the info bar scrolling ends, highlight the marker on the map and zoom/scroll to it
-        //this.infoDiv.addEventListener('scrollend', () => {
-            this.selectedMapMarker.options.className = 'sight-'+feature.properties['slug'];
-            this.mapMarkerObjects.forEach(marker => {
-                this.mapMarker.options.className = 'sight-'+marker.feature.properties['slug'];
-                if (marker.feature.properties['slug']==feature.properties['slug']) {
-                    marker.setIcon(this.selectedMapMarker);
-                } else {
-                    marker.setIcon(this.mapMarker);
-                }
-            });
-            this.map.setView(e.target.getLatLng(), 16);
-        //}, { once: true });
+        this.selectedMapMarker.options.className = 'sight-'+feature.properties['slug'];
+        this.mapMarkerObjects.forEach(marker => {
+            this.mapMarker.options.className = 'sight-'+marker.feature.properties['slug'];
+            if (marker.feature.properties['slug']==feature.properties['slug']) {
+                marker.setIcon(this.selectedMapMarker);
+            } else {
+                marker.setIcon(this.mapMarker);
+            }
+        });
+        this.map.invalidateSize();
+        this.map.setView(e.target.getLatLng(), 16);
 
     }
 
@@ -320,7 +330,8 @@ class MapApp {
         // reset map size on window resize
         window.addEventListener('resize', () => {
             setTimeout(() => {
-                this.infoDiv.style.height = window.innerHeight + 'px';
+                this.sightsList.style.height = window.innerHeight + 'px';
+                this.mapDiv.style.height = window.innerHeight + 'px';
                 if (this.map) this.map.invalidateSize();
                 this.map.setView(this.mapInitialCenter, this.mapInitialZoom);
             }, 300);
@@ -338,7 +349,7 @@ class MapApp {
         
         // pre-query information box elements for future references
         if (!this.infoElements.length) {
-            this.infoElements = document.querySelectorAll('#info .marker-box .marker-meta h2');
+            this.infoElements = document.querySelectorAll('#sights .marker-box .marker-meta h2');
             if (!this.infoElements.length) {
                 setTimeout(() => {
                     this.storeDomQueryReferences();
