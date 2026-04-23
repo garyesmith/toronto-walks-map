@@ -5,6 +5,7 @@ class MapApp {
         // global references
         this.sightsList = document.getElementById('sights');
         this.mapDiv = document.getElementById('map');
+        this.aboutDiv = document.getElementById('about-content');
         this.infoScrollObserver;
         this.map;
         this.mapLayers = [];
@@ -411,24 +412,19 @@ class MapApp {
             clearTimeout(this.resizingTimeout);
             this.resizingTimeout=setTimeout(() => {
                 var infoHeight=document.getElementById('info').getBoundingClientRect().height;
-                this.sightsList.style.height = infoHeight + 'px';
                 if (this.map) this.map.invalidateSize();
-                this.mapDiv.style.height = window.innerHeight + 'px';
                 this.map.setView(this.mapInitialCenter, this.mapInitialZoom);
             }, 300);
         });
-
-        // set some initial heights
-        this.sightsList.style.height = window.innerHeight + 'px';
-        this.mapDiv.style.height = window.innerHeight + 'px';
     }
 
     // display 'about this app' page when info icon clicked
     bindAboutPageEvents() {
         document.getElementById('about').addEventListener('click', (e) => {
-            document.getElementById('about-content').style.display='block';
+            this.aboutDiv.style.display='block';
+            this.aboutDiv.scrollTop = 0;
             document.getElementById('about-close').addEventListener('click', (e) => {
-                document.getElementById('about-content').style.display='none';
+                this.aboutDiv.style.display='none';
             }, { once: true });
         });
     }
