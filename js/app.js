@@ -8,6 +8,7 @@ class MapApp {
         this.infoScrollObserver;
         this.map = null;
         this.mapLayers = [];
+        this.mapMarkersLayer;
         this.walkLayer = null;
         this.mapMarkerObjects = []; 
         this.infoElements = []; 
@@ -46,7 +47,7 @@ class MapApp {
         // config options for the info bar scroll observer
         this.infoScrollObserverOptions = {
             root: this.sightsList,
-            rootMargin: '2% 0px -80% 0px',
+            rootMargin: '2% 0px -75% 0px',
             threshold: 0
         };
 
@@ -68,7 +69,7 @@ class MapApp {
         this.loadWalkContent();   
         this.bindGlobalEvents();
         this.locateUser();
-        this.storeDomQueryReferences();
+        //this.storeDomQueryReferences();
     }
 
     // init map
@@ -142,9 +143,17 @@ class MapApp {
 
         const url="json/walks/walk" + walkNumber + ".json";
 
-        // add each layer to a new map pane, to control z-index ordering
-        this.map.createPane('walk_pane');
-        this.map.getPane('walk_pane').style.zIndex = 400;
+        const paneName='walk_pane';
+
+        // if the walk pane already exists from a previous walk, delete it first
+        if (this.map.getPane(paneName)) {
+            L.DomUtil.remove(paneName);
+            delete this.map._panes[paneName];
+            delete this.map._paneRenderers[paneName];
+        }
+
+        this.map.createPane(paneName);
+        this.map.getPane(paneName).style.zIndex = 400;
 
         // load GeoJSON layer with AJAX, style, and store reference to it in an array
         this.walkLayer = new L.GeoJSON.AJAX(url, {
@@ -155,7 +164,7 @@ class MapApp {
                 opacity: 0.7,
                 dashArray: '5, 10'
             }),
-            pane: 'walk_pane'
+            pane: paneName
         });
 
         this.walkLayer.addTo(this.map);
@@ -171,20 +180,27 @@ class MapApp {
         // define a new pane for this layer
         var paneName = 'location_pane';
 
-        // if the pane already exists from a previous walk, delete it first
-        if (this.map.getPane(paneName)) {
-            L.DomUtil.remove(paneName);
-            delete map._panes[paneName];
-            delete map._paneRenderers[paneName];
+        // remove any existing markers on the pane
+        this.map.eachLayer((layer) => {
+            if (layer instanceof L.Marker && layer.options.pane === paneName) {
+                this.map.removeLayer(layer);
+                delete this.mapMarkersLayer;
+                L.DomUtil.remove(paneName);
+                delete this.map._panes[paneName];
+                delete this.map._paneRenderers[paneName];
+            }
+        });
+
+        // create a new pane for the sight markers, if it does not already exist
+        if (!this.map.getPane(paneName)) {
+            this.map.createPane(paneName);
+            this.map.getPane(paneName).style.zIndex = 400;
         }
 
-        // create a new pane for the walk
-        this.map.createPane(paneName);
-        this.map.getPane(paneName).style.zIndex = 400;
-
         // load GeoJSON layer with AJAX, style, and store reference to it in an array
+        // only render markers that are part of the current walk
         // use className option to assign a unique class to markers so they can be referenced individually later
-        this.mapLayers[nextLayerIndex] = new L.GeoJSON.AJAX(url, {
+        this.mapMarkersLayer = new L.GeoJSON.AJAX(url, {
             pointToLayer: (feature, latlng) => { 
                 if (this.walksContent.get(this.currWalkNumber).sights.includes(feature.properties['slug'])) {
                     this.mapMarker.options.className = 'sight-'+feature.properties['slug'];
@@ -205,7 +221,18 @@ class MapApp {
                 }
             }
         });
-        this.mapLayers[nextLayerIndex].addTo(this.map);
+        this.mapMarkersLayer.addTo(this.map);
+
+        // when all markers above are loaded, re-cache the rendered page elements and (re)initialize the 
+        // intersection observer to highlight markers as they are scrolled past in the info pane
+        this.mapMarkersLayer.on('data:loaded', (e) => {
+            this.infoElements=[];
+            this.mapElements=[];
+            this.storeDomQueryReferences();
+            if (this.infoScrollObserver) this.infoScrollObserver.disconnect();
+            this.startInfoScrollObserver();
+        });
+
     }
 
     // load content that defines walk routes from walks.json
@@ -225,10 +252,10 @@ class MapApp {
 
     // populate the select at the top of the sidebar with loaded walk names and IDs
     populateWalkSelect() {
-        document.getElementById('this-walk').innerHTML = 'Walk: ' + this.walksContent.get(this.currWalkNumber).name + " &#9662;";
+        document.getElementById('this-walk').innerHTML = 'Walk: <span id=\"this-walk-name\">' + this.walksContent.get(this.currWalkNumber).name + "</span> <span id=\"walk-down\">&dtrif;</span><span id=\"walk-up\">&utrif;</span>";
         this.walksContent.forEach(walk => {
             var option = document.createElement('li');
-            option.setAttribute('value', walk.id);
+            option.setAttribute('data-value', walk.id);
             var walkMetaHtml = `
                 <img src="images/${walk.thumb}" alt="${walk.name}" />
                 <h3>${walk.name}</h3>
@@ -244,6 +271,17 @@ class MapApp {
             }
             option.innerHTML=walkMetaHtml;
             document.getElementById('walk-list').appendChild(option);
+            document.getElementById('walk-list').addEventListener('click', (e) => {
+                const walkId = parseInt(e.target.closest('li').getAttribute("data-value", 10));
+                if (this.currWalkNumber != walkId) {
+                    this.currWalkNumber=walkId;
+                    document.getElementById('this-walk-name').innerText=this.walksContent.get(walkId).name;
+                    this.loadWalkLayer(this.currWalkNumber);
+                    this.sightsList.innerHTML="";
+                    this.renderSightMarkers();
+                    document.getElementById('this-walk-name').click();
+                }
+            });
         });
         var option = document.createElement('li');
         //option.innerHTML='<p>blank</p>';
@@ -258,11 +296,27 @@ class MapApp {
                 if (walkList.style.maxHeight != "0px") {
                     walkList.style.maxHeight="0px";
                     walkList.style.overflowY="hidden";
+                    document.getElementById('walk-up').style.display='none';
+                    document.getElementById('walk-down').style.display='inline-block';
+                    document.getElementById('close').style.display='none';
                 } else {
                     walkList.style.maxHeight=this.walkListMaxHeight+"px";
+                    document.querySelectorAll('#walk-list li').forEach((item) => {
+                        if (item.getAttribute('data-value')==this.currWalkNumber) {
+                            item.classList.add("current");
+                        } else {
+                            item.classList.remove("current");
+                        }
+                    });
                     setTimeout(() => {
                         walkList.style.overflowY="scroll";
                     }, 750);
+                    document.getElementById('walk-down').style.display='none';
+                    document.getElementById('walk-up').style.display='inline-block';
+                    document.getElementById('close').style.display='block';
+                    document.getElementById('close').addEventListener('click', (e) => {
+                        document.getElementById('this-walk').click();
+                    }, { once: true });
                 }
         });
         document.getElementById('walk-list').style.maxHeight="0px"; // set default state
@@ -407,10 +461,6 @@ class MapApp {
                 return;
             }
         }
-
-        // only initialize info panel scroll interection observer once all required
-        // elements are rendered into the DOM and pre-queried
-        this.startInfoScrollObserver();
 
     }
 

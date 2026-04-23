@@ -58,7 +58,7 @@ header #hamburger {
 #sights {
     width: 100%;
     height: 100%;
-    padding: 0 3% 25% 3%;
+    padding: 12% 3% 25% 3%;
     overflow-x: hidden;
     overflow-y: scroll;
 }
@@ -143,21 +143,39 @@ p {
     padding: 2% 3% 5% 0;
 }
 
-#about {
+#about,
+#close {
     cursor: pointer;
-    font-size: 1.3rem;
+    font-size: 1.4rem;
     display: block;
     position: absolute;
-    top: 10px;
-    right: 5%;
+    top: 1px;
+    right: 10px;
+    z-index: 1;
+    display: inline-block;
+    text-align: center;
+    padding: 8px 13px 6px 13px;
+    background-color: #13537d;
+}
+#close {
+    font-size: 1.6rem;
+    padding: 5px 15px 4px 11px;
+    display: none;
+    z-index: 2;
 }
 
 h2#this-walk {
     width: 100%;
-    font-size: 1.0rem;
-    font-weight: 600;
+    font-size: 1.1rem;
+    font-weight: 700;
     color: white;
     cursor: pointer;
+}
+h2#this-walk span#walk-down {
+    display: inline-block;
+}
+h2#this-walk span#walk-up {
+    display: none;
 }
 ul#walk-list {
     color: white;
@@ -165,13 +183,15 @@ ul#walk-list {
     width: 100%;
     font-size: 1.0rem;
     max-height: 0;
-    transition: max-height 0.7s ease-out;
+    transition: max-height 0.5s ease-out;
     overflow: hidden;
 }
 ul#walk-list li {
     border-top: 1px solid white;
     width: 100%;
     padding: 5% 4%;
+    -webkit-user-select: none;
+    user-select: none; 
 }
 ul#walk-list li img {
     width: 16%;
@@ -192,6 +212,12 @@ ul#walk-list li p {
 ul#walk-list li:hover {
     background-color: #2a93ee;
     cursor: pointer;
+}
+ul#walk-list li.current,
+ul#walk-list li.current:hover {
+    cursor: auto;
+    opacity: 0.5;
+    background-color: transparent;
 }
 ul#walk-list.open {
     max-height: 1200px;
