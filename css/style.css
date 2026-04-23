@@ -71,17 +71,6 @@ header #hamburger {
     border-radius: 16px;
 }
 
-#info p a {
-    background-color: #e1e1e1;
-    color: #2a93ee;
-    padding: 3px 12px;
-    border-radius: 6px;
-    text-decoration: none;
-    text-transform: none;
-    font-size: 0.7rem;
-    margin-top: 8px;
-}
-
 #map {
     background-color: #f1f1f1;
     padding: 20px;
@@ -144,7 +133,8 @@ p {
 }
 
 #about,
-#close {
+#close,
+#about-close {
     cursor: pointer;
     font-size: 1.4rem;
     display: block;
@@ -156,8 +146,10 @@ p {
     text-align: center;
     padding: 8px 13px 6px 13px;
     background-color: #13537d;
+    color: white;
 }
-#close {
+#close,
+#about-close {
     font-size: 1.6rem;
     padding: 5px 15px 4px 11px;
     display: none;
@@ -222,6 +214,59 @@ ul#walk-list li.current:hover {
 ul#walk-list.open {
     max-height: 1200px;
 }
+#about-content {
+    width: 100%;
+    height: auto;
+    margin: 0;
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #e1e1e1;
+    padding: 20% 4%;
+    z-index: 10;
+}
+#about-content.show {
+    display: block;
+}
+#about-content h1,
+#about-content h2, 
+#about-content p {
+    color: #222222;
+}
+#about-content p a {
+    color: #13537d;
+}
+#about-content h1 {
+    margin-top: 10%;
+}
+#about-content h2 {
+    margin-top: 7%;
+    line-height: 1.4rem;
+}
+#about-content p {
+    margin-top: 3%;
+}
+#about-content p a {
+    font-weight: 600;
+}
+#about-close-bar {
+    width: 110%;
+    height: 50px;
+    margin: -22% 0 0 -5%;
+    padding: 0;
+    background-color: #13537d;
+    top: 0;
+    left: 0;
+    position: sticky;
+    display: block;
+    color: white;
+}
+#about-close {
+    display: block;
+    color: white;
+    padding: 5px 15px 4px 11px;
+}
 
 /* desktop (default) */
 @media (min-width: 1025px) {
@@ -271,7 +316,7 @@ ul#walk-list.open {
 
     #sights {
         width: 100%;
-        padding: 10px 4% 30% 4%;
+        padding: 12% 4% 30% 4%;
     }
 
     #info img {

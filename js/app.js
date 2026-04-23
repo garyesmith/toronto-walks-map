@@ -6,15 +6,15 @@ class MapApp {
         this.sightsList = document.getElementById('sights');
         this.mapDiv = document.getElementById('map');
         this.infoScrollObserver;
-        this.map = null;
+        this.map;
         this.mapLayers = [];
         this.mapMarkersLayer;
-        this.walkLayer = null;
+        this.walkLayer;
         this.mapMarkerObjects = []; 
         this.infoElements = []; 
         this.mapElements = []; 
         this.sightContent;
-        this.walkListMaxHeight=1200;
+        this.resizingTimeout=0;
 
         // initial map configs
         this.canvasRenderer = L.canvas({ padding: 0.5}); // buffers 0.5 of the map outside view
@@ -30,6 +30,13 @@ class MapApp {
             ["json/dissolved/buildings.geojson", "#d0b38f", 1]
         ];
 
+        // json config file URLs
+        this.jsonUrls = {
+            "sightMarkers": "json/points.geojson",
+            "sightContent": "json/sights.json",
+            "walksContent": "json/walks.json"
+        };
+
         // default map marker style
         this.mapMarker = L.ExtraMarkers.icon({
             markerColor: 'cyan',
@@ -44,35 +51,22 @@ class MapApp {
             prefix: 'fa'
         });
 
-        // config options for the info bar scroll observer
-        this.infoScrollObserverOptions = {
-            root: this.sightsList,
-            rootMargin: '2% 0px -75% 0px',
-            threshold: 0
-        };
-
-        this.sightMarkersUrl = "json/points.geojson";
-        this.sightContentUrl = "json/sights.json";
-        this.walksContentUrl = "json/walks.json";
-        this.currWalkNumber = 1
-
-        this.sightsList.style.height = window.innerHeight + 'px';
-        this.mapDiv.style.height = window.innerHeight + 'px';
+        this.currWalkNumber = 1;
 
     }
 
     init() {
         this.setupMap();
-        this.loadMapLayers();
-        this.loadWalkLayer(this.currWalkNumber);
+        this.loadMapFeatureLayers();
+        this.loadCurrentWalkLayer();
         this.addBasemapLayer();
         this.loadWalkContent();   
-        this.bindGlobalEvents();
+        this.handleWindowResizing();
+        this.bindAboutPageEvents();
         this.locateUser();
-        //this.storeDomQueryReferences();
     }
 
-    // init map
+    // initialize the map
     setupMap() {
         this.map = L.map('map', {
             preferCanvas: true,
@@ -97,7 +91,7 @@ class MapApp {
             setView: false
         }).addTo(this.map);
 
-        // workaround leaflet bug to prevent click handler problems after map drag
+        // workaround for a leaflet bug that causes click handler problems after map drag
         this.map.on('dragend', () => {
             this.map.dragging.disable();
             setTimeout(() => {
@@ -107,8 +101,8 @@ class MapApp {
 
     }
 
-    // load and add geoJson map layers
-    async loadMapLayers() {
+    // load and add geoJson map layers (water, sidewalks, green spaces, buildings)
+    async loadMapFeatureLayers() {
         this.map.createPane('layers_pane');
         this.map.getPane('layers_pane').style.zIndex = 200;
         const layerPromises = this.layerConfigs.map(async ([url, color, weight]) => {
@@ -120,11 +114,10 @@ class MapApp {
                 renderer: this.canvasRenderer
             }).addTo(this.map);
         });
-
         this.mapLayers = await Promise.all(layerPromises);
     }    
 
-    // add base tile layer
+    // add base tile map layer
     addBasemapLayer() {
         this.map.createPane('basemap_pane');
         this.map.getPane('basemap_pane').style.zIndex = 400;
@@ -139,9 +132,9 @@ class MapApp {
     }
 
     // create and add GeoJSON walk path layers
-    loadWalkLayer(walkNumber) {
+    loadCurrentWalkLayer() {
 
-        const url="json/walks/walk" + walkNumber + ".json";
+        const url="json/walks/walk" + this.currWalkNumber + ".json";
 
         const paneName='walk_pane';
 
@@ -151,7 +144,6 @@ class MapApp {
             delete this.map._panes[paneName];
             delete this.map._paneRenderers[paneName];
         }
-
         this.map.createPane(paneName);
         this.map.getPane(paneName).style.zIndex = 400;
 
@@ -174,7 +166,7 @@ class MapApp {
     // add GeoJSON sight markers for the current walk to the map
     renderSightMarkers() {
 
-        const url = this.sightMarkersUrl;
+        const url = this.jsonUrls.sightMarkers;
         const nextLayerIndex = this.mapLayers.length;
 
         // define a new pane for this layer
@@ -228,7 +220,7 @@ class MapApp {
         this.mapMarkersLayer.on('data:loaded', (e) => {
             this.infoElements=[];
             this.mapElements=[];
-            this.storeDomQueryReferences();
+            this.cacheDomQueries();
             if (this.infoScrollObserver) this.infoScrollObserver.disconnect();
             this.startInfoScrollObserver();
         });
@@ -238,7 +230,7 @@ class MapApp {
     // load content that defines walk routes from walks.json
     async loadWalkContent() {
         try {
-            const response = await fetch(this.walksContentUrl);
+            const response = await fetch(this.jsonUrls.walksContent);
             if (!response.ok) throw new Error('File not found');
             const walksArray = await response.json(); 
             this.walksContent = new Map(walksArray.map(walk => [walk.id, walk]));
@@ -276,7 +268,7 @@ class MapApp {
                 if (this.currWalkNumber != walkId) {
                     this.currWalkNumber=walkId;
                     document.getElementById('this-walk-name').innerText=this.walksContent.get(walkId).name;
-                    this.loadWalkLayer(this.currWalkNumber);
+                    this.loadCurrentWalkLayer();
                     this.sightsList.innerHTML="";
                     this.renderSightMarkers();
                     document.getElementById('this-walk-name').click();
@@ -284,7 +276,6 @@ class MapApp {
             });
         });
         var option = document.createElement('li');
-        //option.innerHTML='<p>blank</p>';
         document.getElementById('walk-list').appendChild(option);
         this.bindWalkSelectClickHandler();
     }
@@ -300,7 +291,7 @@ class MapApp {
                     document.getElementById('walk-down').style.display='inline-block';
                     document.getElementById('close').style.display='none';
                 } else {
-                    walkList.style.maxHeight=this.walkListMaxHeight+"px";
+                    walkList.style.maxHeight="1200px";
                     document.querySelectorAll('#walk-list li').forEach((item) => {
                         if (item.getAttribute('data-value')==this.currWalkNumber) {
                             item.classList.add("current");
@@ -325,7 +316,7 @@ class MapApp {
     // load content that describes sight points from sights.json
     async loadSightContent() {
         try {
-            const response = await fetch(this.sightContentUrl);
+            const response = await fetch(this.jsonUrls.sightContent);
             if (!response.ok) throw new Error('File not found');
             const sightArray = await response.json(); 
             this.sightContent = new Map(sightArray.map(sight => [sight.slug, sight]));
@@ -414,38 +405,48 @@ class MapApp {
 
     }
 
-    // handle global window events
-    bindGlobalEvents() {
-
-        // reset map size on window resize
+    // when window resizes, reset the map and adjust heights on a few other elements
+    handleWindowResizing() {
         window.addEventListener('resize', () => {
-            setTimeout(() => {
+            clearTimeout(this.resizingTimeout);
+            this.resizingTimeout=setTimeout(() => {
                 var infoHeight=document.getElementById('info').getBoundingClientRect().height;
                 this.sightsList.style.height = infoHeight + 'px';
-                this.walkListMaxHeight=infoHeight-70;
                 if (this.map) this.map.invalidateSize();
+                this.mapDiv.style.height = window.innerHeight + 'px';
                 this.map.setView(this.mapInitialCenter, this.mapInitialZoom);
             }, 300);
         });
 
-        window.dispatchEvent(new Event('resize'));
-
+        // set some initial heights
+        this.sightsList.style.height = window.innerHeight + 'px';
+        this.mapDiv.style.height = window.innerHeight + 'px';
     }
 
-    // trigger a request to determine user's current location
+    // display 'about this app' page when info icon clicked
+    bindAboutPageEvents() {
+        document.getElementById('about').addEventListener('click', (e) => {
+            document.getElementById('about-content').style.display='block';
+            document.getElementById('about-close').addEventListener('click', (e) => {
+                document.getElementById('about-content').style.display='none';
+            }, { once: true });
+        });
+    }
+
+    // trigger a request to determine user's current location on the emap
     locateUser() {
         this.locationControl.start();
     }
 
-    // run DOM queries only once and store references
-    storeDomQueryReferences() {
+    // run a few DOM queries only once and store element references
+    cacheDomQueries() {
         
         // pre-query information box elements for future references
         if (!this.infoElements.length) {
             this.infoElements = document.querySelectorAll('#sights .marker-box .marker-meta h2');
             if (!this.infoElements.length) {
                 setTimeout(() => {
-                    this.storeDomQueryReferences();
+                    this.cacheDomQueries();
                 }, 100);
                 return;
             }
@@ -456,7 +457,7 @@ class MapApp {
             this.mapElements = document.querySelectorAll('.leaflet-marker-icon');
             if (!this.mapElements.length) {
                 setTimeout(() => {
-                    this.storeDomQueryReferences();
+                    this.cacheDomQueries();
                 }, 100);
                 return;
             }
@@ -464,7 +465,8 @@ class MapApp {
 
     }
 
-     infoScrollObserverCallback = (entries) => {
+    // when a sight info box scrolls into the top area of its parent div, highlight it there and on the map
+    infoScrollObserverCallback = (entries) => {
         if (!this.mapElements.length) return;
         entries.forEach((entry) => {
             const child = entry.target;
@@ -485,15 +487,15 @@ class MapApp {
     // when a sight info box scrolls to the area near the top, highlight the relevant marker
     // on the map and zoom/scroll to it
     startInfoScrollObserver() {
-
-        this.infoScrollObserver = new IntersectionObserver(this.infoScrollObserverCallback, this.infoScrollObserverOptions);
-
+        this.infoScrollObserver = new IntersectionObserver(this.infoScrollObserverCallback, {
+            root: this.sightsList,
+            rootMargin: '2% 0px -75% 0px',
+            threshold: 0
+        });
         this.infoElements.forEach(child =>  this.infoScrollObserver.observe(child));
-
     }
 
 }
 
-// init the app
-const myMapApp = new MapApp();
-myMapApp.init();
+const app = new MapApp();
+app.init();
