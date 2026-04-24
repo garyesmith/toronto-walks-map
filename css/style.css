@@ -379,6 +379,7 @@ ul#walk-list.open {
     }
     #info figure figcaption.credit {
         bottom: 0;
+        height: 40%;
     }
 
     p {

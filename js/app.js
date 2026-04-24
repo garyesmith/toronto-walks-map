@@ -125,7 +125,7 @@ class MapApp {
         L.tileLayer('https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}{r}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
             subdomains: 'abcd',
-            maxZoom: 16,
+            maxZoom: 17,
             updateWhenZooming: false,
             pane: 'basemap_pane',
             edgeBufferTiles: 2
