@@ -126,8 +126,9 @@ header #hamburger {
 h2 {
     font-family: 'Open Sans', Arial, sans-serif;
     font-weight: 700;    
-    line-height: 3.0rem;
+    line-height: 1.8rem;
     font-size: 1.4rem;
+    margin: 2% auto 5% auto;
     color: #444;
 }
 
