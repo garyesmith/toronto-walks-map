@@ -128,7 +128,7 @@ h2 {
     font-weight: 700;    
     line-height: 1.8rem;
     font-size: 1.4rem;
-    margin: 2% auto 5% auto;
+    margin: 2% auto 3% auto;
     color: #444;
 }
 
@@ -387,5 +387,9 @@ ul#walk-list.open {
 
     p {
         font-size: 1.2rem;
+    }
+
+    h2 {
+        margin-bottom: 5%;
     }
 }
