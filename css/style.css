@@ -206,6 +206,8 @@ h2#this-walk {
     font-weight: 700;
     color: white;
     cursor: pointer;
+    -webkit-user-select: none;
+    user-select: none; 
 }
 h2#this-walk span#walk-down {
     display: inline-block;
@@ -219,7 +221,7 @@ ul#walk-list {
     width: 100%;
     font-size: 1.0rem;
     max-height: 0;
-    transition: max-height 0.5s ease-out;
+    transition: max-height 0.3s ease-out;
     overflow: hidden;
 }
 ul#walk-list li {
@@ -379,7 +381,7 @@ ul#walk-list.open {
     }
     #info figure figcaption.credit {
         bottom: 0;
-        height: 40%;
+        height: 45%;
     }
 
     p {

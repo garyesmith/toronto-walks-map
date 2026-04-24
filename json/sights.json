@@ -21,15 +21,12 @@
         "slug": "st-lawrence-market-south",
         "name": "St. Lawrence Market South",
         "details": "The St. Lawrence Market south building has hogged this corner since 1842, when the central section served as City Hall. The 120 vendors across two floors include butchers, fishmongers, organic vegetable stalls, take-out restaurants, and speciality shops. The south market is open every day of the week except Mondays.",
-        "url": "https://www.stlawrencemarket.com/",
-        "photoLicense": "licensed under the Creative Commons Attribution 4.0 International license",
-        "photoName": "Canmenwalker",
-        "photoUrl": "https://commons.wikimedia.org/wiki/File:St_Lawerence_South_Market_Exterior_202112.jpg"
+        "url": "https://www.stlawrencemarket.com/"
     },
     {
         "slug": "gooderham-flatiron-building",
         "name": "Gooderham Flatiron Building",
-        "details": "Often described as the most-photographed building in Toronto, the Flatiron has stood in the heart of Old Toronto since 1892. George Gooderham (1830–1905) of the Gooderham & Worts Distillery once kept a watchful eye on his sprawling business empire from an  office in the top floor cupola.",
+        "details": "Often described as the most-photographed building in Toronto, the Flatiron has stood in the heart of Old Toronto since 1892. George Gooderham (1830–1905) of the Gooderham & Worts Distillery once kept a watchful eye on his sprawling business empire from an  office in the top floor cupola. There's a pub in the basement, with a sunny sidewalk patio in the summers.",
         "url": "",
         "photoLicense": "made available under the Creative Commons CC0 1.0 Universal Public Domain Dedication",
         "photoName": "Bernard Spragg",
@@ -38,7 +35,7 @@
     {
         "slug": "berczy-park",
         "name": "Berczy Park",
-        "details": "Berczy Park became a social media favourite in 2017 when it was refurbished with a photogenic Claude Cormier-designed fountain featuring 27 cast iron dogs, and one cat. Don't miss the distinctive mural on the rear wall of the Gooderham Flatiron Building to the east, created by Derek Michael Besant in 1980.",
+        "details": "Berczy Park became a social media favourite in 2017 when it was refurbished with a photogenic Claude Cormier-designed fountain featuring 27 cast iron dogs, and one cat. Look very closely and you'll realize what the cat is staring at. Also, don't miss the distinctive Derek Michael Besant mural installed in 1980 on the rear wall of the neighbouring Gooderham Flatiron Building.",
         "url": ""
     },
     {
@@ -111,46 +108,43 @@
     {
         "slug": "king-edward-hotel",
         "name": "King Edward Hotel",
-        "details": "The King Edward Hotel has always been one of the more prestigious hotels in Toronto, with a long list of famous past guests that includes Queen Elizabeth II, Mark Twain, Elvis Presley, the Beatles, Teddy Roosevelt, and the Dalai Lama. The King Eddy's weekend High Tea is a tradition that dates back to 1903.",
-        "url": "",
-        "photoLicense": "licensed under Creative Commons Attribution 4.0 International",
-        "photoName": "Canmenwalker",
-        "photoUrl":"https://commons.wikimedia.org/wiki/File:King_Edward_Hotel_2025.jpg"
+        "details": "The King Edward Hotel has always been one of the more prestigious hotels in Toronto, with a long list of famous past guests that includes Queen Elizabeth II, Mark Twain, Elvis Presley, the Beatles, Teddy Roosevelt, and the Dalai Lama. The King Eddy's weekend Afternoon Tea is a tradition that dates back to 1903.",
+        "url": ""
     },
     {
         "slug": "toronto-street",
         "name": "Toronto Street",
-        "details": "A bank stands on the northeast corner of King Street East and Toronto Street today, but in the 1830s the corner was dominated by the King Street Gaol. Just outside the two-story brick building were the gallows, enclosed by a wooden stockade. It was here that  Samuel Lount and Peter Matthews were hanged for their roles in the Upper Canada Rebellion of 1837, a failed uprising against the colonial British government of the time.",
+        "details": "A bank stands on the northeast corner of King Street East and Toronto Street today, but in the 1830s it was dominated by the King Street Gaol. Just outside the two-story brick building were the gallows, enclosed by a wooden stockade. It was here that  Samuel Lount and Peter Matthews were hanged for their roles in the Upper Canada Rebellion, a failed uprising against the colonial British government in 1837.",
         "url": ""  
     },
     {
         "slug": "adelaide-street-court-house",
         "name": "Adelaide Street Court House",
-        "details": "Lorem ipsum.",
-        "url": ""  
+        "details": "The stern columns of this Court House have loomed over Adelaide Street since 1852, making it one of the oldest intact buildings in Toronto. After the courts moved to City Hall in 1900, this building was leased by the Arts and Letters Club. This men-only organization hosted painters, writers, and musicians until 1913, including the landscape artists who would later form the Group of Seven. Today the building is home to an Italian restaurant.",
+        "url": ""
     },
     {
         "slug": "st-james-cathedral",
         "name": "St. James Cathedral",
-        "details": "Lorem ipsum.",
+        "details": "The Cathedral of St. James is the fourth Anglican church to stand at this location. It opened in 1853 after the previous structure burned in the Great Fire of Toronto. The elaborate tower and spires were not added until the 1870s, making it the tallest structure in Canada for 25 years. On Sunday mornings, the tower's full set of 12 bells are rung in mesmerizing sequence by the Guild of Change Ringers.",
         "url": ""  
     },
     {
         "slug": "st-james-park",
         "name": "St. James Park",
-        "details": "Lorem ipsum.",
+        "details": "At the south end of St. James Park there is a formal garden with a fountain, which features rotating flowers and plantings throughout the spring and summer. In the center of the park is a new stylish timber pavilion for concerts and festivals. Meanwhile, few realize that the grassy field next to the church conceals the bones of thousands of Torontonians frantically buried in mass graves during the cholera epidemics of the 1830s.",
         "url": ""  
     },
     {
         "slug": "christie-brown-and-co-factory",
-        "name": "Christie Brown & Co. Factory",
-        "details": "Lorem ipsum.",
+        "name": "Christie, Brown & Co. Factory",
+        "details": "Built in 1868, the Christie, Brown & Co. Biscuit Factory eventually became the largest biscuit manufacturer in Canada, using newfangled steam-powered machines to produce the biscuits they shipped around the world. Today, the building is part of the George Brown College campus.",
         "url": ""  
     },
     {
         "slug": "torontos-first-post-office",
         "name": "Toronto's First Post Office",
-        "details": "Lorem ipsum.",
+        "details": "When it opened in 1833, Toronto's first post office was originally run by British Royal Mail. Today, it is a National Historic Site operated by the York Historical Society as both a museum and a modern Post Office. Passing through the tiny door onto the creaky wooden floors is like stepping back in time. The museum exhibits are free, but they always appreciate donations.",
         "url": ""  
     },
     {
@@ -162,7 +156,7 @@
     {
         "slug": "st-lawrence-market-north",
         "name": "St. Lawrence Market North",
-        "details": "Lorem ipsum.",
+        "details": "Years late and millions over budget, the eye-catching new St. Lawrence Market North building finally opened to the public in 2025. It currently sits empty most of the week, but on Saturday mornings it comes alive as farmers and specialty food producers arrive from the surrounding towns and rural areas to sell their high-quality products to crowds of hungry Torontonians.",
         "url": ""  
     },
     {

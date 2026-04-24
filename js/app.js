@@ -271,11 +271,11 @@ class MapApp {
                 const walkId = parseInt(e.target.closest('li').getAttribute("data-value", 10));
                 if (this.currWalkNumber != walkId) {
                     this.currWalkNumber=walkId;
+                    document.getElementById('this-walk-name').click();
                     document.getElementById('this-walk-name').innerText=this.walksContent.get(walkId).name;
                     this.loadCurrentWalkLayer();
                     this.sightsList.innerHTML="";
                     this.renderSightMarkers();
-                    document.getElementById('this-walk-name').click();
                 }
             });
         });
