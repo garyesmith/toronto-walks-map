@@ -226,6 +226,7 @@ class MapApp {
             this.cacheDomQueries();
             if (this.infoScrollObserver) this.infoScrollObserver.disconnect();
             this.startInfoScrollObserver();
+            this.bindPhotoCreditLinks();
         });
 
     }
@@ -339,10 +340,16 @@ class MapApp {
                     </div>
                     <div class="marker-meta">
                         <h2 class="info-header" id="sight-${sight.slug}">${sight.name}</h2>
-                        <p>
-                            <img src="./images/${sight.slug}.jpg" alt="${sight.name}" />
-                            ${sight.details}
-                        </p>
+                            <figure>
+                                <img src="./images/${sight.slug}.jpg" alt="${sight.name}" />`;
+
+            if (sight.photoLicense) {
+                infoHtml +=`    <figcaption class="credit">Photo ${sight.photoLicense} by <nobr><a href="${sight.photoUrl}" target="_blank">${sight.photoName}</a>&nbsp;&nearr;</nobr></figcaption>
+                                <a class="show-credit"></a>`;
+            }
+
+            infoHtml+=`     </figure>
+                            <p>${sight.details}</p>
                     </div>
             `;
             var markerDiv = document.createElement('div');
@@ -352,7 +359,6 @@ class MapApp {
             this.sightsList.appendChild(markerDiv);
             var numSights=this.walksContent.get(this.currWalkNumber).sights.length ;
             var numChildren=this.sightsList.childElementCount;
-            //console.log(numChildren + " of " + numSights + " slug="+sight.slug);
             if (numChildren==numSights) {
                 this.sortSightsInInfoBar();
             }
@@ -362,6 +368,7 @@ class MapApp {
 
     }
 
+    // sort marker box elements in the info bar according to the order they appear in the current walk
     sortSightsInInfoBar() {
         var sights = Array.from(this.sightsList.children); 
         sights.sort((a, b) => {
@@ -369,6 +376,20 @@ class MapApp {
         });
         this.sightsList.innerHTML="";
         sights.forEach(sight => this.sightsList.appendChild(sight));
+    }
+
+    // show or hide photo credits when provided for an image in the info bar
+    bindPhotoCreditLinks() {
+        document.querySelectorAll('#sights a.show-credit').forEach((el) => {
+            el.addEventListener('click', (e) => {
+                var caption = e.target.parentElement.querySelector('figcaption');
+                if (caption.style.display=='block') {
+                    caption.style.display='none';
+                } else {
+                    caption.style.display='block';
+                }
+            });
+        });
     }
 
     // display clicked sight details in info bar, highlight it, and zoom to it

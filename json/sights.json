@@ -2,75 +2,99 @@
     {
         "slug": "distillery-district",
         "name": "Distillery District",
-        "details": "The brick-lined Victorian streets of the Gooderham & Worts Distillery are now a pleasant car-free district filled with art galleries, restaurants, brewpubs, coffee shops, and other independent businesses. On summer weekends, the district hosts themed festivals and live music. The Distillery Winter Village holiday market now attracts over a million visitors annually.",
+        "details": "The brick-lined Victorian streets of the Gooderham & Worts Distillery are now a popular car-free district of art galleries, restaurants, brewpubs, coffee shops, and other independent businesses. On summer weekends, the district hosts themed festivals and live music. The Distillery Winter Village holiday market attracts over a million visitors annually.",
         "url": "https://www.thedistillerydistrict.com/"
     },
     {
         "slug": "first-parliament-site",
         "name": "First Parliament Site",
-        "details": "Nothing remains but a plaque honouring the first parliament buildings for Upper Canada (now Ontario) that stood on this site from 1798 to 1832. Occupying American troops set fire to the buildings during the War of 1812, and the British responded a year later by torching what is now the White House in Washington, DC.",
+        "details": "Nothing remains but a plaque honouring the first parliament buildings for Upper Canada (now Ontario) that stood on this site from 1798 to 1832. During the War of 1812 occupying American troops set fire to the buildings, and the British responded a year later by torching what is now the White House in Washington, DC.",
         "url": ""
     },
     {
         "slug": "the-esplanade",
         "name": "The Esplanade",
-        "details": "In the early 1900s, after infill pushed the shoreline of Lake Ontario south from Front Street, the Esplanade became an industrial area. David Crombie Park, which runs for six blocks along the Esplanade, now sits atop former railway sidings. Crombie, mayor of Toronto in the 1970s, oversaw a major redevelopment of the St. Lawrence Market area. Parking lots and vacant warehouses gave way to a vibrant walkable community of co-ops, condos, schools, and businesses.",
+        "details": "In the early 1900s, after infill pushed the shoreline of Lake Ontario south from Front Street, the Esplanade was an industrial area. David Crombie Park, which runs for six blocks along the Esplanade, now sits atop former railway sidings. Crombie, mayor of Toronto in the 1970s, oversaw a major redevelopment of the St. Lawrence Market area. Vacant warehouses have given way to a vibrant walkable community of co-ops, condos, schools, and businesses.",
         "url": "https://www.thedistillerydistrict.com/"
     },        
     {
         "slug": "st-lawrence-market-south",
         "name": "St. Lawrence Market South",
-        "details": "The St. Lawrence Market south building has stood on this corner since 1842, when the central section served as City Hall. The 120 vendors across two floors include butchers, fishmongers, organic vegetable stalls, take-out restaurants, and speciality shops. The south market is open every day of the week except Mondays.",
-        "url": "https://www.stlawrencemarket.com/"
+        "details": "The St. Lawrence Market south building has hogged this corner since 1842, when the central section served as City Hall. The 120 vendors across two floors include butchers, fishmongers, organic vegetable stalls, take-out restaurants, and speciality shops. The south market is open every day of the week except Mondays.",
+        "url": "https://www.stlawrencemarket.com/",
+        "photoLicense": "licensed under the Creative Commons Attribution 4.0 International license",
+        "photoName": "Canmenwalker",
+        "photoUrl": "https://commons.wikimedia.org/wiki/File:St_Lawerence_South_Market_Exterior_202112.jpg"
     },
     {
         "slug": "gooderham-flatiron-building",
         "name": "Gooderham Flatiron Building",
-        "details": "Often described as the most-photographed building in Toronto, the Flatiron has stood in the heart of Old Toronto since 1892. President George Gooderham (1830–1905) of the Gooderham & Worts Distillery once kept a watchful eye on his sprawling business empire from an  office in the top floor cupola.",
-        "url": ""
+        "details": "Often described as the most-photographed building in Toronto, the Flatiron has stood in the heart of Old Toronto since 1892. George Gooderham (1830–1905) of the Gooderham & Worts Distillery once kept a watchful eye on his sprawling business empire from an  office in the top floor cupola.",
+        "url": "",
+        "photoLicense": "made available under the Creative Commons CC0 1.0 Universal Public Domain Dedication",
+        "photoName": "Bernard Spragg",
+        "photoUrl": "https://commons.wikimedia.org/wiki/File:Gooderham_%28Flatiron%29_Building.Toronto._%2848989206142%29.jpg"
     },
     {
         "slug": "berczy-park",
         "name": "Berczy Park",
-        "details": "Berczy Park became a social media favourite when it was refurbished in 2017 with a photogenic Claude Cormier-designed fountain featuring 27 cast iron dogs, and one cat. Don't miss the distinctive trompe-l'oeil mural on the rear wall of the Gooderham Flatiron Building to the east, created by Derek Michael Besant in 1980.",
+        "details": "Berczy Park became a social media favourite in 2017 when it was refurbished with a photogenic Claude Cormier-designed fountain featuring 27 cast iron dogs, and one cat. Don't miss the distinctive mural on the rear wall of the Gooderham Flatiron Building to the east, created by Derek Michael Besant in 1980.",
         "url": ""
     },
     {
         "slug": "hockey-hall-of-fame",
         "name": "Hockey Hall of Fame",
-        "details": "Canada's national hockey museum curates exhibits and memorabilia related to Canada's game. Olympians, NHLers, PWHLers and junior players are all honoured. The Stanley Cup lives here, too.",
-        "url": "https://www.hhof.com/"
+        "details": "This national hockey museum curates exhibits and memorabilia related to Canada's game. Olympians, NHLers, PWHLers and junior players are all honoured. The Stanley Cup lives here, too.",
+        "url": "https://www.hhof.com/",
+        "photoLicense": "licensed under the Creative Commons Attribution-Share Alike 4.0 International license",
+        "photoName": "JK Liu",
+        "photoUrl": "https://commons.wikimedia.org/wiki/File:Hockey_Hall_of_Fame_2025-05-24.jpg"
     },
     {
         "slug": "union-station",
         "name": "Union Station",
         "details": "Union Station has been Toronto's transit hub since 1927. National and regional trains, buses, and subways all converge here. The Great Hall on the main level near Front Street has been freshly renovated to show off its soaring ceiling and Beaux-Arts finishes. The lower levels are a warren of speciality shops, international food courts, and restaurants.",
-        "url": "https://torontounion.ca/"  
+        "url": "https://torontounion.ca/",
+        "photoLicense": "licensed under the Creative Commons Attribution 2.0 Generic license",
+        "photoName": "Michael Caven",
+        "photoUrl": "https://commons.wikimedia.org/wiki/File:The_Great_Hall_of_Union_Station_in_Toronto.jpg"
     },
     {
         "slug": "maple-leaf-square",
         "name": "Maple Leaf Square",
         "details": "This normally bland area where Union Station meets Scotiabank Arena becomes the official outdoor gathering spot for hardy fans of the Toronto Maple Leafs and Toronto Raptors during playoff runs. When the Raptors are playing, the square is known as Jurrasic Park.",
-        "url": ""
+        "url": "",
+        "photoLicense": "licensed under the Creative Commons Attribution 2.0 Generic license",
+        "photoName": "KatieThebeau",
+        "photoUrl":"https://commons.wikimedia.org/wiki/File:First_period_play_gets_a_little_rowdy.jpg"
 
     },
     {
         "slug": "scotiabank-arena",
         "name": "Scotiabank Arena",
         "details": "Scotiabank Arena is the shared home of the Toronto Maple Leafs hockey team and the Toronto Raptors basketball team, as well as a popular venue for major concerts.",
-        "url": "https://www.scotiabankarena.com"  
+        "url": "https://www.scotiabankarena.com",
+        "photoLicense": "licensed under the Creative Commons Attribution 2.0 Generic license",
+        "photoName": "Djuradj Vujcic",
+        "photoUrl":"https://commons.wikimedia.org/wiki/File:Legends_Row_photo_by_Djuradj_Vujcic.jpg"
     },
     {
         "slug": "roundhouse-park",
         "name": "Roundhouse Park",
         "details": "The John Street Roundhouse was built in 1929 by the Canadian Pacific Railway Company. Closed in the 1980s and converted into a park in 1997, its massive locomotive turntable still functions. The adjoining train repair sheds now house the Toronto Railway Museum, a brewpub, and a restaurant arcade.",
-        "url": "https://torontorailwaymuseum.com"  
+        "url": "https://torontorailwaymuseum.com",
+        "photoLicense": "licensed under the Creative Commons Attribution-Share Alike 3.0 Unported license",
+        "photoName": "Michael Mayer",
+        "photoUrl":"https://commons.wikimedia.org/wiki/File:Roundhouse_Park_Toronto.jpg"
     },
     {
         "slug": "ripleys-aquarium",
         "name": "Ripley's Aquarium",
         "details": "Canada's largest indoor aquarium opened in 2013 and quickly became a central attraction for tourists and locals alike. Highlights include photogenic neon jellyfish and a 96-metre-long underwater tunnel.",
-        "url": "https://www.ripleys.com/attractions/ripleys-aquarium-of-canada"  
+        "url": "https://www.ripleys.com/attractions/ripleys-aquarium-of-canada",
+        "photoLicense": "published under the Creative Commons CC0 1.0 Universal Public Domain Dedication",
+        "photoName": "Tim Gouw",
+        "photoUrl":"https://commons.wikimedia.org/wiki/File:Ripley%27s_Aquarium_of_Canada,_Toronto,_Canada_(Unsplash_Krh85nEqOQc).jpg"
     },
     {
         "slug": "rogers-centre",
@@ -82,18 +106,21 @@
         "slug": "cn-tower",
         "name": "CN Tower",
         "details": "One of Toronto's most recognizable symbols, the CN Tower was the world's tallest free-standing structure from 1975 to 1997. On a clear day, it's possible to glimpse Niagara Falls and New York State from the observation deck.",
-        "url": ""  
+        "url": ""
     },
     {
         "slug": "king-edward-hotel",
         "name": "King Edward Hotel",
-        "details": "Lorem ipsum.",
-        "url": ""  
+        "details": "The King Edward Hotel has always been one of the more prestigious hotels in Toronto, with a long list of famous past guests that includes Queen Elizabeth II, Mark Twain, Elvis Presley, the Beatles, Teddy Roosevelt, and the Dalai Lama. The King Eddy's weekend High Tea is a tradition that dates back to 1903.",
+        "url": "",
+        "photoLicense": "licensed under Creative Commons Attribution 4.0 International",
+        "photoName": "Canmenwalker",
+        "photoUrl":"https://commons.wikimedia.org/wiki/File:King_Edward_Hotel_2025.jpg"
     },
     {
         "slug": "toronto-street",
         "name": "Toronto Street",
-        "details": "Lorem ipsum.",
+        "details": "A bank stands on the northeast corner of King Street East and Toronto Street today, but in the 1830s the corner was dominated by the King Street Gaol. Just outside the two-story brick building were the gallows, enclosed by a wooden stockade. It was here that  Samuel Lount and Peter Matthews were hanged for their roles in the Upper Canada Rebellion of 1837, a failed uprising against the colonial British government of the time.",
         "url": ""  
     },
     {

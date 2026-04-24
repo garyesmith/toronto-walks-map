@@ -63,13 +63,56 @@ header #hamburger {
     overflow-y: scroll;
 }
 
-#info img {
+#info figure {
     width: 100%;
-    clear: both;
-    margin: 10px 0;
+    position: relative;
+    display: block;
+}
+#info figure img {
+    width: 100%;
+    clear: both;   
+    margin: 3% 0;
     border: none;
     border-radius: 16px;
 }
+
+#info figure figcaption.credit {
+    background-color: rgba(0,0,0,0.6);
+    color: white;
+    font-size: 0.8rem;
+    line-height: 1.3rem;
+    position: absolute;
+    bottom: 5%;
+    height: 33%;
+    padding: 4% 12% 0 4%;
+    border-radius: 0 0 16px 16px;
+    display: none;
+    -webkit-user-select: none;
+    user-select: none; 
+}
+#info figure figcaption.credit a {
+    color: white !important;
+    text-decoration: underline;
+}
+#info figure a.show-credit {
+    background-color: rgba(0,0,0,0.6);
+    padding: 10px;
+    display: block;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-image: url('../assets/icon-camera.png');
+    background-size: 65% auto;
+    background-repeat: no-repeat;
+    background-position: center center;
+    position: absolute;
+    right: 2%;
+    bottom: 7%;
+    -webkit-user-select: none;
+    user-select: none; 
+    cursor: pointer;
+}
+#info 
 
 #map {
     background-color: #f1f1f1;
@@ -319,7 +362,7 @@ ul#walk-list.open {
         padding: 12% 4% 30% 4%;
     }
 
-    #info img {
+    #info figure img {
         width: 100%;
         margin-top: 0;
         display: block;
@@ -329,6 +372,13 @@ ul#walk-list.open {
         height: 66vh;
         padding-bottom: 30%;
         margin-bottom: 0;
+    }
+
+    #info figure a.show-credit {
+        bottom: 3%;
+    }
+    #info figure figcaption.credit {
+        bottom: 0;
     }
 
     p {
