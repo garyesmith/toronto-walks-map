@@ -135,12 +135,14 @@ class MapApp {
     // create and add GeoJSON walk path layers
     loadCurrentWalkLayer() {
 
-        const url="json/walks/walk" + this.currWalkNumber + ".json";
+        const url="json/walks/walk" + this.currWalkNumber + ".geojson";
 
         const paneName='walk_pane';
 
         // if the walk pane already exists from a previous walk, delete it first
         if (this.map.getPane(paneName)) {
+            this.map.removeLayer(this.walkLayer);
+            delete this.walkLayer;
             L.DomUtil.remove(paneName);
             delete this.map._panes[paneName];
             delete this.map._paneRenderers[paneName];
@@ -348,7 +350,10 @@ class MapApp {
             markerDiv.setAttribute('data-index', sightIndex);
             markerDiv.innerHTML= infoHtml;
             this.sightsList.appendChild(markerDiv);
-            if (sightIndex==this.walksContent.get(this.currWalkNumber).sights.length-2) {
+            var numSights=this.walksContent.get(this.currWalkNumber).sights.length ;
+            var numChildren=this.sightsList.childElementCount;
+            //console.log(numChildren + " of " + numSights + " slug="+sight.slug);
+            if (numChildren==numSights) {
                 this.sortSightsInInfoBar();
             }
         } else {
@@ -360,7 +365,7 @@ class MapApp {
     sortSightsInInfoBar() {
         var sights = Array.from(this.sightsList.children); 
         sights.sort((a, b) => {
-            return Number(a.getAttribute('data-index')) - Number(b.getAttribute('data-index'));
+            return Number(Number(a.getAttribute('data-index') - b.getAttribute('data-index')));
         });
         this.sightsList.innerHTML="";
         sights.forEach(sight => this.sightsList.appendChild(sight));

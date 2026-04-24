@@ -26,15 +26,27 @@
     },
     {
         "id": 2,
-        "name": "Another walk",
-        "details": "An east-west overview of many of Toronto's most well-known attractions and historical sights.",
-        "km": "3",
+        "name": "Old Town Toronto",
+        "details": "A clockwise circuit of Toronto's oldest neighbourhood.",
+        "km": "2",
         "hours": "1",
-        "mins": "15",
-        "thumb": "rogers-centre.jpg",
+        "mins": "0",
+        "thumb": "st-james-cathedral.jpg",
         "sights": [
-            "rogers-centre",
-            "union-station"
+            "gooderham-flatiron-building",
+            "berczy-park",
+            "king-edward-hotel",
+            "toronto-street",
+            "adelaide-street-court-house",
+            "st-james-cathedral",
+            "st-james-park",
+            "christie-brown-and-co-factory",
+            "torontos-first-post-office",
+            "young-peoples-theatre",
+            "st-lawrence-market-south",
+            "st-lawrence-market-north",
+            "st-lawrence-hall",
+            "toronto-sculpture-garden"
         ]
     },
     {

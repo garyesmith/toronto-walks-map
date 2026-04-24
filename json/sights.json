@@ -83,5 +83,71 @@
         "name": "CN Tower",
         "details": "One of Toronto's most recognizable symbols, the CN Tower was the world's tallest free-standing structure from 1975 to 1997. On a clear day, it's possible to glimpse Niagara Falls and New York State from the observation deck.",
         "url": ""  
+    },
+    {
+        "slug": "king-edward-hotel",
+        "name": "King Edward Hotel",
+        "details": "Lorem ipsum.",
+        "url": ""  
+    },
+    {
+        "slug": "toronto-street",
+        "name": "Toronto Street",
+        "details": "Lorem ipsum.",
+        "url": ""  
+    },
+    {
+        "slug": "adelaide-street-court-house",
+        "name": "Adelaide Street Court House",
+        "details": "Lorem ipsum.",
+        "url": ""  
+    },
+    {
+        "slug": "st-james-cathedral",
+        "name": "St. James Cathedral",
+        "details": "Lorem ipsum.",
+        "url": ""  
+    },
+    {
+        "slug": "st-james-park",
+        "name": "St. James Park",
+        "details": "Lorem ipsum.",
+        "url": ""  
+    },
+    {
+        "slug": "christie-brown-and-co-factory",
+        "name": "Christie Brown & Co. Factory",
+        "details": "Lorem ipsum.",
+        "url": ""  
+    },
+    {
+        "slug": "torontos-first-post-office",
+        "name": "Toronto's First Post Office",
+        "details": "Lorem ipsum.",
+        "url": ""  
+    },
+    {
+        "slug": "young-peoples-theatre",
+        "name": "Young People's Theatre",
+        "details": "Lorem ipsum.",
+        "url": ""  
+    },
+    {
+        "slug": "st-lawrence-market-north",
+        "name": "St. Lawrence Market North",
+        "details": "Lorem ipsum.",
+        "url": ""  
+    },
+    {
+        "slug": "st-lawrence-hall",
+        "name": "St. Lawrence Hall",
+        "details": "Lorem ipsum.",
+        "url": ""  
+    },
+    {
+        "slug": "toronto-sculpture-garden",
+        "name": "Toronto Sculpture Garden",
+        "details": "Lorem ipsum.",
+        "url": ""  
     }
 ]
