@@ -28,6 +28,7 @@
         "name": "Gooderham Flatiron Building",
         "details": "Often described as the most-photographed building in Toronto, the Flatiron has stood in the heart of Old Toronto since 1892. George Gooderham of the Gooderham & Worts Distillery once kept a watchful eye on his sprawling business empire from an  office in the top floor cupola. Today there's a pub in the basement, with a sunny sidewalk patio in the summers.",
         "url": "",
+        "note": "Note: As of spring 2026, this building remains under scaffolding for extensive restoration. The pub is still operating. Stay tuned!",
         "photoLicense": "made available under the Creative Commons CC0 1.0 Universal Public Domain Dedication",
         "photoName": "Bernard Spragg",
         "photoUrl": "https://commons.wikimedia.org/wiki/File:Gooderham_%28Flatiron%29_Building.Toronto._%2848989206142%29.jpg"
@@ -114,37 +115,37 @@
     {
         "slug": "toronto-street",
         "name": "Toronto Street",
-        "details": "A bank stands on the northeast corner of King Street East and Toronto Street today, but in the 1830s it was dominated by the King Street Gaol. Just outside the two-story brick building were the gallows, enclosed by a wooden stockade. It was here that  Samuel Lount and Peter Matthews were hanged for their roles in the Upper Canada Rebellion, a failed uprising against the colonial British government in 1837.",
+        "details": "A bank stands on the northeast corner of King Street East and Toronto Street today, but in the 1830s it was dominated by the King Street Gaol. Just outside the two-story brick building stood the gallows where Samuel Lount and Peter Matthews were hanged for their roles in the Upper Canada Rebellion, a failed uprising against the colonial British government in 1837.",
         "url": ""  
     },
     {
         "slug": "adelaide-street-court-house",
         "name": "Adelaide Street Court House",
-        "details": "The stern columns of this court house have loomed over Adelaide Street since 1852. After the courts moved to City Hall in 1900, this building was leased by the Arts and Letters Club. This men-only organization hosted painters, writers, and musicians until 1913, including the landscape artists who would later form the Group of Seven. To see the interior, make a reservation at Italian restaurant that now leases the space.",
+        "details": "The stern columns of this court house have loomed over Adelaide Street since 1852. After the courts moved to City Hall in 1900, the building was home to the Arts and Letters Club. This men-only organization hosted painters, writers, and musicians until 1913, including the landscape artists who would later form the Group of Seven. To see the interior, make a reservation at Italian restaurant that now leases the space.",
         "url": ""
     },
     {
         "slug": "st-james-cathedral",
         "name": "St. James Cathedral",
-        "details": "The Cathedral of St. James is the fourth Anglican church to stand at this location. It opened in 1853 after the previous structure burned in the Great Fire of Toronto. The elaborate tower and spires were not added until the 1870s, making it the tallest structure in Canada for 25 years. On Sunday mornings, the tower's full set of 12 bells are rung in mesmerizing sequence by the Guild of Change Ringers.",
+        "details": "The Cathedral of St. James is the fourth Anglican church to stand at this location. It opened in 1853 after the previous structure burned in the Great Fire of 1849. The elaborate tower and spires were not added until the 1870s, making it the tallest structure in Canada for 25 years. On Sunday mornings, the tower's full set of 12 bells are rung in mesmerizing sequence by the Guild of Change Ringers.",
         "url": ""  
     },
     {
         "slug": "st-james-park",
         "name": "St. James Park",
-        "details": "At the south end of St. James Park there is a formal garden with a fountain, surrounded by well-maintained flowers and plantings from spring to fall. In the center of the park is a new stylish timber pavilion for concerts and festivals. Meanwhile, few realize that the grassy field next to the church conceals the bones of thousands of Torontonians frantically buried in mass graves during two cholera epidemics in the 1830s.",
+        "details": "At the south end of St. James Park there is a formal garden with a fountain surrounded by well-maintained flowers and plantings. In the center of the park is a stylish new timber pavilion for concerts and festivals. Meanwhile, few realize that the grassy field next to the church conceals the bones of thousands of Torontonians frantically buried in mass graves during two cholera epidemics in the 1830s.",
         "url": ""  
     },
     {
         "slug": "christie-brown-and-co-factory",
         "name": "Christie, Brown & Co. Factory",
-        "details": "Built in 1868, the Christie, Brown & Co. Biscuit Factory eventually became the largest biscuit manufacturer in Canada, using newfangled steam-powered machines to produce the biscuits they shipped around the world. Today, the building is part of the George Brown College campus.",
+        "details": "Built in 1868, the Christie, Brown & Co. Biscuit Factory eventually became the largest biscuit manufacturer in Canada, using newfangled steam-powered machines to churn out the biscuits they shipped around the British Empire. Today, the building is part of the George Brown College campus.",
         "url": ""  
     },
     {
         "slug": "torontos-first-post-office",
         "name": "Toronto's First Post Office",
-        "details": "When it opened in 1833, Toronto's first post office was originally run by British Royal Mail. Today, it is a National Historic Site operated by the York Historical Society as both a museum and a modern Post Office. Passing through the tiny door onto the creaky wooden floors is like stepping back in time. The museum exhibits are free, but they always appreciate donations.",
+        "details": "When it opened in 1833, Toronto's first post office was originally run by British Royal Mail. Today, it is a National Historic Site operated by the York Historical Society as both a museum and a modern Post Office. Passing through the tiny door onto the creaky wooden floors is like stepping back in time. The museum exhibits are free, but donations are always appreciated.",
         "url": ""  
     },
     {

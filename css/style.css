@@ -176,6 +176,15 @@ p {
     flex: 9;
     padding: 2% 3% 5% 0;
 }
+.marker-box p.note {
+    font-weight: 600;
+    font-style: italic;
+    padding: 3%;
+    background-color: #e4dbd0;
+    border-radius: 10px;
+    line-height: 1.5rem;
+    margin: 2% auto;
+}
 
 #about,
 #close,
@@ -386,7 +395,7 @@ ul#walk-list.open {
     }
 
     p {
-        font-size: 1.2rem;
+        font-size: 1.3rem;
     }
 
     h2 {

@@ -349,9 +349,12 @@ class MapApp {
             }
 
             infoHtml+=`     </figure>
-                            <p>${sight.details}</p>
-                    </div>
-            `;
+                            <p>${sight.details}</p>`;
+            if (sight.note && sight.note.length) {
+                infoHtml+=`<p class="note">${sight.note}</p>`;
+            }
+            infoHtml+=`</div>`;
+            
             var markerDiv = document.createElement('div');
             markerDiv.className='marker-box';
             markerDiv.setAttribute('data-index', sightIndex);
