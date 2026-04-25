@@ -29,9 +29,9 @@
         "details": "Often described as the most-photographed building in Toronto, the Flatiron has stood in the heart of Old Toronto since 1892. George Gooderham of the Gooderham & Worts Distillery once kept a watchful eye on his sprawling business empire from an  office in the top floor cupola. Today there's a pub in the basement, with a sunny sidewalk patio in the summers.",
         "url": "",
         "note": "Note: As of spring 2026, this building remains under scaffolding for extensive restoration. The pub is still operating. Stay tuned!",
-        "photoLicense": "made available under the Creative Commons CC0 1.0 Universal Public Domain Dedication",
-        "photoName": "Bernard Spragg",
-        "photoUrl": "https://commons.wikimedia.org/wiki/File:Gooderham_%28Flatiron%29_Building.Toronto._%2848989206142%29.jpg"
+        "photoLicense": "licensed under the Creative Commons Attribution-Share Alike 4.0 International license",
+        "photoName": "Arild Vågen",
+        "photoUrl": "https://commons.wikimedia.org/wiki/File:Gooderham_Building_August_2017_01.jpg"
     },
     {
         "slug": "berczy-park",
@@ -109,7 +109,7 @@
     {
         "slug": "king-edward-hotel",
         "name": "King Edward Hotel",
-        "details": "The King Edward Hotel has always been one of the more prestigious hotels in Toronto, with a long list of famous past guests that includes Queen Elizabeth II, Mark Twain, Elvis Presley, the Beatles, Teddy Roosevelt, and the Dalai Lama. The King Eddy's weekend Afternoon Tea is a tradition that dates back to 1903.",
+        "details": "The King Edward Hotel has long been one of the more prestigious hotels in Toronto, with a list of famous past guests that includes Queen Elizabeth II, Mark Twain, Elvis Presley, the Beatles, Teddy Roosevelt, and the Dalai Lama. The King Eddy's weekend Afternoon Tea is a tradition that dates back to 1903.",
         "url": ""
     },
     {
@@ -121,19 +121,19 @@
     {
         "slug": "adelaide-street-court-house",
         "name": "Adelaide Street Court House",
-        "details": "The stern columns of this court house have loomed over Adelaide Street since 1852. After the courts moved to City Hall in 1900, the building was home to the Arts and Letters Club. This men-only organization hosted painters, writers, and musicians until 1913, including the landscape artists who would later form the Group of Seven. To see the interior, make a reservation at Italian restaurant that now leases the space.",
+        "details": "The stern columns of this court house have loomed over Adelaide Street since 1852. After the courts moved to City Hall in 1900, the building was home to the Arts and Letters Club. This men-only organization hosted painters, writers, and musicians until 1913, including the landscape artists who would later form the Group of Seven. To see the interior, you can eat at Italian restaurant now using the space.",
         "url": ""
     },
     {
         "slug": "st-james-cathedral",
         "name": "St. James Cathedral",
-        "details": "The Cathedral of St. James is the fourth Anglican church to stand at this location. It opened in 1853 after the previous structure burned in the Great Fire of 1849. The elaborate tower and spires were not added until the 1870s, making it the tallest structure in Canada for 25 years. On Sunday mornings, the tower's full set of 12 bells are rung in mesmerizing sequence by the Guild of Change Ringers.",
+        "details": "The Cathedral of St. James is the fourth Anglican church to stand at this location. It opened in 1853 after the previous structure burned in the Great Fire of 1849. When the elaborate tower and spires were added in the 1870s it became the tallest structure in Canada, and held that title for 25 years. On Sunday mornings, the tower's full set of 12 bells are rung in mesmerizing sequence by the Guild of Change Ringers.",
         "url": ""  
     },
     {
         "slug": "st-james-park",
         "name": "St. James Park",
-        "details": "At the south end of St. James Park there is a formal garden with a fountain surrounded by well-maintained flowers and plantings. In the center of the park is a stylish new timber pavilion for concerts and festivals. Meanwhile, few realize that the grassy field next to the church conceals the bones of thousands of Torontonians frantically buried in mass graves during two cholera epidemics in the 1830s.",
+        "details": "At the south end of St. James Park there is a formal garden with a fountain ringed by carefully-tended flowers and plantings. In the center of the park is a stylish new timber pavilion for concerts and festivals. Meanwhile, few parkgoers realize that the grassy field next to the church conceals the bones of thousands of Torontonians frantically buried in mass graves during two cholera epidemics in the 1830s.",
         "url": ""  
     },
     {
@@ -145,13 +145,13 @@
     {
         "slug": "torontos-first-post-office",
         "name": "Toronto's First Post Office",
-        "details": "When it opened in 1833, Toronto's first post office was originally run by British Royal Mail. Today, it is a National Historic Site operated by the York Historical Society as both a museum and a modern Post Office. Passing through the tiny door onto the creaky wooden floors is like stepping back in time. The museum exhibits are free, but donations are always appreciated.",
+        "details": "When it opened in 1833, Toronto's first post office was originally run by British Royal Mail. Today, it is a National Historic Site operated by the York Historical Society as both a museum and a modern Canada Post outlet. Passing through the tiny door onto the creaky wooden floors is like stepping back in time. The museum exhibits are free, but donations are always appreciated.",
         "url": ""  
     },
     {
-        "slug": "young-peoples-theatre",
-        "name": "Young People's Theatre",
-        "details": "Lorem ipsum.",
+        "slug": "toronto-railway-company-stables",
+        "name": "Toronto Railway Company Stables",
+        "details": "The building was originally constructed in 1888 as stables for the Toronto Railway Company, an operator of horse-drawn streetcars in the pre-electrification era. This structure used to be much larger: records from 1891 show it had 588 stalls and 495 horses. In 1977, the Young People's Theatre purchased and restored the property into a venue with two stages.",
         "url": ""  
     },
     {
@@ -163,13 +163,16 @@
     {
         "slug": "st-lawrence-hall",
         "name": "St. Lawrence Hall",
-        "details": "Lorem ipsum.",
-        "url": ""  
+        "details": "From 1850, St. Lawrence Hall was the centre of Toronto social life, serving as a venue for meetings, speeches, concerts and elegant balls. The hall also hosted numerous anti-slavery conferences promoting abolition in the United States, including an 1854 speech by social reformer Frederick Douglass. In 1867, the Fathers of Confederation, including our first Prime Minister John A. Macdonald, spoke here as Canada was born.",
+        "url": "",
+        "photoLicense": "licensed under the Creative Commons Attribution-Share Alike 4.0 International license",
+        "photoName": "DavidArthur",
+        "photoUrl": "https://commons.wikimedia.org/wiki/File:St_Lawrence_Hall,_Toronto_(exterior).jpg"
     },
     {
         "slug": "toronto-sculpture-garden",
         "name": "Toronto Sculpture Garden",
-        "details": "Lorem ipsum.",
+        "details": "Since 1981, the Toronto Sculpture Garden has exhibited a wide range of creative artworks in a small park tucked between two circa-1840s heritage buildings. In the summer, there's a waterfall fountain. The artwork typically changes once or twice per year, with over 80 artists featured to date.",
         "url": ""  
     }
 ]

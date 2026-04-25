@@ -2,7 +2,9 @@
     {
         "id": 1,
         "name": "CN Tower to Distillery",
-        "details": "An east-west overview of many of Toronto's most well-known attractions and historical sights.",
+        "summary": "An west-to-east overview of many of Toronto's most well-known attractions and historical sights.",
+        "init_coords": [43.6474997, -79.3734078],
+        "init_zoom": 15,
         "km": "3",
         "hours": "2",
         "mins": "0",
@@ -27,7 +29,9 @@
     {
         "id": 2,
         "name": "Old Town Toronto",
-        "details": "A clockwise circuit of Toronto's oldest neighbourhood.",
+        "summary": "A clockwise circuit of Toronto's oldest neighbourhood.",
+        "init_coords": [43.6501587, -79.3730951],
+        "init_zoom": 17,
         "km": "2",
         "hours": "1",
         "mins": "0",
@@ -38,29 +42,15 @@
             "king-edward-hotel",
             "toronto-street",
             "adelaide-street-court-house",
+            "toronto-sculpture-garden",
             "st-james-cathedral",
             "st-james-park",
             "christie-brown-and-co-factory",
             "torontos-first-post-office",
-            "young-peoples-theatre",
+            "toronto-railway-company-stables",
             "st-lawrence-market-south",
             "st-lawrence-market-north",
-            "st-lawrence-hall",
-            "toronto-sculpture-garden"
-        ]
-    },
-    {
-        "id": 3,
-        "name": "A third walk",
-        "details": "An east-west overview of many of Toronto's most well-known attractions and historical sights.",
-        "km": "1",
-        "hours": "0",
-        "mins": "45",
-        "thumb": "the-esplanade.jpg",
-        "sights": [
-            "the-esplanade",
-            "first-parliament-site",
-            "distillery-district"
+            "st-lawrence-hall"
         ]
     }
 ]

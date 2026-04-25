@@ -42,14 +42,16 @@ class MapApp {
         this.mapMarker = L.ExtraMarkers.icon({
             markerColor: 'cyan',
             shape: 'circle',
-            prefix: 'fa'
+            prefix: 'fa',
+            shadowSize: [31, 31]
         });
 
         // selected map marker style
         this.selectedMapMarker = L.ExtraMarkers.icon({
             markerColor: 'orange',
             shape: 'circle',
-            prefix: 'fa'
+            prefix: 'fa',
+            shadowSize: [31, 31]
         });
 
         this.currWalkNumber = 1;
@@ -192,6 +194,8 @@ class MapApp {
             this.map.getPane(paneName).style.zIndex = 400;
         }
 
+        this.populateWalkIntro();
+
         // load GeoJSON layer with AJAX, style, and store reference to it in an array
         // only render markers that are part of the current walk
         // use className option to assign a unique class to markers so they can be referenced individually later
@@ -227,8 +231,17 @@ class MapApp {
             if (this.infoScrollObserver) this.infoScrollObserver.disconnect();
             this.startInfoScrollObserver();
             this.bindPhotoCreditLinks();
+            this.zoomAndCentreWalkStart();
         });
 
+    }
+
+    // zoom and center the map at the starting coordinates and zoom value for the current walk
+    zoomAndCentreWalkStart() {
+        this.map.invalidateSize();
+        const initCoords=this.walksContent.get(this.currWalkNumber).init_coords;
+        const initZoom=this.walksContent.get(this.currWalkNumber).init_zoom;
+        this.map.setView(initCoords, initZoom);
     }
 
     // load content that defines walk routes from walks.json
@@ -246,25 +259,45 @@ class MapApp {
         }
     }
 
-    // populate the select at the top of the sidebar with loaded walk names and IDs
-    populateWalkSelect() {
-        document.getElementById('this-walk').innerHTML = 'Walk: <span id=\"this-walk-name\">' + this.walksContent.get(this.currWalkNumber).name + "</span> <span id=\"walk-down\">&dtrif;</span><span id=\"walk-up\">&utrif;</span>";
-        this.walksContent.forEach(walk => {
-            var option = document.createElement('li');
-            option.setAttribute('data-value', walk.id);
-            var walkMetaHtml = `
-                <img src="images/${walk.thumb}" alt="${walk.name}" />
-                <h3>${walk.name}</h3>
-                <p>${walk.km} km &bull; Approx`;
+    // add information about current walk to top of info sidebar
+    populateWalkIntro() {
+        const walk=this.walksContent.get(this.currWalkNumber);
+        var walkMetaHtml=this.getWalkMetaHtml(walk);
+        var walkIntroDiv=document.createElement('div');
+        walkIntroDiv.innerHTML=walkMetaHtml;
+        walkIntroDiv.setAttribute('id', "walk-intro");
+        document.getElementById('sights').appendChild(walkIntroDiv);
+    }
+
+    // get formatted walk description
+    getWalkMetaHtml(walk, includeSummary=true) {
+        var walkMetaHtml=`
+            <h3>${walk.name} Walk</h3>
+            <p class="distance">${walk.km} km &bull; Approx`;
             if (walk.hours!="0") {
-                walkMetaHtml+=' '+walk.hours + ' hour';
+                walkMetaHtml+=` ${walk.hours} hour`;
                 if (parseInt(walk.hours,10)>1) {
-                    walkMetaHtml+='s';
+                    walkMetaHtml+=`s`;
                 }
             }
             if (walk.mins!="0") {
-                walkMetaHtml+=' '+walk.mins + ' mins';
+                walkMetaHtml+=' ${walk.mins} mins';
             }
+            if (includeSummary) {
+                walkMetaHtml+=`</p>
+                <p class="summary">${walk.summary}</p>`;
+            }
+        return walkMetaHtml;
+    }
+
+    // populate the select at the top of the sidebar with loaded walk names and IDs
+    populateWalkSelect() {
+        document.getElementById('this-walk').innerHTML = '<span id=\"this-walk-name\">' + this.walksContent.get(this.currWalkNumber).name + "</span> Walk <span id=\"walk-down\">&dtrif;</span><span id=\"walk-up\">&utrif;</span>";
+        this.walksContent.forEach(walk => {
+            var option = document.createElement('li');
+            option.setAttribute('data-value', walk.id);
+            var walkMetaHtml = `<img src="images/${walk.thumb}" alt="${walk.name}" />`;
+            walkMetaHtml+=this.getWalkMetaHtml(walk, false);
             option.innerHTML=walkMetaHtml;
             document.getElementById('walk-list').appendChild(option);
             document.getElementById('walk-list').addEventListener('click', (e) => {
@@ -354,7 +387,7 @@ class MapApp {
                 infoHtml+=`<p class="note">${sight.note}</p>`;
             }
             infoHtml+=`</div>`;
-            
+
             var markerDiv = document.createElement('div');
             markerDiv.className='marker-box';
             markerDiv.setAttribute('data-index', sightIndex);
@@ -362,7 +395,7 @@ class MapApp {
             this.sightsList.appendChild(markerDiv);
             var numSights=this.walksContent.get(this.currWalkNumber).sights.length ;
             var numChildren=this.sightsList.childElementCount;
-            if (numChildren==numSights) {
+            if (numChildren>numSights) {
                 this.sortSightsInInfoBar();
             }
         } else {
@@ -431,7 +464,7 @@ class MapApp {
             }
         });
         this.map.invalidateSize();
-        this.map.setView(e.target.getLatLng(), 16);
+        this.map.setView(e.target.getLatLng(), 17);
 
     }
 

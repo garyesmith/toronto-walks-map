@@ -179,10 +179,10 @@ p {
 .marker-box p.note {
     font-weight: 600;
     font-style: italic;
-    padding: 3%;
+    padding: 4%;
     background-color: #e4dbd0;
     border-radius: 10px;
-    line-height: 1.5rem;
+    line-height: 1.7rem;
     margin: 2% auto;
 }
 
@@ -322,6 +322,26 @@ ul#walk-list.open {
     color: white;
     padding: 5px 15px 4px 11px;
 }
+#walk-intro {
+    padding: 0;
+    width: 100%;
+    clear: both;
+    float: none;
+    display: block;
+    background-color: #c4d0ab;
+    padding: 2% 4%;
+    border-radius: 16px;
+    margin: 3% auto;
+}
+#walk-intro p.distance {
+    font-size: 0.9rem;
+    color: black;
+    font-weight: 600;
+}
+#walk-intro p.summary {
+    font-size: 1.0rem;
+    font-style: italic;
+}
 
 /* desktop (default) */
 @media (min-width: 1025px) {
@@ -371,7 +391,7 @@ ul#walk-list.open {
 
     #sights {
         width: 100%;
-        padding: 12% 4% 30% 4%;
+        padding: 12% 4% 60vh 4%;
     }
 
     #info figure img {
@@ -395,10 +415,10 @@ ul#walk-list.open {
     }
 
     p {
-        font-size: 1.3rem;
+        font-size: 17px;
     }
 
     h2 {
-        margin-bottom: 5%;
+        margin-bottom: 3%;
     }
 }
