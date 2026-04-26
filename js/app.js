@@ -78,7 +78,7 @@ class MapApp {
             maxBounds: this.mapBounds,
             maxBoundsViscosity: 1.0,
             zoom: this.mapInitialZoom,
-            minZoom: 15,
+            minZoom: 14,
             maxZoom: 17
         });
         this.locationControl = L.control.locate({
