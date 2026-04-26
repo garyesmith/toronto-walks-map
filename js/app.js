@@ -12,6 +12,7 @@ class MapApp {
         this.mapMarkersLayer;
         this.walkLayer;
         this.mapMarkerObjects = []; 
+        this.mapMarkerGroup;
         this.infoElements = []; 
         this.mapElements = []; 
         this.sightContent;
@@ -199,6 +200,10 @@ class MapApp {
         // load GeoJSON layer with AJAX, style, and store reference to it in an array
         // only render markers that are part of the current walk
         // use className option to assign a unique class to markers so they can be referenced individually later
+        if (this.mapMarkerGroup) {
+            this.map.removeLayer(this.mapMarkerGroup);
+        }
+        this.mapMarkerGroup = L.featureGroup().addTo(this.map);
         this.mapMarkersLayer = new L.GeoJSON.AJAX(url, {
             pointToLayer: (feature, latlng) => { 
                 if (this.walksContent.get(this.currWalkNumber).sights.includes(feature.properties['slug'])) {
@@ -207,6 +212,7 @@ class MapApp {
                         icon: this.mapMarker,
                         pane: paneName,
                     });
+                    this.mapMarkerGroup.addLayer(newMarker);
                     this.mapMarkerObjects.push(newMarker);
                     return newMarker;
                 }
@@ -228,20 +234,11 @@ class MapApp {
             this.infoElements=[];
             this.mapElements=[];
             this.cacheDomQueries();
-            if (this.infoScrollObserver) this.infoScrollObserver.disconnect();
             this.startInfoScrollObserver();
             this.bindPhotoCreditLinks();
-            this.zoomAndCentreWalkStart();
+            this.map.fitBounds(this.mapMarkerGroup.getBounds()); // zoom and center map markers for the walk
         });
 
-    }
-
-    // zoom and center the map at the starting coordinates and zoom value for the current walk
-    zoomAndCentreWalkStart() {
-        this.map.invalidateSize();
-        const initCoords=this.walksContent.get(this.currWalkNumber).init_coords;
-        const initZoom=this.walksContent.get(this.currWalkNumber).init_zoom;
-        this.map.setView(initCoords, initZoom);
     }
 
     // load content that defines walk routes from walks.json
@@ -266,13 +263,14 @@ class MapApp {
         var walkIntroDiv=document.createElement('div');
         walkIntroDiv.innerHTML=walkMetaHtml;
         walkIntroDiv.setAttribute('id', "walk-intro");
+        walkIntroDiv.classList.add("marker-box");
         document.getElementById('sights').appendChild(walkIntroDiv);
     }
 
     // get formatted walk description
     getWalkMetaHtml(walk, includeSummary=true) {
         var walkMetaHtml=`
-            <h3>${walk.name} Walk</h3>
+            <h3 id="walk-intro-heading">${walk.name} Walk</h3>
             <p class="distance">${walk.km} km &bull; Approx`;
             if (walk.hours!="0") {
                 walkMetaHtml+=` ${walk.hours} hour`;
@@ -501,7 +499,7 @@ class MapApp {
         
         // pre-query information box elements for future references
         if (!this.infoElements.length) {
-            this.infoElements = document.querySelectorAll('#sights .marker-box .marker-meta h2');
+            this.infoElements = document.querySelectorAll('#walk-intro h3, #sights .marker-box .marker-meta h2');
             if (!this.infoElements.length) {
                 setTimeout(() => {
                     this.cacheDomQueries();
@@ -531,10 +529,13 @@ class MapApp {
             const childId = child.id;
             if (entry.isIntersecting && !child.classList.contains('active')) {
                 child.classList.add('active');
-                const markerToClick = document.querySelector('.leaflet-location_pane-pane .' + childId);
-                if (markerToClick)  { 
-                    markerToClick.click();
+                if (child.id=='walk-intro-heading') { // when scrolled all the way up, zoom and center map markers for the walk
+                    this.map.fitBounds(this.mapMarkerGroup.getBounds()); 
                 } else {
+                    const markerToClick = document.querySelector('.leaflet-location_pane-pane .' + childId);
+                    if (markerToClick)  { 
+                        markerToClick.click();
+                    }
                 }
             } else if (!entry.isIntersecting) {
                 child.classList.remove('active');  
@@ -545,9 +546,10 @@ class MapApp {
     // when a sight info box scrolls to the area near the top, highlight the relevant marker
     // on the map and zoom/scroll to it
     startInfoScrollObserver() {
+        if (this.infoScrollObserver) this.infoScrollObserver.disconnect();
         this.infoScrollObserver = new IntersectionObserver(this.infoScrollObserverCallback, {
             root: this.sightsList,
-            rootMargin: '2% 0px -75% 0px',
+            rootMargin: '-3% 0px -85% 0px',
             threshold: 0
         });
         this.infoElements.forEach(child =>  this.infoScrollObserver.observe(child));
