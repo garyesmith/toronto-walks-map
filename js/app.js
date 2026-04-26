@@ -18,6 +18,12 @@ class MapApp {
         this.sightContent;
         this.resizingTimeout=0;
 
+        // set min zoom amount based on screen size
+        this.minZoom=15;
+        if (window.innerWidth<1024) {
+            this.minZoom=14;
+        }
+
         // initial map configs
         this.canvasRenderer = L.canvas({ padding: 0.5}); // buffers 0.5 of the map outside view
         this.mapInitialCenter=[43.6542251, -79.3723956];
@@ -78,7 +84,7 @@ class MapApp {
             maxBounds: this.mapBounds,
             maxBoundsViscosity: 1.0,
             zoom: this.mapInitialZoom,
-            minZoom: 14,
+            minZoom: this.minZoom,
             maxZoom: 17
         });
         this.locationControl = L.control.locate({
@@ -472,9 +478,19 @@ class MapApp {
         window.addEventListener('resize', () => {
             clearTimeout(this.resizingTimeout);
             this.resizingTimeout=setTimeout(() => {
-                var infoHeight=document.getElementById('info').getBoundingClientRect().height;
-                if (this.map) this.map.invalidateSize();
-                this.map.setView(this.mapInitialCenter, this.mapInitialZoom);
+
+                // adjust minzoom based on screen width
+                this.minZoom=15;
+                if (window.innerWidth<1024) {
+                    this.minZoom=14;
+                }
+                this.map.setMinZoom(this.minZoom);
+                //var infoHeight=document.getElementById('info').getBoundingClientRect().height;
+                if (this.map) {
+                    this.map.invalidateSize();
+                    //this.map.setView(this.mapInitialCenter, this.mapInitialZoom);
+                    this.map.fitBounds(this.mapMarkerGroup.getBounds(), { padding: [50, 50] }); 
+                }
             }, 300);
         });
     }

@@ -344,7 +344,7 @@ ul#walk-list.open {
 }
 
 /* desktop (default) */
-@media (min-width: 1025px) {
+@media (min-width: 769px) {
     .container {
         flex-direction: row;
     }
@@ -369,7 +369,7 @@ ul#walk-list.open {
 }
 
 /* mobile */
-@media (max-width: 1024px) {
+@media (max-width: 768px) {
     .container {
         flex-direction: column-reverse;
     }
