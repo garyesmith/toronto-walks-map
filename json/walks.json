@@ -48,5 +48,31 @@
             "st-lawrence-market-north",
             "st-lawrence-hall"
         ]
+    },
+    {
+        "id": 3,
+        "name": "Canary District & Corktown",
+        "summary": "Explore the Canary District, one of Toronto's newest neighbourhoods, and Corktown, one of its oldest.",
+        "km": "4",
+        "hours": "2",
+        "mins": "0",
+        "thumb": "former-canary-restaurant.jpg",
+        "sights": [
+            "distillery-district",
+            "indigenous-hub",
+            "former-canary-restaurant",
+            "front-street-promenade",
+            "garden-of-future-follies",
+            "corktown-common",
+            "lawren-harris-square",
+            "underpass-park",
+            "riverside-church",
+            "bright-street",
+            "sackville-playground",
+            "inglenook-school",
+            "blackburn-house-site",
+            "enoch-turner-schoolhouse",
+            "little-trinity-church"
+        ]
     }
 ]

@@ -236,7 +236,8 @@ class MapApp {
             this.cacheDomQueries();
             this.startInfoScrollObserver();
             this.bindPhotoCreditLinks();
-            this.map.fitBounds(this.mapMarkerGroup.getBounds()); // zoom and center map markers for the walk
+            this.map.invalidateSize();
+            this.map.fitBounds(this.mapMarkerGroup.getBounds(), { padding: [50, 50] }); // zoom and center map markers for the walk
         });
 
     }
@@ -530,7 +531,8 @@ class MapApp {
             if (entry.isIntersecting && !child.classList.contains('active')) {
                 child.classList.add('active');
                 if (child.id=='walk-intro-heading') { // when scrolled all the way up, zoom and center map markers for the walk
-                    this.map.fitBounds(this.mapMarkerGroup.getBounds()); 
+                    this.map.invalidateSize();
+                    this.map.fitBounds(this.mapMarkerGroup.getBounds(), { padding: [50, 50] }); 
                 } else {
                     const markerToClick = document.querySelector('.leaflet-location_pane-pane .' + childId);
                     if (markerToClick)  { 

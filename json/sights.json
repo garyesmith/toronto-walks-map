@@ -174,5 +174,89 @@
         "name": "Toronto Sculpture Garden",
         "details": "Since 1981, the Toronto Sculpture Garden has exhibited a wide range of creative artworks in a small park tucked between two circa-1840s heritage buildings. In the summer, there's a waterfall fountain. The artwork typically changes once or twice per year, with over 80 artists featured to date.",
         "url": ""  
+    },
+    {
+        "slug": "indigenous-hub",
+        "name": "Indigenous Hub",
+        "details": "Lorem",
+        "url": ""  
+    },
+    {
+        "slug": "former-canary-restaurant",
+        "name": "Former Canary Restaurant",
+        "details": "Lorem",
+        "url": ""  
+    },
+    {
+        "slug": "front-street-promenade",
+        "name": "Front Street Promenade",
+        "details": "Lorem",
+        "url": ""  
+    },
+    {
+        "slug": "garden-of-future-follies",
+        "name": "Garden of Future Follies",
+        "details": "Lorem",
+        "url": ""  
+    },
+    {
+        "slug": "corktown-common",
+        "name": "Corktown Common",
+        "details": "Lorem",
+        "url": ""  
+    },
+    {
+        "slug": "lawren-harris-square",
+        "name": "Lawren Harris Square",
+        "details": "Lorem",
+        "url": ""  
+    },
+    {
+        "slug": "underpass-park",
+        "name": "Underpass Park",
+        "details": "Lorem",
+        "url": ""  
+    },
+    {
+        "slug": "riverside-church",
+        "name": "Riverside Church",
+        "details": "Lorem",
+        "url": ""  
+    },
+    {
+        "slug": "bright-street",
+        "name": "Bright Street",
+        "details": "Lorem",
+        "url": ""  
+    },
+    {
+        "slug": "sackville-playground",
+        "name": "Sackville Playground",
+        "details": "Lorem",
+        "url": ""  
+    },
+    {
+        "slug": "inglenook-school",
+        "name": "Inglenook School",
+        "details": "Lorem",
+        "url": ""  
+    },
+    {
+        "slug": "blackburn-house-site",
+        "name": "Blackburn House Site",
+        "details": "Lorem",
+        "url": ""  
+    },
+    {
+        "slug": "enoch-turner-schoolhouse",
+        "name": "Enoch Turner Schoolhouse",
+        "details": "Lorem",
+        "url": ""  
+    },
+    {
+        "slug": "little-trinity-church",
+        "name": "Little Trinity Church",
+        "details": "Lorem",
+        "url": ""  
     }
 ]
