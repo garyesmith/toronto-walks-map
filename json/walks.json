@@ -2,7 +2,7 @@
     {
         "id": 1,
         "name": "CN Tower to Distillery",
-        "summary": "An west-to-east overview of many of Toronto's most well-known attractions and historical sights.",
+        "summary": "An west-to-east overview of many of Toronto's most well-known attractions and historical sights. <i>Transit: 504 Streetcar, Line 1 Subway to Union Station</i>",
         "km": "3",
         "hours": "2",
         "mins": "0",
@@ -27,7 +27,7 @@
     {
         "id": 2,
         "name": "Old Town Toronto",
-        "summary": "A clockwise circuit of Toronto's oldest neighbourhood.",
+        "summary": "A clockwise circuit of Toronto's oldest neighbourhood. <i>Transit: 504 streetcar to John Street, or Line 1 Subway to King Station</i>",
         "km": "2",
         "hours": "1",
         "mins": "0",
@@ -51,11 +51,11 @@
     },
     {
         "id": 3,
-        "name": "Canary District & Corktown",
-        "summary": "Explore the Canary District, one of Toronto's newest neighbourhoods, and Corktown, one of its oldest.",
-        "km": "4",
-        "hours": "2",
-        "mins": "0",
+        "name": "Canary District",
+        "summary": "Explore one of Toronto's newest neighbourhoods, built on former industrial lands. <i>Transit: 504A Streetcar to Front Street East</i>",
+        "km": "2.5",
+        "hours": "1",
+        "mins": "15",
         "thumb": "former-canary-restaurant.jpg",
         "sights": [
             "distillery-district",
@@ -64,8 +64,23 @@
             "front-street-promenade",
             "garden-of-future-follies",
             "corktown-common",
+            "don-river",
             "lawren-harris-square",
             "underpass-park",
+            "dominion-foundry",
+            "cube-houses",
+            "cooper-koo-ymca"
+        ]
+    },
+    {
+        "id": 4,
+        "name": "Corktown",
+        "summary": "Explore one of Toronto's oldest neighbourhoods, a working class area buiult on Irish immigration in the 1800s.",
+        "km": "2",
+        "hours": "2",
+        "mins": "0",
+        "thumb": "enoch-turner-schoolhouse.jpg",
+        "sights": [
             "riverside-church",
             "bright-street",
             "sackville-playground",

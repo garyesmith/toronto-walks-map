@@ -178,38 +178,50 @@
     {
         "slug": "indigenous-hub",
         "name": "Indigenous Hub",
-        "details": "Lorem",
+        "details": "This mixed-use centre opened in 2025, offering educational services and employment training alongside retail space and rental housing. At its heart is the Anishnawbe Health Centre, which provides both conventional care and traditional land-based Indigenous healing. Out front stands <i>In Equilibrium</i>, a striking sculpture by Ludovic Boney, a Quebec-based artist of Wendat descent.",
         "url": ""  
     },
     {
         "slug": "former-canary-restaurant",
         "name": "Former Canary Restaurant",
-        "details": "Lorem",
+        "details": "When this ornate brick building opened in 1859 as the Palace Street School, it had two classrooms, one for girls and one for boys. After 1900, the building operated as a hotel. But many current Torontonians of a certain age remember it as the Canary Restaurant, a greasy-spoon diner that was so well-loved it gave the Canary District its name. Now freshly restored and painted a vibrant red, the building is awaiting its next identity.",
         "url": ""  
     },
     {
         "slug": "front-street-promenade",
         "name": "Front Street Promenade",
-        "details": "Lorem",
+        "details": "The Front Street Promenade is the pedestrian-friendly main passage through the Canary District. It features plenty of trees, benches, and artwork, along with a splash pad for kids and dogs. Everything here is barely a decade old, built on remediated former industrial lands, in part with funding obtained for the 2015 Pan Am Games. Once a wasteland, the Canary District is now home to thousands of residents.",
         "url": ""  
     },
     {
         "slug": "garden-of-future-follies",
         "name": "Garden of Future Follies",
-        "details": "Lorem",
-        "url": ""  
+        "details": "The Garden of Future Follies is a sculptural artwork by artist Hadley Howes. The artist created impressions from over 80 other sculptures and architectural features located around Toronto, cast them in bronze, and recombined them in ways their original creators could never have imagined.",
+        "url": "",
+        "photoLicense": " published in a compilation of public art",
+        "photoName": "Waterfront Toronto",
+        "photoUrl": "https://www.waterfrontoronto.ca/news/a-virtual-tour-of-public-art-in-the-west-don-lands"
     },
     {
         "slug": "corktown-common",
         "name": "Corktown Common",
-        "details": "Lorem",
+        "details": "The trails of Corktown Common meander through various landscapes, including thick forests, a marshy pond, open lawns, and a children's playground. It's not hard to lose sight of the city skyline here, surrounded only by croaking bullfrogs and swooping red-winged blackbirds. The park also serves an important secondary purpose: it was carefully engineered as a flood berm to protect the surrounding neighbourhoods from a once-in-500-years flood of the Don River.",
+        "url": ""  
+    },
+    {
+        "slug": "don-river",
+        "name": "Don River",
+        "details": "You may catch glimpses of the Don River from Corktown Common. Archaeology suggests Indigenous peoples settled in the Don Valley more than 6,000 years ago. Europeans later used the river as the eastern boundary of the original city of Toronto. Like many urban rivers, the Don was abused by industry in the 1900s, polluted and boxed in with concrete. Today, it's being remediated, with a newly naturalized mouth opening into Lake Ontario just south of here.",
         "url": ""  
     },
     {
         "slug": "lawren-harris-square",
         "name": "Lawren Harris Square",
-        "details": "Lorem",
-        "url": ""  
+        "details": "This gravelly Parisian-style square is named after Canadian painter Lawren Harris (1885-1970). Harris was a member of the famous Group of Seven, a collective known for their bold and modern Canadian wilderness landscapes. Though the artists often painted in remote areas, they met in Toronto, and Harris painted many Toronto streetscapes early in his career.",
+        "url": "",
+        "photoLicense": " published as 402 – 21 Lawren Harris Square",
+        "photoName": "Pope Real Estate",
+        "photoUrl": "https://poperealestate.ca/portfolio/402-21-lawren-harris-square/"
     },
     {
         "slug": "underpass-park",
@@ -256,6 +268,24 @@
     {
         "slug": "little-trinity-church",
         "name": "Little Trinity Church",
+        "details": "Lorem",
+        "url": ""  
+    },
+    {
+        "slug": "dominion-foundry",
+        "name": "Dominion Foundry",
+        "details": "Lorem",
+        "url": ""  
+    },
+    {
+        "slug": "cube-houses",
+        "name": "Cube Houses",
+        "details": "Lorem",
+        "url": ""  
+    },
+    {
+        "slug": "cooper-koo-ymca",
+        "name": "Cooper Koo YMCA",
         "details": "Lorem",
         "url": ""  
     }

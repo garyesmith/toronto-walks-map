@@ -286,7 +286,7 @@ class MapApp {
                 }
             }
             if (walk.mins!="0") {
-                walkMetaHtml+=' ${walk.mins} mins';
+                walkMetaHtml+=` ${walk.mins} mins`;
             }
             if (includeSummary) {
                 walkMetaHtml+=`</p>
