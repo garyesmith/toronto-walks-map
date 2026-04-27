@@ -127,7 +127,7 @@
     {
         "slug": "st-james-cathedral",
         "name": "St. James Cathedral",
-        "details": "The Cathedral of St. James is the fourth Anglican church to stand at this location. It opened in 1853 after the previous structure burned in the Great Fire of 1849. When the elaborate tower and spires were added in the 1870s it became the tallest structure in Canada, and remained so for 25 years. On Sunday mornings, the tower's full set of 12 bells are rung in mesmerizing sequence by the Guild of Change Ringers.",
+        "details": "The Cathedral of St. James is the fourth Anglican church to stand at this location. It opened in 1853 after the previous structure burned in the Great Fire of 1849. When the elaborate tower and spires were added in the 1870s it became the tallest structure in Canada, and kept that status for 25 years. On Sunday mornings, the tower's full set of 12 bells are rung in mesmerizing sequence by the Guild of Change Ringers.",
         "url": ""  
     },
     {
@@ -151,7 +151,7 @@
     {
         "slug": "toronto-railway-company-stables",
         "name": "Toronto Railway Company Stables",
-        "details": "The building was originally constructed in 1888 as stables for the Toronto Railway Company, an operator of horse-drawn streetcars in the pre-electrification era. This structure used to be much larger: records from 1891 show it had 588 stalls and 495 horses. In 1977, the Young People's Theatre purchased and restored the property into a venue with two stages.",
+        "details": "The building was originally constructed in 1888 as stables for the Toronto Railway Company, an operator of horse-drawn streetcars in the pre-electrification era. This structure used to be much larger: records from 1891 show it housed 495 horses. In 1977, the Young People's Theatre purchased and restored the property into a venue with two stages.",
         "url": ""  
     },
     {
@@ -205,7 +205,7 @@
     {
         "slug": "corktown-common",
         "name": "Corktown Common",
-        "details": "The trails of Corktown Common meander through various landscapes, including thick forests, a marshy pond, open lawns, and a children's playground. It's not hard to lose sight of the city skyline here, surrounded only by croaking bullfrogs and swooping red-winged blackbirds. The park also serves an important secondary purpose: it was carefully engineered as a flood berm to protect the surrounding neighbourhoods from a once-in-500-years flood of the Don River.",
+        "details": "The trails of Corktown Common meander through thick forests, marshes, ponds, open lawns, and a children's playground. It's not hard to lose sight of the city skyline here, surrounded only by croaking bullfrogs and swooping red-winged blackbirds. The park also serves an important hidden purpose: it was carefully engineered as a flood berm to protect the surrounding neighbourhoods from a once-in-500-years flood of the Don River.",
         "url": ""  
     },
     {
@@ -226,7 +226,7 @@
     {
         "slug": "underpass-park",
         "name": "Underpass Park",
-        "details": "Lorem",
+        "details": "This previously unused space was repurposed in 2015. There's a skate park, basketball hoops, colourful public art, and a children's playground. On Thursdays in the summer, a farmer's market fills the open space on the west side of St. Lawrence Street. Many were skeptical, but Underpass Park has proven to be well used. The space has also had numerous cameo appearances in TV commercials.",
         "url": ""  
     },
     {
@@ -274,19 +274,28 @@
     {
         "slug": "dominion-foundry",
         "name": "Dominion Foundry",
-        "details": "Lorem",
-        "url": ""  
+        "details": "Dominion Wheel & Foundries built these industrial facilities in the early 1900s to supply railway companies with wheels and other parts for their rolling stock. Various plans to repurpose the large, light-filled spaces have been proposed. But in 2021, without consultation, the Ontario government deployed crews to demolish the site. They were soon met by angry protestors. Courts paused the demolition, and the land is now in limbo, with the bulldozed areas used as a parking lot.",
+        "url": "",
+        "photoLicense": "licensed under the Creative Commons Attribution-Share Alike 4.0 International license",
+        "photoName": "Clippership",
+        "photoUrl": "https://commons.wikimedia.org/wiki/File:Machine-shop-southeast-corner.jpg"
     },
     {
         "slug": "cube-houses",
         "name": "Cube Houses",
-        "details": "Lorem",
-        "url": ""  
+        "details": "These three unusual houses in the form of rotated cubes were built in 1996, based on similar homes designed by architect Piet Blom in the city of Rotterdam. For decades, they've been a curiosity visible from nearby expressway ramps. Artists and other creatives have made them home. There future of the structures is now in doubt, however, as the land is slated for major condo redevelopment.",
+        "url": "",
+        "photoLicense": "licensed under the Creative Commons Attribution-Share Alike 3.0 Unported",
+        "photoName": "OldYorkGuy",
+        "photoUrl": "https://commons.wikimedia.org/wiki/File:Adelaide%27s_unusual_Cube_apartments,_2016_08_22_(5)_-_panoramio.jpg"
     },
     {
         "slug": "cooper-koo-ymca",
         "name": "Cooper Koo YMCA",
-        "details": "Lorem",
-        "url": ""  
+        "details": "This family-oriented YMCA, with extensive facilities for both kids and adults, was the first building to open in the new Canary District. During the 2015 Pan Am Games, when it was part of the Athlete's Village, the gym facilities were used by competitors training for their events. Now it serves the community, with two swimming pools, an indoor running track, a gymnasium, and green roof.",
+        "url": "",
+        "photoLicense": "tour of Gyms",
+        "photoName": "YMCA of Greater Toronto Area",
+        "photoUrl": "https://www.ymcagta.org/health-and-fitness/virtual-tours"
     }
 ]

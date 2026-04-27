@@ -2,7 +2,7 @@
     {
         "id": 1,
         "name": "CN Tower to Distillery",
-        "summary": "An west-to-east overview of many of Toronto's most well-known attractions and historical sights. <i>Transit: 504 Streetcar, Line 1 Subway to Union Station</i>",
+        "summary": "An west-to-east overview of many of Toronto's most well-known attractions and historical sights.",
         "km": "3",
         "hours": "2",
         "mins": "0",
@@ -27,7 +27,7 @@
     {
         "id": 2,
         "name": "Old Town Toronto",
-        "summary": "A clockwise circuit of Toronto's oldest neighbourhood. <i>Transit: 504 streetcar to John Street, or Line 1 Subway to King Station</i>",
+        "summary": "A clockwise circuit of Toronto's oldest neighbourhood.",
         "km": "2",
         "hours": "1",
         "mins": "0",
@@ -52,7 +52,7 @@
     {
         "id": 3,
         "name": "Canary District",
-        "summary": "Explore one of Toronto's newest neighbourhoods, built on former industrial lands. <i>Transit: 504A Streetcar to Front Street East</i>",
+        "summary": "One of Toronto's newest neighbourhoods, built on former industrial lands that hosted the Athlete's Village for the 2015 Pan Am Games.",
         "km": "2.5",
         "hours": "1",
         "mins": "15",
