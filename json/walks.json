@@ -67,7 +67,7 @@
             "don-river",
             "lawren-harris-square",
             "underpass-park",
-            "dominion-foundry",
+            "dominion-foundries",
             "cube-houses",
             "cooper-koo-ymca"
         ]
@@ -75,19 +75,28 @@
     {
         "id": 4,
         "name": "Corktown",
-        "summary": "Explore one of Toronto's oldest neighbourhoods, a working class area buiult on Irish immigration in the 1800s.",
-        "km": "2",
-        "hours": "2",
-        "mins": "0",
+        "summary": "Explore one of Toronto's oldest neighbourhoods, a working class area built by Irish immigrants.",
+        "km": "2.5",
+        "hours": "1",
+        "mins": "30",
         "thumb": "enoch-turner-schoolhouse.jpg",
         "sights": [
-            "riverside-church",
-            "bright-street",
-            "sackville-playground",
-            "inglenook-school",
-            "blackburn-house-site",
+            "first-parliament-site",
+            "data-centre",
+            "51-division",
             "enoch-turner-schoolhouse",
-            "little-trinity-church"
+            "little-trinity-church",
+            "st-pauls-basilica",
+            "dominion-brewery",
+            "dominion-hotel",
+            "bright-street",
+            "riverside-church",
+            "corktown-overpasses",
+            "sackville-playground",
+            "19th-century-commercial-rows",
+            "gilead-place",
+            "inglenook-school",
+            "blackburn-house-site"            
         ]
     }
 ]

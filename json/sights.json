@@ -178,7 +178,7 @@
     {
         "slug": "indigenous-hub",
         "name": "Indigenous Hub",
-        "details": "This mixed-use centre opened in 2025, offering educational services and employment training alongside retail space and rental housing. At its heart is the Anishnawbe Health Centre, which provides both conventional care and traditional land-based Indigenous healing. Out front stands <i>In Equilibrium</i>, a striking sculpture by Ludovic Boney, a Quebec-based artist of Wendat descent.",
+        "details": "This mixed-use centre offers educational services and employment training alongside retail space and rental housing. At its heart is the Anishnawbe Health Centre, which provides both conventional care and traditional land-based Indigenous healing. Outside stands <i>In Equilibrium</i>, a fringed sculpture by Ludovic Boney, a Quebec-based artist of Wendat descent.",
         "url": ""  
     },
     {
@@ -197,10 +197,7 @@
         "slug": "garden-of-future-follies",
         "name": "Garden of Future Follies",
         "details": "The Garden of Future Follies is a sculptural artwork by artist Hadley Howes. The artist created impressions from over 80 other sculptures and architectural features located around Toronto, cast them in bronze, and recombined them in ways their original creators could never have imagined.",
-        "url": "",
-        "photoLicense": " published in a compilation of public art",
-        "photoName": "Waterfront Toronto",
-        "photoUrl": "https://www.waterfrontoronto.ca/news/a-virtual-tour-of-public-art-in-the-west-don-lands"
+        "url": ""
     },
     {
         "slug": "corktown-common",
@@ -218,15 +215,13 @@
         "slug": "lawren-harris-square",
         "name": "Lawren Harris Square",
         "details": "This gravelly Parisian-style square is named after Canadian painter Lawren Harris (1885-1970). Harris was a member of the famous Group of Seven, a collective known for their bold and modern Canadian wilderness landscapes. Though the artists often painted in remote areas, they met in Toronto, and Harris painted many Toronto streetscapes early in his career.",
-        "url": "",
-        "photoLicense": " published as 402 – 21 Lawren Harris Square",
-        "photoName": "Pope Real Estate",
-        "photoUrl": "https://poperealestate.ca/portfolio/402-21-lawren-harris-square/"
+        "url": ""
     },
     {
         "slug": "underpass-park",
         "name": "Underpass Park",
         "details": "This previously unused space was repurposed in 2015. There's a skate park, basketball hoops, colourful public art, and a children's playground. On Thursdays in the summer, a farmer's market fills the open space on the west side of St. Lawrence Street. Many were skeptical, but Underpass Park has proven to be well used. The space has also had numerous cameo appearances in TV commercials.",
+        "note": "Note: As of spring 2026, these areas are closed while the expressway ramps above undergo maintenance. Stay tuned!",
         "url": ""  
     },
     {
@@ -272,30 +267,64 @@
         "url": ""  
     },
     {
-        "slug": "dominion-foundry",
-        "name": "Dominion Foundry",
-        "details": "Dominion Wheel & Foundries built these industrial facilities in the early 1900s to supply railway companies with wheels and other parts for their rolling stock. Various plans to repurpose the large, light-filled spaces have been proposed. But in 2021, without consultation, the Ontario government deployed crews to demolish the site. They were soon met by angry protestors. Courts paused the demolition, and the land is now in limbo, with the bulldozed areas used as a parking lot.",
-        "url": "",
-        "photoLicense": "licensed under the Creative Commons Attribution-Share Alike 4.0 International license",
-        "photoName": "Clippership",
-        "photoUrl": "https://commons.wikimedia.org/wiki/File:Machine-shop-southeast-corner.jpg"
+        "slug": "dominion-foundries",
+        "name": "Dominion Foundries",
+        "details": "Dominion Wheel & Foundries built this industrial complex in the early 1900s to supply railway companies with wheels and other parts for their rolling stock. Various plans to repurpose the large, light-filled spaces have been proposed. But in 2021, without consultation, the Ontario government deployed crews to demolish the site. Angry protestors soon arrived, and courts paused the demolition. The land is now in limbo, with bulldozed areas used as a parking lot.",
+        "url": ""
     },
     {
         "slug": "cube-houses",
         "name": "Cube Houses",
-        "details": "These three unusual houses in the form of rotated cubes were built in 1996, based on similar homes designed by architect Piet Blom in the city of Rotterdam. For decades, they've been a curiosity visible from nearby expressway ramps. Artists and other creatives have made them home. There future of the structures is now in doubt, however, as the land is slated for major condo redevelopment.",
-        "url": "",
-        "photoLicense": "licensed under the Creative Commons Attribution-Share Alike 3.0 Unported",
-        "photoName": "OldYorkGuy",
-        "photoUrl": "https://commons.wikimedia.org/wiki/File:Adelaide%27s_unusual_Cube_apartments,_2016_08_22_(5)_-_panoramio.jpg"
+        "details": "These three unusual houses in the form of rotated cubes were built in 1996, based on similar homes designed by architect Piet Blom in the city of Rotterdam. For decades, they've been a curiosities, visible from nearby expressway ramps. Artists, musicians, and other creatives have made them home. The future of the structures is in doubt, however, with the land slated for major redevelopment.",
+        "url": ""
     },
     {
         "slug": "cooper-koo-ymca",
         "name": "Cooper Koo YMCA",
-        "details": "This family-oriented YMCA, with extensive facilities for both kids and adults, was the first building to open in the new Canary District. During the 2015 Pan Am Games, when it was part of the Athlete's Village, the gym facilities were used by competitors training for their events. Now it serves the community, with two swimming pools, an indoor running track, a gymnasium, and green roof.",
-        "url": "",
-        "photoLicense": "tour of Gyms",
-        "photoName": "YMCA of Greater Toronto Area",
-        "photoUrl": "https://www.ymcagta.org/health-and-fitness/virtual-tours"
+        "details": "This family-oriented YMCA, with facilities for both kids and adults, was the first building to open in the new Canary District. During the 2015 Pan Am Games, when it was part of the Athlete's Village, the gym facilities were used by competitors training for their events. Now it serves the community, with two swimming pools, an indoor running track, a gymnasium, and a green roof.",
+        "url": ""
+    },
+    {
+        "slug": "st-pauls-basilica",
+        "name": "St. Paul's Basilica",
+        "details": "The oldest Catholic church in Toronto, the congregation has met here since 1824. The current building was constructed in 1889, with the Italian-style campanile added in 1905, keeping the bell from the original church.  Pope John Paul II designated this church a Minor Basilica in 1999."
+    },
+    {
+        "slug": "dominion-hotel",
+        "name": "Dominion Hotel",
+        "details": "Lorem"
+    },
+    {
+        "slug": "dominion-brewery",
+        "name": "Dominion Brewery",
+        "details": "Lorem"
+    },    
+    {
+        "slug": "corktown-overpasses",
+        "name": "Corktown Overpasses",
+        "details": "Like the east sides of many major North American cities, Corktown was riven in two by new highway overpasses constructed in the 1960s, to provide drivers with acccess to the Don Valley Parkway. Home at the time to poorer and working class people, the area was not able to successfully mobilize against the intrusion, as residents of the Annex did in the western part of the city."
+    },
+    {
+        "slug": "19th-century-commercial-rows",
+        "name": "19th Century Business Blocks",
+        "details": "In 2020, the Toronto Preservation Board recommended that hundreds of properies in the Corktown area be added to the City of Toronto's Heritage Register. Among them were these 1800s commercial row blocks, featuring their distinctive brick facades, with retail business on the ground floor and living accommodations above, often with peaked gabled rooflines."
+    },
+    {
+        "slug": "51-division",
+        "name": "51 Division",
+        "details": "Lorem"
+    },
+    {
+        "slug": "data-centre",
+        "name": "Data Centre",
+        "details": "Lorem"
+    },
+    {
+        "slug": "gilead-place",
+        "name": "Gilead Place",
+        "details": "This narrow laneway is a microcosm of the changes that have transformed Corktown. In the 1800s Gilead Place was lined with ramshackle rowhouses, home to labourers at the nearby factories and breweries. By the 1930s these homes were being demolished in favour of brick industrial buildings. Today, it's come a full circle, with expensive new townhomes and condos replacing the industry.",
+        "photoLicense": " in the public domain. Made available ",
+        "photoName": "City of Toronto Archives",
+        "photoUrl": "https://7078.sydneyplus.com/archive/final/Portal/Default.aspx?component=AABC&record=33a94490-09a2-4de6-a487-9fda17eae1f3"
     }
 ]
