@@ -8,7 +8,7 @@
     {
         "slug": "first-parliament-site",
         "name": "First Parliament Site",
-        "details": "Nothing remains but a plaque honouring the first parliament buildings for Upper Canada (now Ontario) that stood on this site from 1798 to 1832. During the War of 1812 occupying American troops set fire to the buildings, and the British responded a year later by torching what is now the White House in Washington, DC.",
+        "details": "Nothing remains here but a plaque honouring the first parliament buildings for Upper Canada (now Ontario) that stood on this site from 1798 to 1832. During the War of 1812, occupying American troops set fire to the buildings. The British responded a year later by torching what is now the White House in Washington, DC.",
         "url": ""
     },
     {
@@ -257,13 +257,13 @@
     {
         "slug": "enoch-turner-schoolhouse",
         "name": "Enoch Turner Schoolhouse",
-        "details": "Lorem",
+        "details": "The construction of this schoolhouse in 1848 was funded by local brewer Enoch Turner, who saw that many of his Irish immigrant employees were unable to afford the fees needed to send their children to other schools. The building is now run by a charitable foundation, and is often used for weddings. The public can vist for free during the city's annual Doors Open event held every May.",
         "url": ""  
     },
     {
         "slug": "little-trinity-church",
         "name": "Little Trinity Church",
-        "details": "Lorem",
+        "details": "Opened in 1844, Little Trinity Anglican Church is the oldest church building still used for worship in Toronto. Most of the original congregation were local immigrant workers from the Corktown area who were unable to afford the high 'pew fees' at the larger St. James Cathedral near St. Lawrence Market.",
         "url": ""  
     },
     {
@@ -287,7 +287,7 @@
     {
         "slug": "st-pauls-basilica",
         "name": "St. Paul's Basilica",
-        "details": "The oldest Catholic church in Toronto, the congregation has met here since 1824. The current building was constructed in 1889, with the Italian-style campanile added in 1905, keeping the bell from the original church.  Pope John Paul II designated this church a Minor Basilica in 1999."
+        "details": "The oldest Catholic church in Toronto, the congregation has been meeting at this location since 1824. The current building was constructed in 1889, with the Italian-style campanile added in 1905, containing the bell from the original church.  Pope John Paul II designated this church a Minor Basilica in 1999."
     },
     {
         "slug": "dominion-hotel",
@@ -297,7 +297,7 @@
     {
         "slug": "dominion-brewery",
         "name": "Dominion Brewery",
-        "details": "Lorem"
+        "details": "Brewer Robert T. Davies founded the Dominion Brewery in 1877 after leaving his previous job at his brother's Don Brewery a few blocks east. The brewery's name refers to the Dominion of Canada: not yet an independent country but merely a part of the British Empire. The brewery complex, with its large entry arches, was incorporated into a modern retail and office development in the 1980s."
     },    
     {
         "slug": "corktown-overpasses",
@@ -306,18 +306,18 @@
     },
     {
         "slug": "19th-century-commercial-rows",
-        "name": "19th Century Business Blocks",
-        "details": "In 2020, the Toronto Preservation Board recommended that hundreds of properies in the Corktown area be added to the City of Toronto's Heritage Register. Among them were these 1800s commercial row blocks, featuring their distinctive brick facades, with retail business on the ground floor and living accommodations above, often with peaked gabled rooflines."
+        "name": "Heritage Commercial Rows",
+        "details": "In 2020, the Toronto Preservation Board recommended many properies in the Corktown area be added to the City of Toronto's Heritage Register. Among them were these 1800s commercial row blocks, featuring retail business on the ground floor and living accommodations above, often with steep gabled rooflines."
     },
     {
         "slug": "51-division",
         "name": "51 Division",
-        "details": "Lorem"
+        "details": "The Toronto Police Service 51 Division Headquarters operate out of this repurposed 1898 building, originally constructed by the Consumers Gas Company. The building was vacant for nearly 50 years before being completely restored and modernized in 2004."
     },
     {
         "slug": "data-centre",
         "name": "Data Centre",
-        "details": "Lorem"
+        "details": "The Parliament Street Data Centre, completed in 2015, is a sharp contrast to the many historic buildings in this area. The textured facade was designed to mimic an old-school computer punchcard. This secure facility houses the digital infrastructure used by many Toronto institutions, with dedicated connections to Toronto's City Hall and financial core to ensure uptime even during a major disaster."
     },
     {
         "slug": "gilead-place",
