@@ -33,9 +33,10 @@ class MapApp {
         // map layer configs
         this.layerConfigs = [
             ["json/dissolved/green_spaces.geojson", "#adc57b", 1],
-            ["json/dissolved/sidewalks.geojson", "#999999", 1],
+            ["json/dissolved/sidewalks.geojson", "#aaaaaa", 1],
             ["json/dissolved/water.geojson", "#91cbef", 1],
-            ["json/dissolved/buildings.geojson", "#d0b38f", 1]
+            ["json/dissolved/buildings.geojson", "#d0b38f", 1],
+            ["json/dissolved/roadcentres.geojson", "#cccccc", 7]
         ];
 
         // json config file URLs
