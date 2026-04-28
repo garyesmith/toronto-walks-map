@@ -423,7 +423,8 @@ ul#walk-list.open {
 
     p,
     p.distance,
-    p.summary {
+    p.summary,
+    #what-next {
         font-size: 18px;
     }
 
