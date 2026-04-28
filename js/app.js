@@ -50,7 +50,7 @@ class MapApp {
             markerColor: 'cyan',
             shape: 'circle',
             prefix: 'fa',
-            shadowSize: [31, 31]
+            shadowSize: [0,0]
         });
 
         // selected map marker style
@@ -58,7 +58,7 @@ class MapApp {
             markerColor: 'orange',
             shape: 'circle',
             prefix: 'fa',
-            shadowSize: [31, 31]
+            shadowSize: [0,0]
         });
 
         this.currWalkNumber = 1;
@@ -244,8 +244,20 @@ class MapApp {
             this.bindPhotoCreditLinks();
             this.map.invalidateSize();
             this.map.fitBounds(this.mapMarkerGroup.getBounds(), { padding: [30, 30] }); // zoom and center map markers for the walk
+            this.addWhatNextBox();
         });
 
+    }
+
+    // add the 'what next' box at the end of the walk info 
+    addWhatNextBox() {
+        const walk=this.walksContent.get(this.currWalkNumber);
+        if (walk.next && walk.next.length) {
+            var nextDiv = document.createElement('div');
+            nextDiv.id='what-next';
+            nextDiv.innerHTML= `<p><b>Where to next?</b> ${walk.next}</p>`;
+            this.sightsList.appendChild(nextDiv);
+        }
     }
 
     // load content that defines walk routes from walks.json
