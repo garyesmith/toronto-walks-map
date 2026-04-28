@@ -30,9 +30,9 @@
         "name": "Old Town Toronto",
         "summary": "A clockwise circuit of Toronto's oldest neighbourhood.",
         "next": "From here, the King subway station is a short walk to the west. The 504 King streetcar runs west to the city centre, and the 504A King streetcar runs east to the Distillery District.",
-        "km": "2",
+        "km": "3",
         "hours": "1",
-        "mins": "0",
+        "mins": "30",
         "thumb": "st-james-cathedral.jpg",
         "sights": [
             "gooderham-flatiron-building",

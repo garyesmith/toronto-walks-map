@@ -214,9 +214,14 @@ class MapApp {
         this.mapMarkersLayer = new L.GeoJSON.AJAX(url, {
             pointToLayer: (feature, latlng) => { 
                 if (this.walksContent.get(this.currWalkNumber).sights.includes(feature.properties['slug'])) {
-                    this.mapMarker.options.className = 'sight-'+feature.properties['slug'];
+                    var markerIcon=this.mapMarker;
+                    if (this.walksContent.get(this.currWalkNumber).sights[0]==feature.properties['slug']) {
+                        markerIcon=this.selectedMapMarker; // initially highlight first walk marker
+                    } 
+                    markerIcon.options.className = 'sight-'+feature.properties['slug'];
+                    document.getElementById
                     var newMarker=L.marker(latlng, {
-                        icon: this.mapMarker,
+                        icon: markerIcon,
                         pane: paneName,
                     });
                     this.mapMarkerGroup.addLayer(newMarker);
@@ -385,9 +390,13 @@ class MapApp {
         if (typeof feature.properties.slug != "undefined" && feature.properties.slug.length) {
             const sight = this.sightContent.get(feature.properties.slug);
             const sightIndex = this.walksContent.get(this.currWalkNumber).sights.indexOf(feature.properties.slug);
+            var markerColor='cyan';
+            if (this.walksContent.get(this.currWalkNumber).sights[0]==feature.properties.slug) {
+                markerColor='orange'; // highlight first walk marker
+            }
             var infoHtml = `
                     <div class="marker-line">
-                        <div class="info-marker marker-${sight.slug} leaflet-marker-icon extra-marker extra-marker-circle-cyan"></div>
+                        <div class="info-marker marker-${sight.slug} leaflet-marker-icon extra-marker extra-marker-circle-${markerColor}"></div>
                     </div>
                     <div class="marker-meta">
                         <h2 class="info-header" id="sight-${sight.slug}">${sight.name}</h2>
@@ -580,7 +589,7 @@ class MapApp {
         if (this.infoScrollObserver) this.infoScrollObserver.disconnect();
         this.infoScrollObserver = new IntersectionObserver(this.infoScrollObserverCallback, {
             root: this.sightsList,
-            rootMargin: '-3% 0px -85% 0px',
+            rootMargin: '-3% 0px -82% 0px',
             threshold: 0
         });
         this.infoElements.forEach(child =>  this.infoScrollObserver.observe(child));
