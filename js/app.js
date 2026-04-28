@@ -36,7 +36,7 @@ class MapApp {
             ["json/dissolved/sidewalks.geojson", "#aaaaaa", 1],
             ["json/dissolved/water.geojson", "#91cbef", 1],
             ["json/dissolved/buildings.geojson", "#d0b38f", 1],
-            ["json/dissolved/roadcentres.geojson", "#cccccc", 7]
+            ["json/dissolved/roadcentres.geojson", "#bbbbbb", 7]
         ];
 
         // json config file URLs
@@ -256,7 +256,7 @@ class MapApp {
         if (walk.next && walk.next.length) {
             var nextDiv = document.createElement('div');
             nextDiv.id='what-next';
-            nextDiv.innerHTML= `<p><b>Where to next?</b> ${walk.next}</p>`;
+            nextDiv.innerHTML= `<h3>Where to next?</h3><p>${walk.next}</p>`;
             this.sightsList.appendChild(nextDiv);
         }
     }

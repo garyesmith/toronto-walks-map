@@ -178,7 +178,7 @@
     {
         "slug": "indigenous-hub",
         "name": "Indigenous Hub",
-        "details": "This mixed-use centre offers educational services and employment training alongside retail space and rental housing. At its heart is the Anishnawbe Health Centre, which provides both conventional care and traditional land-based Indigenous healing. Outside stands <i>In Equilibrium</i>, a fringed sculpture by Ludovic Boney, a Quebec-based artist of Wendat descent.",
+        "details": "This mixed-use centre offers educational services and employment training alongside retail space and rental housing. At its heart is the Anishnawbe Health Centre, which provides both conventional care and traditional land-based Indigenous healing. Outside is a fringed sculpture titled <i>In Equilibrium</i>, created by Ludovic Boney, a Quebec-based artist of Wendat descent.",
         "url": ""  
     },
     {
@@ -202,7 +202,7 @@
     {
         "slug": "corktown-common",
         "name": "Corktown Common",
-        "details": "The trails of Corktown Common meander through thick forests, marshes, ponds, open lawns, and a children's playground. It's not hard to lose sight of the city skyline here, surrounded only by croaking bullfrogs and swooping red-winged blackbirds. The park also serves an important hidden purpose: it was carefully engineered as a flood berm to protect the surrounding neighbourhoods from a once-in-500-years flood of the Don River.",
+        "details": "The trails of Corktown Common meander through thick forests, marshes, ponds, open lawns, and a children's playground. It's easy to lose sight of the city skyline here, surrounded only by croaking bullfrogs and swooping red-winged blackbirds. The park also serves an important hidden purpose: it was carefully engineered as a flood berm to protect the surrounding neighbourhoods from a once-in-500-years flood of the Don River.",
         "url": ""  
     },
     {
@@ -214,32 +214,32 @@
     {
         "slug": "lawren-harris-square",
         "name": "Lawren Harris Square",
-        "details": "This gravelly Parisian-style square is named after Canadian painter Lawren Harris (1885-1970). Harris was a member of the famous Group of Seven, a collective known for their bold and modern Canadian wilderness landscapes. Though the artists often painted in remote areas, they met in Toronto, and Harris painted many Toronto streetscapes early in his career.",
+        "details": "This gravelly minimalist Paris-style square is named after Canadian painter Lawren Harris (1885-1970). Harris was a member of the famous Group of Seven, a collective known for their bold Canadian wilderness landscapes. Though the artists often painted in remote areas, they met in Toronto, where Harris also painted many streetscapes.",
         "url": ""
     },
     {
         "slug": "underpass-park",
         "name": "Underpass Park",
         "details": "This previously unused space was repurposed in 2015. There's a skate park, basketball hoops, colourful public art, and a children's playground. On Thursdays in the summer, a farmer's market fills the open space on the west side of St. Lawrence Street. Many were skeptical, but Underpass Park has proven to be well used. The space has also had numerous cameo appearances in TV commercials.",
-        "note": "Note: As of spring 2026, these areas are closed while the expressway ramps above undergo maintenance. Stay tuned!",
+        "note": "Note: As of spring 2026, these areas are closed while the expressway ramps undergo maintenance. Stay tuned!",
         "url": ""  
     },
     {
         "slug": "riverside-church",
         "name": "Riverside Church",
-        "details": "Lorem",
+        "details": "The imposing red building has been ominously warning drivers on the adjacent elevated Richmond Street off-ramp to 'Prepare to Meet Thy God' for so long that the phone number on its sign does not have an area code. The building was constructed in 1903 as a Methodist church, and now houses the Riverside Evangelical Missionary Church.",
         "url": ""  
     },
     {
         "slug": "bright-street",
         "name": "Bright Street",
-        "details": "Lorem",
+        "details": "Tiny, crooked, and colourful, Bright Street is a pleasant surprise to walk down. A throwback to the earlier days of Corktown, the street is lined with circa-1870 workers row houses, restored and beautifully maintained, but still sporting their distinctive lean.",
         "url": ""  
     },
     {
         "slug": "sackville-playground",
         "name": "Sackville Playground",
-        "details": "Lorem",
+        "details": "This park, tucked into a small triangular space created by the adjacent highway ramps, was completely refurbished in 2018 to create a fenced children's playground with a splashpad and water filling stations. This park is often the sight of outdoor birthday parties in the summer. On the wall to the west, a mural titled <i>The Light in the North</i> by Toronto artists Flips and Sowl honours Corktown's immigrant history.",
         "url": ""  
     },
     {
@@ -263,7 +263,7 @@
     {
         "slug": "little-trinity-church",
         "name": "Little Trinity Church",
-        "details": "Opened in 1844, Little Trinity Anglican Church is the oldest church building still used for worship in Toronto. Most of the original congregation were local immigrant workers from the Corktown area who were unable to afford the high 'pew fees' at the larger St. James Cathedral near St. Lawrence Market.",
+        "details": "Opened in 1844, Little Trinity Anglican Church is the oldest church building still used for worship in Toronto. Most of the original congregation were local Irish immigrant workers who were unable to afford the high 'pew fees' at the larger St. James Cathedral near the St. Lawrence Market.",
         "url": ""  
     },
     {
@@ -275,7 +275,7 @@
     {
         "slug": "cube-houses",
         "name": "Cube Houses",
-        "details": "These three unusual houses in the form of rotated cubes were built in 1996, based on similar homes designed by architect Piet Blom in the city of Rotterdam. For decades, they've been a curiosities, visible from nearby expressway ramps. Artists, musicians, and other creatives have made them home. The future of the structures is in doubt, however, with the land slated for major redevelopment.",
+        "details": "These three unusual houses in the form of rotated cubes were built in 1996, based on similar homes designed by Dutch architect Piet Blom in the city of Rotterdam. For decades, they've been a curiosities, visible from nearby expressway ramps. Artists, musicians, and other creatives have made them home. The future of the structures is in doubt, however, with the land slated for major redevelopment.",
         "url": ""
     },
     {
@@ -292,22 +292,22 @@
     {
         "slug": "dominion-hotel",
         "name": "Dominion Hotel",
-        "details": "Lorem"
+        "details": "In 1889, brewer Robert T. Davies constructed this hotel next to his Dominion Brewery. It was a handy place to sell his product, with an elegant performance space on the main floor. After a century of neglect, the Dominion on Queen opened in 1998 as a grungy pub featuring jazz and rockabilly music. Now, after a brief stint as a chain pub, the space is home to a Mexican restaurant. The building has been extensively restored with hope of a new life as a modern boutique hotel."
     },
     {
         "slug": "dominion-brewery",
         "name": "Dominion Brewery",
-        "details": "Brewer Robert T. Davies founded the Dominion Brewery in 1877 after leaving his previous job at his brother's Don Brewery a few blocks east. The brewery's name refers to the Dominion of Canada: not yet an independent country but merely a part of the British Empire. The brewery complex, with its large entry arches, was incorporated into a modern retail and office development in the 1980s."
+        "details": "Brewer Robert T. Davies founded the Dominion Brewery in 1877 after leaving his previous job at his brother's Don Brewery a few blocks east. The brewery complex, still recognizable by its large entry arches, was incorporated into a modern retail and office development in the 1980s."
     },    
     {
         "slug": "corktown-overpasses",
         "name": "Corktown Overpasses",
-        "details": "Like the east sides of many major North American cities, Corktown was riven in two by new highway overpasses constructed in the 1960s, to provide drivers with acccess to the Don Valley Parkway. Home at the time to poorer and working class people, the area was not able to successfully mobilize against the intrusion, as residents of the Annex did in the western part of the city."
+        "details": "Corktown shared the fate of many 'east sides' in major North American cities when it was chopped in two by new highway overpasses in the 1960s, during construction of the Don Valley Parkway. The loss of 200 old buildings occupied by working class people was considered the price of progress. The story was very different a decade later, when fierce opposition prevented construction of the Spadina Expressway in Toronto's west-end Annex neighbourhood."
     },
     {
         "slug": "19th-century-commercial-rows",
-        "name": "Heritage Commercial Rows",
-        "details": "In 2020, the Toronto Preservation Board recommended many properies in the Corktown area be added to the City of Toronto's Heritage Register. Among them were these 1800s commercial row blocks, featuring retail business on the ground floor and living accommodations above, often with steep gabled rooflines."
+        "name": "Heritage Row Blocks",
+        "details": "In 2020, the Toronto Preservation Board recommended many properies in the Corktown area be added to the City of Toronto's Heritage Register. Among them were these 1800s row blocks, featuring multiple streetfront businesses on the ground floor and living accommodations above, often with steep gabled rooflines."
     },
     {
         "slug": "51-division",
@@ -317,12 +317,12 @@
     {
         "slug": "data-centre",
         "name": "Data Centre",
-        "details": "The Parliament Street Data Centre, completed in 2015, is a sharp contrast to the many historic buildings in this area. The textured facade was designed to mimic an old-school computer punchcard. This secure facility houses the digital infrastructure used by many Toronto institutions, with dedicated connections to Toronto's City Hall and financial core to ensure uptime even during a major disaster."
+        "details": "The Parliament Street Data Centre, completed in 2015,  sharply contrasts with the many historic buildings nearby. The textured facade was designed to mimic an old-school computer punchcard. This secure facility houses the data servers for many Toronto institutions, with dedicated connections to City Hall and the financial core to ensure operation even during a major disaster."
     },
     {
         "slug": "gilead-place",
         "name": "Gilead Place",
-        "details": "This narrow laneway is a microcosm of the changes that have transformed Corktown. In the 1800s Gilead Place was lined with ramshackle rowhouses, home to labourers at the nearby factories and breweries. By the 1930s these homes were being demolished in favour of brick industrial buildings. Today, it's come a full circle, with expensive new townhomes and condos replacing the industry.",
+        "details": "This narrow laneway is a microcosm of the changes that have transformed Corktown. In the 1800s Gilead Place was lined with ramshackle rowhouses housing labourers from nearby factories and breweries. By the 1930s these homes were being demolished in favour of brick warehouses. Today, it's come a full circle, with expensive new townhomes and condos replacing the industrial buildings.",
         "photoLicense": " in the public domain. Made available ",
         "photoName": "City of Toronto Archives",
         "photoUrl": "https://7078.sydneyplus.com/archive/final/Portal/Default.aspx?component=AABC&record=33a94490-09a2-4de6-a487-9fda17eae1f3"

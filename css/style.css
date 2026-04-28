@@ -351,6 +351,10 @@ ul#walk-list.open {
     font-size: 1.0rem;
     font-style: italic;
 }
+#what-next h3 {
+    font-size: 1.3rem;
+    font-style: normal;
+}
 
 /* desktop (default) */
 @media (min-width: 769px) {
@@ -422,12 +426,15 @@ ul#walk-list.open {
     }
 
     p,
-    p.distance,
-    p.summary,
+    #walk-intro p.distance,
+    #walk-intro p.summary,
     #what-next {
         font-size: 18px;
     }
 
+    #what-next h3 {
+        font-size: 22px;
+    }
     h2 {
         margin-bottom: 3%;
     }
