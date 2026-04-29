@@ -43,19 +43,13 @@
         "slug": "hockey-hall-of-fame",
         "name": "Hockey Hall of Fame",
         "details": "This national hockey museum curates exhibits and memorabilia related to Canada's game. Olympians, NHLers, PWHLers and junior players are all honoured. The Stanley Cup lives here, too.",
-        "url": "https://www.hhof.com/",
-        "photoLicense": "licensed under the Creative Commons Attribution-Share Alike 4.0 International license",
-        "photoName": "JK Liu",
-        "photoUrl": "https://commons.wikimedia.org/wiki/File:Hockey_Hall_of_Fame_2025-05-24.jpg"
+        "url": "https://www.hhof.com/"
     },
     {
         "slug": "union-station",
         "name": "Union Station",
         "details": "Union Station has been Toronto's transit hub since 1927. National and regional trains, buses, and subways all converge here. The Great Hall on the main level near Front Street has been freshly renovated to show off its soaring ceiling and Beaux-Arts finishes. The lower levels are a warren of speciality shops, international food courts, and restaurants.",
-        "url": "https://torontounion.ca/",
-        "photoLicense": "licensed under the Creative Commons Attribution 2.0 Generic license",
-        "photoName": "Michael Caven",
-        "photoUrl": "https://commons.wikimedia.org/wiki/File:The_Great_Hall_of_Union_Station_in_Toronto.jpg"
+        "url": "https://torontounion.ca/"
     },
     {
         "slug": "maple-leaf-square",
@@ -71,19 +65,13 @@
         "slug": "scotiabank-arena",
         "name": "Scotiabank Arena",
         "details": "Scotiabank Arena is the shared home of the Toronto Maple Leafs hockey team and the Toronto Raptors basketball team, as well as a popular venue for major concerts.",
-        "url": "https://www.scotiabankarena.com",
-        "photoLicense": "licensed under the Creative Commons Attribution 2.0 Generic license",
-        "photoName": "Djuradj Vujcic",
-        "photoUrl":"https://commons.wikimedia.org/wiki/File:Legends_Row_photo_by_Djuradj_Vujcic.jpg"
+        "url": "https://www.scotiabankarena.com"
     },
     {
         "slug": "roundhouse-park",
         "name": "Roundhouse Park",
         "details": "The John Street Roundhouse was built in 1929 by the Canadian Pacific Railway Company. Closed in the 1980s and converted into a park in 1997, its massive locomotive turntable still functions. The adjoining train repair sheds now house the Toronto Railway Museum, a brewpub, and a restaurant arcade.",
-        "url": "https://torontorailwaymuseum.com",
-        "photoLicense": "licensed under the Creative Commons Attribution-Share Alike 3.0 Unported license",
-        "photoName": "Michael Mayer",
-        "photoUrl":"https://commons.wikimedia.org/wiki/File:Roundhouse_Park_Toronto.jpg"
+        "url": "https://torontorailwaymuseum.com"
     },
     {
         "slug": "ripleys-aquarium",
