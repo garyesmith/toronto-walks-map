@@ -10,6 +10,8 @@ body {
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    scrollbar-color: #c1c1c1 #e1e1e1;
+    scrollbar-width: thin;
 }
 
 path.leaflet-interactive:focus {
@@ -61,6 +63,13 @@ header #hamburger {
     padding: 12% 3% 25% 3%;
     overflow-x: hidden;
     overflow-y: scroll;
+}
+
+/* reduce padding on chrome to accommodate larger scrollbar */
+@supports (-webkit-appearance: none) {
+    #sights {
+        padding-right: 1%;
+    }
 }
 
 #info figure {
