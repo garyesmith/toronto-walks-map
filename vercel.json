@@ -15,5 +15,8 @@
         }
       ]
     }
+  ],
+  "redirects": [
+    { "source": "/README.md", "destination": "/404", "permanent": false }
   ]
 }
