@@ -66,10 +66,8 @@ header #hamburger {
 }
 
 /* reduce padding on chrome to accommodate larger scrollbar */
-@supports (-webkit-appearance: none) {
-    #sights {
-        padding-right: 1%;
-    }
+#sights.chrome {
+    padding-right: 1%;
 }
 
 #info figure {

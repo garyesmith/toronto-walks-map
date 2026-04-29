@@ -73,6 +73,7 @@ class MapApp {
         this.addBasemapLayer();
         this.loadWalkContent();   
         this.handleWindowResizing();
+        this.accommodateChromeScrollbar();
         this.bindAboutPageEvents();
         this.locateUser();
     }
@@ -515,6 +516,14 @@ class MapApp {
                 }
             }, 300);
         });
+    }
+
+    // reduce right padding in sidebar for Chrome only, to accommodate its large adult scrollbar
+    accommodateChromeScrollbar() {
+        const isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+        if (isChrome) {
+           document.getElementById('sights').classList.add('chrome');
+        }
     }
 
     // display 'about this app' page when info icon clicked
