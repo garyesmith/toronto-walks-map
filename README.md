@@ -1,4 +1,4 @@
-# Toronto Walks
+# Toronto Walks Web App
 
 Toronto Walks is browser app designed to showcase interesting walks around downtown Toronto, intended for use by curious locals and visitors alike. The interface works on mobile and desktop devices, and allows users to follow along on a live map to read details about various sights they encounter along their walk. The writing highlights the culture and history of places that casual pedestrians might not otherwise be aware of.
 
