@@ -18,7 +18,7 @@ Currently, the app is populated with four walks:
 
 **Implementation Notes**
 
-This single-page web app was coded in Javascript using [Leaflet.js](https://leafletjs.com/) 2.0 with the LocateControl and ExtraMarkers plugins. An [OpenStreetMap](https://www.openstreetmap.org/) base layer was used, enhanced with additional custom map layers created in QGIS from [City of Toronto Open Data Portal](https://open.toronto.ca/) shape files for streets, sidewalks, green spaces and building outlines. QGIS was also used to create point and line vector layers for the walk paths and sights of interest. These custom map layers were exported as GeoJSON for ingestion into the Leaflet app.
+This single-page web app was coded in Javascript using [Leaflet.js](https://leafletjs.com/) with the LocateControl and ExtraMarkers plugins. An [OpenStreetMap](https://www.openstreetmap.org/) base layer was used, enhanced with additional custom map layers created in QGIS from [City of Toronto Open Data Portal](https://open.toronto.ca/) shape files for streets, sidewalks, green spaces and building outlines. QGIS was also used to create point and line vector layers for the walk paths and sights of interest. These custom map layers were exported as GeoJSON for ingestion into the Leaflet app.
 
 It was tempting to add more features, but rather than try to compete with Google Maps, I decided to stay true to the initial purpose of this app, which was to provide clear and simple walking directions for a selected number of sights.
 
