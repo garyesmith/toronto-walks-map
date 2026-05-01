@@ -597,5 +597,9 @@ class MapApp {
 
 }
 
-const app = new MapApp();
-app.init();
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    const app = new MapApp();
+    app.init();
+});
