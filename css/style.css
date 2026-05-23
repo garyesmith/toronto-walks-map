@@ -196,22 +196,20 @@ p {
 #close,
 #about-close {
     cursor: pointer;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     display: block;
     position: absolute;
-    top: 1px;
+    top: 0;
     right: 10px;
     z-index: 1;
     display: inline-block;
     text-align: center;
-    padding: 8px 13px 6px 13px;
+    padding: 5px 15px 4px 11px;
     background-color: #13537d;
     color: white;
 }
 #close,
 #about-close {
-    font-size: 1.6rem;
-    padding: 5px 15px 4px 11px;
     display: none;
     z-index: 2;
 }

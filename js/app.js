@@ -295,7 +295,7 @@ class MapApp {
     // get formatted walk description
     getWalkMetaHtml(walk, includeSummary=true) {
         var walkMetaHtml=`
-            <h3 id="walk-intro-heading">${walk.name} Walk</h3>
+            <h3 id="walk-intro-heading">${walk.name}</h3>
             <p class="distance">${walk.km} km &bull; Approx`;
             if (walk.hours!="0") {
                 walkMetaHtml+=` ${walk.hours} hour`;
