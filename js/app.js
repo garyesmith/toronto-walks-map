@@ -315,7 +315,7 @@ class MapApp {
 
     // populate the select at the top of the sidebar with loaded walk names and IDs
     populateWalkSelect() {
-        document.getElementById('this-walk').innerHTML = '<span id=\"this-walk-name\">' + this.walksContent.get(this.currWalkNumber).name + "</span> Walk <span id=\"walk-down\">&dtrif;</span><span id=\"walk-up\">&utrif;</span>";
+        document.getElementById('this-walk').innerHTML = '<span id=\"this-walk-name\">' + this.walksContent.get(this.currWalkNumber).name + "</span> <span id=\"walk-down\">&dtrif;</span><span id=\"walk-up\">&utrif;</span>";
         this.walksContent.forEach(walk => {
             var option = document.createElement('li');
             option.setAttribute('data-value', walk.id);
